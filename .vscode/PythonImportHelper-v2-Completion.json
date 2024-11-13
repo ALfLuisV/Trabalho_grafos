@@ -1,0 +1,212 @@
+[
+    {
+        "label": "Vertice",
+        "importPath": "vertice",
+        "description": "vertice",
+        "isExtraImport": true,
+        "detail": "vertice",
+        "documentation": {}
+    },
+    {
+        "label": "Vertice",
+        "importPath": "vertice",
+        "description": "vertice",
+        "isExtraImport": true,
+        "detail": "vertice",
+        "documentation": {}
+    },
+    {
+        "label": "listar_vertices",
+        "importPath": "vertice",
+        "description": "vertice",
+        "isExtraImport": true,
+        "detail": "vertice",
+        "documentation": {}
+    },
+    {
+        "label": "Aresta",
+        "importPath": "aresta",
+        "description": "aresta",
+        "isExtraImport": true,
+        "detail": "aresta",
+        "documentation": {}
+    },
+    {
+        "label": "listar_arestas",
+        "importPath": "aresta",
+        "description": "aresta",
+        "isExtraImport": true,
+        "detail": "aresta",
+        "documentation": {}
+    },
+    {
+        "label": "Grafo",
+        "importPath": "grafo",
+        "description": "grafo",
+        "isExtraImport": true,
+        "detail": "grafo",
+        "documentation": {}
+    },
+    {
+        "label": "Aresta",
+        "kind": 6,
+        "importPath": "Codigo.aresta",
+        "description": "Codigo.aresta",
+        "peekOfCode": "class Aresta:\n    def __init__(self, rotulo: str, peso: int, vertice1: Vertice, vertice2: Vertice):\n        self.rotulo = rotulo      # Identificador da aresta (rótulo)\n        self.peso = peso          # Peso da aresta\n        self.vertices = (vertice1, vertice2)  # Aresta conecta dois vértices\n    def __str__(self):\n        return f\"Aresta {self.rotulo}: de {self.vertices[0].rotulo} para {self.vertices[1].rotulo} com peso {self.peso}\"\ndef listar_arestas(arestas):\n    \"\"\"Função para exibir todas as arestas disponíveis com índices.\"\"\"\n    for i, aresta in enumerate(arestas):",
+        "detail": "Codigo.aresta",
+        "documentation": {}
+    },
+    {
+        "label": "listar_arestas",
+        "kind": 2,
+        "importPath": "Codigo.aresta",
+        "description": "Codigo.aresta",
+        "peekOfCode": "def listar_arestas(arestas):\n    \"\"\"Função para exibir todas as arestas disponíveis com índices.\"\"\"\n    for i, aresta in enumerate(arestas):\n        print(f\"{i}: {aresta}\")\ndef alterar_aresta(arestas):\n    \"\"\"Permite alterar o rótulo e o peso de uma aresta selecionada.\"\"\"\n    listar_arestas(arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja alterar: \"))\n        aresta = arestas[idx]",
+        "detail": "Codigo.aresta",
+        "documentation": {}
+    },
+    {
+        "label": "alterar_aresta",
+        "kind": 2,
+        "importPath": "Codigo.aresta",
+        "description": "Codigo.aresta",
+        "peekOfCode": "def alterar_aresta(arestas):\n    \"\"\"Permite alterar o rótulo e o peso de uma aresta selecionada.\"\"\"\n    listar_arestas(arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja alterar: \"))\n        aresta = arestas[idx]\n        novo_rotulo = input(f\"Novo rótulo para a aresta {aresta.rotulo} (deixe vazio para manter): \")\n        if novo_rotulo:\n            aresta.rotulo = novo_rotulo\n        novo_peso = input(f\"Novo peso para a aresta {aresta.peso} (deixe vazio para manter): \")",
+        "detail": "Codigo.aresta",
+        "documentation": {}
+    },
+    {
+        "label": "Grafo",
+        "kind": 6,
+        "importPath": "Codigo.grafo",
+        "description": "Codigo.grafo",
+        "peekOfCode": "class Grafo:\n    def __init__(self, direcionado: bool):\n        self.vertices = []        # Lista de vértices no grafo\n        self.arestas = []         # Lista de arestas no grafo\n        self.direcionado = direcionado  # Determina se o grafo é direcionado\n    def adicionar_vertice(self, rotulo: str, peso: int = 0):\n        \"\"\"Adiciona um vértice ao grafo.\"\"\"\n        vertice = Vertice(rotulo, peso)\n        self.vertices.append(vertice)\n        return vertice",
+        "detail": "Codigo.grafo",
+        "documentation": {}
+    },
+    {
+        "label": "mostrar_menu",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def mostrar_menu():\n    print(\"\\nMenu de Opções:\")\n    print(\"1. Adicionar vértice\")\n    print(\"2. Adicionar aresta\")\n    print(\"3. Exibir grafo\")\n    print(\"4. Alterar vértice\")\n    print(\"5. Alterar aresta\")\n    print(\"6. Deletar vértice\")\n    print(\"7. Deletar aresta\")\n    print(\"8. Checar adjacência entre vértices\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "criar_vertices_iniciais",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def criar_vertices_iniciais(grafo):\n    try:\n        num_vertices = int(input(\"Quantos vértices deseja criar? \"))\n        if num_vertices < 1:\n            print(\"Erro: o número de vértices deve ser pelo menos 1.\")\n            return\n        for i in range(num_vertices):\n            rotulo = f\"V{i+1}\"  \n            peso_str = input(f\"Digite o peso para o vértice {rotulo} (ou deixe em branco para padrão 0): \")\n            peso = int(peso_str) if peso_str else 0",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "adicionar_vertice_ao_grafo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def adicionar_vertice_ao_grafo(grafo: Grafo):\n    rotulo = input(\"Digite o rótulo do vértice: \")\n    peso_str = input(\"Digite o peso do vértice (ou deixe em branco para padrão 0): \")\n    peso = int(peso_str) if peso_str else 0\n    grafo.adicionar_vertice(rotulo, peso)\n    print(f\"Vértice {rotulo} adicionado com sucesso.\")\ndef adicionar_aresta_ao_grafo(grafo: Grafo):\n    if len(grafo.vertices) < 2:\n        print(\"Erro: é necessário ter pelo menos dois vértices para adicionar uma aresta.\")\n        return",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "adicionar_aresta_ao_grafo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def adicionar_aresta_ao_grafo(grafo: Grafo):\n    if len(grafo.vertices) < 2:\n        print(\"Erro: é necessário ter pelo menos dois vértices para adicionar uma aresta.\")\n        return\n    rotulo = input(\"Digite o rótulo da aresta: \")\n    peso_str = input(\"Digite o peso da aresta (ou deixe em branco para padrão 0): \")\n    peso = int(peso_str) if peso_str else 0\n    try:\n        print(\"\\nEscolha o primeiro vértice:\")\n        listar_vertices(grafo.vertices)",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "alterar_vertice_do_grafo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def alterar_vertice_do_grafo(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja alterar: \"))\n        vertice = grafo.vertices[idx]\n        novo_rotulo = input(f\"Digite o novo rótulo para o vértice {vertice.rotulo}: \")\n        novo_peso_str = input(f\"Digite o novo peso para o vértice {vertice.rotulo} (ou deixe em branco para manter o peso atual {vertice.peso}): \")\n        novo_peso = int(novo_peso_str) if novo_peso_str else vertice.peso\n        grafo.alterar_vertice(vertice, novo_rotulo, novo_peso)\n        print(f\"Vértice {vertice.rotulo} atualizado com sucesso.\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "alterar_aresta_do_grafo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def alterar_aresta_do_grafo(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja alterar: \"))\n        aresta = grafo.arestas[idx]\n        novo_rotulo = input(f\"Digite o novo rótulo para a aresta {aresta.rotulo}: \")\n        novo_peso_str = input(f\"Digite o novo peso para a aresta {aresta.rotulo} (ou deixe em branco para manter o peso atual {aresta.peso}): \")\n        novo_peso = int(novo_peso_str) if novo_peso_str else aresta.peso\n        grafo.alterar_aresta(aresta, novo_rotulo, novo_peso)\n        print(f\"Aresta {aresta.rotulo} atualizada com sucesso.\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "deletar_vertice_do_grafo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def deletar_vertice_do_grafo(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja deletar: \"))\n        vertice = grafo.vertices[idx]\n        grafo.remover_vertice(vertice)\n        print(f\"Vértice {vertice.rotulo} e suas arestas foram deletados com sucesso.\")\n    except (ValueError, IndexError):\n        print(\"Erro: índice inválido ou entrada incorreta.\")\ndef deletar_aresta_do_grafo(grafo: Grafo):",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "deletar_aresta_do_grafo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def deletar_aresta_do_grafo(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja deletar: \"))\n        aresta = grafo.arestas[idx]\n        grafo.remover_aresta(aresta)\n        print(f\"Aresta {aresta.rotulo} foi deletada com sucesso.\")\n    except (ValueError, IndexError):\n        print(\"Erro: índice inválido ou entrada incorreta.\")\ndef checar_adjacencia_vertices(grafo: Grafo):",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "checar_adjacencia_vertices",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def checar_adjacencia_vertices(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx1 = int(input(\"Digite o índice do primeiro vértice: \"))\n        idx2 = int(input(\"Digite o índice do segundo vértice: \"))\n        adjacente = grafo.checar_adjacencia_vertices(grafo.vertices[idx1], grafo.vertices[idx2])\n        if adjacente:\n            print(f\"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} são adjacentes.\")\n        else:\n            print(f\"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} não são adjacentes.\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "checar_adjacencia_arestas",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def checar_adjacencia_arestas(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx1 = int(input(\"Digite o índice da primeira aresta: \"))\n        idx2 = int(input(\"Digite o índice da segunda aresta: \"))\n        adjacente = grafo.checar_adjacencia_arestas(grafo.arestas[idx1], grafo.arestas[idx2])\n        if adjacente:\n            print(f\"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} são adjacentes.\")\n        else:\n            print(f\"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} não são adjacentes.\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def main():\n    direcionado = input(\"O grafo é direcionado? (s/n): \").strip().lower() == 's'\n    grafo = Grafo(direcionado=direcionado)\n    criar_vertices_iniciais(grafo)\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '1': adicionar_vertice_ao_grafo(grafo)\n            case '2': adicionar_aresta_ao_grafo(grafo)\n            case '3': print(grafo)",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "Vertice",
+        "kind": 6,
+        "importPath": "Codigo.vertice",
+        "description": "Codigo.vertice",
+        "peekOfCode": "class Vertice:\n    def __init__(self, rotulo: str, peso: int):\n        self.rotulo = rotulo      # Identificador do vértice (rótulo)\n        self.peso = peso          # Peso do vértice\n        self.arestas = []         # Lista de arestas conectadas a este vértice\n    def adicionar_aresta(self, aresta):\n        self.arestas.append(aresta)\n    def __str__(self):\n        return f\"Vértice {self.rotulo} (Peso: {self.peso})\"\ndef listar_vertices(vertices):",
+        "detail": "Codigo.vertice",
+        "documentation": {}
+    },
+    {
+        "label": "listar_vertices",
+        "kind": 2,
+        "importPath": "Codigo.vertice",
+        "description": "Codigo.vertice",
+        "peekOfCode": "def listar_vertices(vertices):\n    \"\"\"Função para exibir todos os vértices disponíveis com índices.\"\"\"\n    for i, vertice in enumerate(vertices):\n        print(f\"{i}: {vertice}\")\ndef alterar_vertice(vertices):\n    \"\"\"Permite alterar o rótulo e o peso de um vértice selecionado.\"\"\"\n    listar_vertices(vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja alterar: \"))\n        vertice = vertices[idx]",
+        "detail": "Codigo.vertice",
+        "documentation": {}
+    },
+    {
+        "label": "alterar_vertice",
+        "kind": 2,
+        "importPath": "Codigo.vertice",
+        "description": "Codigo.vertice",
+        "peekOfCode": "def alterar_vertice(vertices):\n    \"\"\"Permite alterar o rótulo e o peso de um vértice selecionado.\"\"\"\n    listar_vertices(vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja alterar: \"))\n        vertice = vertices[idx]\n        novo_rotulo = input(f\"Novo rótulo para o vértice {vertice.rotulo} (deixe vazio para manter): \")\n        if novo_rotulo:\n            vertice.rotulo = novo_rotulo\n        novo_peso = input(f\"Novo peso para o vértice {vertice.peso} (deixe vazio para manter): \")",
+        "detail": "Codigo.vertice",
+        "documentation": {}
+    }
+]
