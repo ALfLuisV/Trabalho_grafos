@@ -115,3 +115,61 @@ class Grafo:
                     linha.append(0)
             matrizAdj.append(linha)
         return matrizAdj
+    
+    def exibir_matriz_adjacenciaD(self):
+        """Monta a matriz de adjacencia para grafos  direcionados"""
+        matrizAdj = []
+
+        for vertice1 in self.vertices:
+            linha = []
+            for vertice2 in self.vertices:
+                if vertice1 == vertice2:
+                    linha.append(0)
+                    continue
+                found = False
+                for aresta in self.arestas:
+                    if (aresta.vertices[0] == vertice1 and aresta.vertices[1] == vertice2):
+                        found = True
+                        break
+                if found:
+                    linha.append(1)
+                else:
+                    linha.append(0)
+            matrizAdj.append(linha)
+        return matrizAdj
+    
+    def exibir_matriz_incidenciaND(self):
+        """Monta a matriz de incidencia de um grafo não direcionado"""
+        matrizInc=[]
+
+        for vertice in self.vertices:
+            linha = []
+            for aresta in self.arestas:
+                found = False
+                if(vertice in (aresta.vertices[0], aresta.vertices[1])):
+                    found = True
+                if found:
+                    linha.append(1)
+                else:
+                    linha.append(0)
+            matrizInc.append(linha)
+        return matrizInc
+
+    def exibir_matriz_incidenciaD(self):
+        """Monta a matriz de incidencia de um grafo direcionado"""
+        matrizInc=[]
+
+        for vertice in self.vertices:
+            linha = []
+            for aresta in self.arestas:
+                found = 0
+
+                if(aresta.vertices[0] == vertice):
+                    found = -1
+                elif(aresta.vertices[1] == vertice):
+                    found = 1
+                
+                linha.append(found)
+            matrizInc.append(linha)
+        
+        return matrizInc;

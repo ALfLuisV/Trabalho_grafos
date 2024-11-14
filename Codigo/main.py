@@ -17,7 +17,9 @@ def mostrar_menu():
     print("11. Checagem da quantidade de vértices e arestas")
     print("12. Checagem de grafo vazio e completo")
     print("13. Exibir matriz de adjacencia:")
-    print("14. Sair")
+    print("14. Exibir matriz de incidencia")
+    print("15. Exibir matriz de incidencia")
+    print("16. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -151,8 +153,19 @@ def grafo_vazio_completo(grafo: Grafo):
     # Exibe o rótulo de cada vértice para uma visualização mais clara
     print(grafo.checar_grafo())
 
-def exibir_matriz_adjND(grafo: Grafo):
-    print(grafo.exibir_matriz_adjacenciaND())
+def exibir_matriz_adj(grafo: Grafo):
+    """Exibe o grafo em forma de matriz de adjacencia"""
+    if(grafo.direcionado is False):
+        print(grafo.exibir_matriz_adjacenciaND())
+    else:
+        print(grafo.exibir_matriz_adjacenciaD())
+
+def exibir_matriz_inci(grafo: Grafo):
+    """Exibe a matriz de incidencia do grafo"""
+    if(grafo.direcionado is False):
+        print(grafo.exibir_matriz_incidenciaND())
+    else:
+        print(grafo.exibir_matriz_incidenciaD())
 
 def main():
     direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
@@ -160,8 +173,7 @@ def main():
     criar_vertices_iniciais(grafo)
 
     while True:
-        opcao = mostrar_menu()
-        
+        opcao = mostrar_menu()       
         match opcao:
             case '1': adicionar_vertice_ao_grafo(grafo)
             case '2': adicionar_aresta_ao_grafo(grafo)
@@ -175,8 +187,10 @@ def main():
             case '10': checar_existencia_arestas(grafo)
             case '11': checar_vertices_arestas(grafo)
             case '12': grafo_vazio_completo(grafo)
-            case '13': exibir_matriz_adjND(grafo)
-            case '14': break
+            case '13': exibir_matriz_adj(grafo)
+            case '14': exibir_matriz_inci(grafo)
+            case '15': exibir_matriz_inci(grafo)
+            case '16': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
