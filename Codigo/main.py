@@ -16,7 +16,8 @@ def mostrar_menu():
     print("10. Checagem da existência de arestas")
     print("11. Checagem da quantidade de vértices e arestas")
     print("12. Checagem de grafo vazio e completo")
-    print("13. Sair")
+    print("13. Exibir matriz de adjacencia:")
+    print("14. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -150,6 +151,9 @@ def grafo_vazio_completo(grafo: Grafo):
     # Exibe o rótulo de cada vértice para uma visualização mais clara
     print(grafo.checar_grafo())
 
+def exibir_matriz_adjND(grafo: Grafo):
+    print(grafo.exibir_matriz_adjacenciaND())
+
 def main():
     direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
     grafo = Grafo(direcionado=direcionado)
@@ -171,7 +175,8 @@ def main():
             case '10': checar_existencia_arestas(grafo)
             case '11': checar_vertices_arestas(grafo)
             case '12': grafo_vazio_completo(grafo)
-            case '13': break
+            case '13': exibir_matriz_adjND(grafo)
+            case '14': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":

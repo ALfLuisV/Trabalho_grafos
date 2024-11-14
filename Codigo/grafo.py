@@ -67,34 +67,51 @@ class Grafo:
         arestas_str = "\n".join([str(a) for a in self.arestas])
         return f"Grafo (Direcionado: {self.direcionado}):\nVertices: {vertices_str}\nArestas:\n{arestas_str}"
 
-    
     def checar_arestas(self):
         """Metodo que checa a existencia de arestas em um grafo"""
         if len(self.arestas) == 0:
             return "O grafo não possui arestas"
 
         return self.arestas
-    
+
     def verificar_arestas(self):
         """Retorna a quantidade de arestas e vértices no grafo."""
         return "O grafo possui " + str(len(self.arestas)) + " arestas, e " + str(len(self.vertices)) + " vertices"
-    
+
     def checar_grafo(self):
         """Verifica se o grafo é vazio ou se ele é completo."""
         if len(self.vertices) == 0:
             return "Este grafo está vazio!"
-        
+
         # Verifica se cada vértice está conectado a todos os outros vértices
         for vertice in self.vertices:
             conexoes = {aresta.vertices[1] for aresta in self.arestas if aresta.vertices[0] == vertice} | \
-                    {aresta.vertices[0] for aresta in self.arestas if aresta.vertices[1] == vertice}
-            
+                {aresta.vertices[0]
+                    for aresta in self.arestas if aresta.vertices[1] == vertice}
+
             if len(conexoes) != len(self.vertices) - 1:
                 return "O grafo não é completo!"
-        
+
         return "O grafo é completo!"
-    
 
+    def exibir_matriz_adjacenciaND(self):
+        """Monta a matriz de adjacencia para grafos não direcionados"""
+        matrizAdj = []
 
-
-
+        for vertice1 in self.vertices:
+            linha = []
+            for vertice2 in self.vertices:
+                if vertice1 == vertice2:
+                    linha.append(0)
+                    continue
+                found = False
+                for aresta in self.arestas:
+                    if (aresta.vertices[0] == vertice1 and aresta.vertices[1] == vertice2) or (aresta.vertices[1] == vertice1 and aresta.vertices[0] == vertice2):
+                        found = True
+                        break
+                if found:
+                    linha.append(1)
+                else:
+                    linha.append(0)
+            matrizAdj.append(linha)
+        return matrizAdj
