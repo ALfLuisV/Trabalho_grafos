@@ -13,7 +13,10 @@ def mostrar_menu():
     print("7. Deletar aresta")
     print("8. Checar adjacência entre vértices")
     print("9. Checar adjacência entre arestas")
-    print("10. Sair")
+    print("10. Checagem da existência de arestas")
+    print("11. Checagem da quantidade de vértices e arestas")
+    print("12. Checagem de grafo vazio e completo")
+    print("13. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -137,6 +140,16 @@ def checar_adjacencia_arestas(grafo: Grafo):
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
 
+def checar_existencia_arestas(grafo: Grafo):
+    print(grafo.checar_arestas())
+
+def checar_vertices_arestas(grafo: Grafo):
+    print(grafo.verificar_arestas())
+
+def grafo_vazio_completo(grafo: Grafo):
+    # Exibe o rótulo de cada vértice para uma visualização mais clara
+    print(grafo.checar_grafo())
+
 def main():
     direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
     grafo = Grafo(direcionado=direcionado)
@@ -155,7 +168,10 @@ def main():
             case '7': deletar_aresta_do_grafo(grafo)
             case '8': checar_adjacencia_vertices(grafo)
             case '9': checar_adjacencia_arestas(grafo)
-            case '10': break
+            case '10': checar_existencia_arestas(grafo)
+            case '11': checar_vertices_arestas(grafo)
+            case '12': grafo_vazio_completo(grafo)
+            case '13': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
