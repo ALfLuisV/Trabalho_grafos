@@ -18,7 +18,7 @@ def mostrar_menu():
     print("12. Checagem de grafo vazio e completo")
     print("13. Exibir matriz de adjacencia:")
     print("14. Exibir matriz de incidencia")
-    print("15. Exibir matriz de incidencia")
+    print("15. Verificar conectividade")
     print("16. Sair")
     return input("Escolha uma opção: ")
 
@@ -167,6 +167,9 @@ def exibir_matriz_inci(grafo: Grafo):
     else:
         print(grafo.exibir_matriz_incidenciaD())
 
+def verificar_conectividade(grafo: Grafo):
+    print(grafo.verificar_conectividade_nd())
+
 def main():
     direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
     grafo = Grafo(direcionado=direcionado)
@@ -189,7 +192,7 @@ def main():
             case '12': grafo_vazio_completo(grafo)
             case '13': exibir_matriz_adj(grafo)
             case '14': exibir_matriz_inci(grafo)
-            case '15': exibir_matriz_inci(grafo)
+            case '15': verificar_conectividade(grafo)
             case '16': break
             case _: print("Opção inválida. Tente novamente.")
 

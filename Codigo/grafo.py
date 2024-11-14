@@ -172,4 +172,44 @@ class Grafo:
                 linha.append(found)
             matrizInc.append(linha)
         
-        return matrizInc;
+        return matrizInc
+    
+    def verificar_conectividade_nd(self):
+        vetorAlc = []
+
+        verticeRef = self.vertices[0]
+
+        for aresta in self.arestas:
+            if(aresta.vertices[0] == verticeRef):
+                if(aresta.vertices[1] in vetorAlc):
+                    continue              
+                vetorAlc.append(aresta.vertices[1])
+
+
+        i = 0 
+
+        while i < len(vetorAlc):
+            verticeRef2 = vetorAlc[i]  # Pega o vértice atual de `vetorAlc` para processar
+
+            # Itera sobre as arestas para verificar conexões
+            for aresta in self.arestas:
+                if aresta.vertices[0] == verticeRef2:
+                    if aresta.vertices[1] not in vetorAlc:
+                        vetorAlc.append(aresta.vertices[1])  # Adiciona o vértice conectado a `vetorAlc`
+
+            i += 1  # Incrementa o índice para o próximo vértice a ser processado
+
+        vetorAlc.append(verticeRef)
+        
+        conexo = True
+        for vertice in self.vertices:
+            if vertice not in vetorAlc:
+                conexo = False
+                break
+        
+        if conexo:
+            return "O grafo é conexo!"
+        
+        return "O grafo não é conexo!"
+
+           

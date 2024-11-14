@@ -10,6 +10,9 @@ class Aresta:
     def __str__(self):
         return f"Aresta {self.rotulo}: de {self.vertices[0].rotulo} para {self.vertices[1].rotulo} com peso {self.peso}"
 
+    def __repr__(self):
+        return self.__str__()
+    
 def listar_arestas(arestas):
     """Função para exibir todas as arestas disponíveis com índices."""
     for i, aresta in enumerate(arestas):
