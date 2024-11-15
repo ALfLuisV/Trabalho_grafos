@@ -19,7 +19,8 @@ def mostrar_menu():
     print("13. Exibir matriz de adjacencia:")
     print("14. Exibir matriz de incidencia")
     print("15. Verificar conectividade")
-    print("16. Sair")
+    print("16. Exibir lista de adjacência")
+    print("17. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -170,6 +171,28 @@ def exibir_matriz_inci(grafo: Grafo):
 def verificar_conectividade(grafo: Grafo):
     print(grafo.verificar_conectividade_nd())
 
+def exibir_lista_adjacencia(grafo: Grafo):
+    """Exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não."""
+    lista_adjacencia = {}
+
+    for vertice in grafo.vertices:
+        lista_adjacencia[vertice.rotulo] = []
+
+    for aresta in grafo.arestas:
+        origem, destino = aresta.vertices
+
+        # Adicionar adjacência para grafos direcionados e não direcionados
+        lista_adjacencia[origem.rotulo].append(destino.rotulo)
+        if not grafo.direcionado:
+            lista_adjacencia[destino.rotulo].append(origem.rotulo)
+
+    # Exibição da lista de adjacência
+    print("\nLista de Adjacência:")
+    for vertice, adjacentes in lista_adjacencia.items():
+        adjacentes_str = ", ".join(adjacentes)
+        print(f"{vertice}: {adjacentes_str}")
+
+
 def main():
     direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
     grafo = Grafo(direcionado=direcionado)
@@ -193,7 +216,8 @@ def main():
             case '13': exibir_matriz_adj(grafo)
             case '14': exibir_matriz_inci(grafo)
             case '15': verificar_conectividade(grafo)
-            case '16': break
+            case '16': exibir_lista_adjacencia(grafo)
+            case '17': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
