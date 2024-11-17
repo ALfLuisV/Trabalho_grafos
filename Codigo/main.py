@@ -169,7 +169,7 @@ def exibir_matriz_inci(grafo: Grafo):
         print(grafo.exibir_matriz_incidenciaD())
 
 def verificar_conectividade(grafo: Grafo):
-    print(grafo.verificar_conectividade_nd())
+    print(grafo.verificar_conectividade())
 
 def exibir_lista_adjacencia(grafo: Grafo):
     """Exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não."""
