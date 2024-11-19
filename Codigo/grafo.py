@@ -257,3 +257,60 @@ class Grafo:
             return "O grafo é conexo!"
         
         return "O grafo não é conexo!"
+
+    def verificar_conectividade(self):
+        """Verifica o tipo de conectividade do grafo."""
+        if not self.vertices:
+            return "O grafo está vazio!"
+
+        if self.direcionado:
+            if self._fortemente_conexo():
+                return "O grafo é fortemente conexo!"
+            elif self._semi_fortemente_conexo():
+                return "O grafo é semi-fortemente conexo!"
+            else:
+                return "O grafo não é conexo!"
+        else:
+            return self.verificar_conectividade_nd()
+
+    def _fortemente_conexo(self):
+        """Verifica se o grafo direcionado é fortemente conexo."""
+        for vertice in self.vertices:
+            if not self._dfs_direcionado(vertice):
+                return False
+        return True
+
+    def _semi_fortemente_conexo(self):
+        """Verifica se o grafo é semi-fortemente conexo."""
+        grafo_und = self._converter_nao_direcionado()
+        return grafo_und._verificar_conectividade_simples()
+
+    def _dfs_direcionado(self, start):
+        """Realiza DFS em um grafo direcionado a partir de um vértice."""
+        visitados = set()
+        self._dfs_visit(start, visitados)
+        return len(visitados) == len(self.vertices)
+
+    def _dfs_visit(self, vertice, visitados):
+        """Auxiliar para realizar DFS."""
+        visitados.add(vertice)
+        for aresta in vertice.arestas:
+            vizinho = aresta.vertices[1] if aresta.vertices[0] == vertice else aresta.vertices[0]
+            if self.direcionado and aresta.vertices[0] != vertice:
+                continue
+            if vizinho not in visitados:
+                self._dfs_visit(vizinho, visitados)
+
+    def _converter_nao_direcionado(self):
+        """Converte o grafo direcionado em não direcionado."""
+        grafo_nd = Grafo(direcionado=False)
+        grafo_nd.vertices = self.vertices
+        for aresta in self.arestas:
+            grafo_nd.arestas.append(aresta)
+        return grafo_nd
+
+    def _verificar_conectividade_simples(self):
+        """Verifica se um grafo não direcionado é simplesmente conexo."""
+        visitados = set()
+        self._dfs_visit(self.vertices[0], visitados)
+        return len(visitados) == len(self.vertices)
