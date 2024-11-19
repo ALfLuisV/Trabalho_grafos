@@ -1,9 +1,12 @@
+import json
+
 from grafo import Grafo
 from vertice import listar_vertices
 from aresta import listar_arestas
 
 def mostrar_menu():
     print("\nMenu de Opções:")
+    print("0. Carregar grafo a partir de arquivo JSON")
     print("1. Adicionar vértice")
     print("2. Adicionar aresta")
     print("3. Exibir grafo")
@@ -16,11 +19,12 @@ def mostrar_menu():
     print("10. Checagem da existência de arestas")
     print("11. Checagem da quantidade de vértices e arestas")
     print("12. Checagem de grafo vazio e completo")
-    print("13. Exibir matriz de adjacencia:")
-    print("14. Exibir matriz de incidencia")
-    print("15. Verificar conectividade")
-    print("16. Exibir lista de adjacência")
-    print("17. Sair")
+    print("13. Checagem de articulações (por busca em profundidade)")
+    print("14. Exibir matriz de adjacencia:")
+    print("15. Exibir matriz de incidencia")
+    print("16. Verificar conectividade")
+    print("17. Exibir lista de adjacência")
+    print("18. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -149,6 +153,10 @@ def checar_existencia_arestas(grafo: Grafo):
 
 def checar_vertices_arestas(grafo: Grafo):
     print(grafo.verificar_arestas())
+    
+# Checagem de existencia de articulaões
+def checar_articulacoes(grafo: Grafo):
+    print(grafo.checar_articulacoes())
 
 def grafo_vazio_completo(grafo: Grafo):
     # Exibe o rótulo de cada vértice para uma visualização mais clara
@@ -191,16 +199,51 @@ def exibir_lista_adjacencia(grafo: Grafo):
     for vertice, adjacentes in lista_adjacencia.items():
         adjacentes_str = ", ".join(adjacentes)
         print(f"{vertice}: {adjacentes_str}")
+        
+        
+def carregar_grafo_json(nome_arquivo: str) -> Grafo:
+    try:
+        with open(nome_arquivo, 'r') as f:
+            dados = json.load(f)
+        
+        grafo = Grafo(direcionado=dados["direcionado"])
+        
+        vertices = {}
+        for vertice_data in dados["vertices"]:
+            vertice = grafo.adicionar_vertice(vertice_data["rotulo"], vertice_data["peso"])
+            vertices[vertice_data["rotulo"]] = vertice
+        
+        for aresta_data in dados["arestas"]:
+            origem = vertices[aresta_data["origem"]]
+            destino = vertices[aresta_data["destino"]]
+            grafo.adicionar_aresta(aresta_data["rotulo"], aresta_data["peso"], origem, destino)
+        
+        print("Grafo carregado com sucesso a partir do arquivo JSON.")
+        return grafo
+    
+    except FileNotFoundError:
+        print(f"Erro: Arquivo '{nome_arquivo}' não encontrado.")
+    except KeyError as e:
+        print(f"Erro: Chave {e} ausente no arquivo JSON.")
+    except json.JSONDecodeError:
+        print("Erro: O arquivo JSON está malformado.")
+
+    return None
 
 
 def main():
-    direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
-    grafo = Grafo(direcionado=direcionado)
-    criar_vertices_iniciais(grafo)
+    # direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
+    # grafo = Grafo(direcionado=direcionado)
+    # criar_vertices_iniciais(grafo)
+    
+    grafo = None
 
     while True:
         opcao = mostrar_menu()       
         match opcao:
+            case '0': 
+                nome_arquivo = input("Digite o nome do arquivo JSON (ex: grafo.json): ")
+                grafo = carregar_grafo_json(nome_arquivo)            
             case '1': adicionar_vertice_ao_grafo(grafo)
             case '2': adicionar_aresta_ao_grafo(grafo)
             case '3': print(grafo)
@@ -213,11 +256,12 @@ def main():
             case '10': checar_existencia_arestas(grafo)
             case '11': checar_vertices_arestas(grafo)
             case '12': grafo_vazio_completo(grafo)
-            case '13': exibir_matriz_adj(grafo)
-            case '14': exibir_matriz_inci(grafo)
-            case '15': verificar_conectividade(grafo)
-            case '16': exibir_lista_adjacencia(grafo)
-            case '17': break
+            case '13': checar_articulacoes(grafo)
+            case '14': exibir_matriz_adj(grafo)
+            case '15': exibir_matriz_inci(grafo)
+            case '16': verificar_conectividade(grafo)
+            case '17': exibir_lista_adjacencia(grafo)
+            case '18': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":

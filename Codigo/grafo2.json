@@ -1,0 +1,99 @@
+{
+    "direcionado": true,
+    "vertices": [
+        {
+            "rotulo": "0",
+            "peso": 0
+        },
+        {
+            "rotulo": "1",
+            "peso": 0
+        },
+        {
+            "rotulo": "2",
+            "peso": 0
+        },
+        {
+            "rotulo": "3",
+            "peso": 0
+        },
+        {
+            "rotulo": "4",
+            "peso": 0
+        },
+        {
+            "rotulo": "5",
+            "peso": 0
+        },
+        {
+            "rotulo": "6",
+            "peso": 0
+        },
+        {
+            "rotulo": "7",
+            "peso": 0
+        }
+    ],
+    "arestas": [
+        {
+            "rotulo": "A1",
+            "peso": 0,
+            "origem": "0",
+            "destino": "1"
+        },
+        {
+            "rotulo": "A2",
+            "peso": 0,
+            "origem": "1",
+            "destino": "2"
+        },
+        {
+            "rotulo": "A3",
+            "peso": 0,
+            "origem": "2",
+            "destino": "0"
+        },
+        {
+            "rotulo": "A4",
+            "peso": 0,
+            "origem": "2",
+            "destino": "3"
+        },
+        {
+            "rotulo": "A5",
+            "peso": 0,
+            "origem": "3",
+            "destino": "4"
+        },
+        {
+            "rotulo": "A6",
+            "peso": 0,
+            "origem": "4",
+            "destino": "5"
+        },
+        {
+            "rotulo": "A7",
+            "peso": 0,
+            "origem": "5",
+            "destino": "6"
+        },
+        {
+            "rotulo": "A8",
+            "peso": 0,
+            "origem": "6",
+            "destino": "4"
+        },
+        {
+            "rotulo": "A9",
+            "peso": 0,
+            "origem": "6",
+            "destino": "7"
+        },
+        {
+            "rotulo": "A10",
+            "peso": 0,
+            "origem": "4",
+            "destino": "7"
+        }
+    ]
+}

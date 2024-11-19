@@ -1,0 +1,37 @@
+{
+    "direcionado": true,
+    "vertices": [
+        {
+            "rotulo": "V1",
+            "peso": 0
+        },
+        {
+            "rotulo": "V2",
+            "peso": 0
+        },
+        {
+            "rotulo": "V3",
+            "peso": 0
+        }
+    ],
+    "arestas": [
+        {
+            "rotulo": "A1",
+            "peso": 0,
+            "origem": "V1",
+            "destino": "V2"
+        },
+        {
+            "rotulo": "A2",
+            "peso": 0,
+            "origem": "V2",
+            "destino": "V3"
+        },
+        {
+            "rotulo": "A3",
+            "peso": 0,
+            "origem": "V3",
+            "destino": "V1"
+        }
+    ]
+}

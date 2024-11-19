@@ -93,6 +93,52 @@ class Grafo:
                 return "O grafo não é completo!"
 
         return "O grafo é completo!"
+    
+#Checagem de articulações:
+
+    def checar_articulacoes(self):
+        """Encontra e retorna os pontos de articulação do grafo."""
+        def buscaProfundidade(v, visited): 
+            """Realiza uma busca em profundidade a partir do vértice v."""
+            visited.add(v)
+            for u in self.obter_vizinhos(v):
+                if u not in visited:
+                    buscaProfundidade(u, visited) #chamada recursiva a partir do vizinho não visitado
+
+        def contar_componentes(): 
+            """Conta o número de componentes conectados no grafo."""
+            visited = set()
+            componentes = 0
+            for vertice in self.vertices:
+                if vertice.rotulo not in visited:
+                    buscaProfundidade(vertice.rotulo, visited) #chamada recursiva a partir de algum vertice não visitado
+                    componentes += 1
+            return componentes
+
+        articulacoes = []
+        componentes_iniciais = contar_componentes()
+
+        for vertice in self.vertices[:]:  # Usa uma cópia da lista para evitar problemas de iteração
+            rotulo = vertice.rotulo # Salva o rótulo do vértice
+            self.vertices.remove(vertice) # Remove o vértice para verificar se é uma articulação
+            componentes_apos_remocao = contar_componentes() # Conta os componentes após a remoção
+            self.vertices.append(vertice) # Restaura o vértice removido
+            if componentes_apos_remocao > componentes_iniciais: # Se o número de componentes aumentou, é uma articulação
+                articulacoes.append(rotulo) # Adiciona o vértice à lista de articulações
+
+        if not articulacoes:
+            return "O grafo não possui pontos de articulação"
+        return f"O grafo possui pontos de articulação: {', '.join(articulacoes)}"
+
+    def obter_vizinhos(self, vertice_rotulo):
+        """Retorna os vizinhos de um vértice dado seu rótulo."""
+        vizinhos = set()
+        for aresta in self.arestas:
+            if aresta.vertices[0].rotulo == vertice_rotulo:
+                vizinhos.add(aresta.vertices[1].rotulo)
+            elif aresta.vertices[1].rotulo == vertice_rotulo:
+                vizinhos.add(aresta.vertices[0].rotulo)
+        return vizinhos
 
     def exibir_matriz_adjacenciaND(self):
         """Monta a matriz de adjacencia para grafos não direcionados"""
@@ -211,5 +257,3 @@ class Grafo:
             return "O grafo é conexo!"
         
         return "O grafo não é conexo!"
-
-           
