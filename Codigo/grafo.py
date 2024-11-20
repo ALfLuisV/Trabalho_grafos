@@ -1,4 +1,5 @@
 # grafo.py
+import random
 from vertice import Vertice
 from aresta import Aresta
 
@@ -108,9 +109,9 @@ class Grafo:
         def contar_componentes(): 
             """Conta o número de componentes conectados no grafo."""
             visited = set()
-            componentes = 0
-            for vertice in self.vertices:
-                if vertice.rotulo not in visited:
+            componentes = 0 
+            for vertice in self.vertices: 
+                if vertice.rotulo not in visited: #se o vértice não foi visitado
                     buscaProfundidade(vertice.rotulo, visited) #chamada recursiva a partir de algum vertice não visitado
                     componentes += 1
             return componentes
@@ -314,3 +315,43 @@ class Grafo:
         visitados = set()
         self._dfs_visit(self.vertices[0], visitados)
         return len(visitados) == len(self.vertices)
+    
+    def criarGrafo(self):
+        direcionado = input("O grafo será direcionado? (s/n): ").strip().lower() == 's'
+        num_vertices = int(input("Digite o número de vértices: "))
+        pesos_aleatorios = input("Os pesos das arestas e vértices serão aleatórios? (s/n) n = todos os pesos = 0: ").strip().lower() == 's'
+        grafo = Grafo(direcionado=direcionado)
+        
+        # Adicionar vértices
+        vertices = [Vertice(f'V{i}', random.randint(1, 10) if pesos_aleatorios else 0) for i in range(num_vertices)]
+        for vertice in vertices:
+            grafo.adicionar_vertice(vertice.rotulo, vertice.peso)
+        
+        # Adicionar arestas aleatórias
+        num_arestas = random.randint(num_vertices, num_vertices * (num_vertices - 1) // 2)
+        arestas_existentes = set()
+        for i in range(num_arestas):
+            while True:
+                vertice1, vertice2 = random.sample(vertices, 2)
+                
+                # Verificar se a aresta é um loop
+                if vertice1 == vertice2:
+                    continue
+                
+                if direcionado:
+                    aresta_id = (vertice1.rotulo, vertice2.rotulo)
+                    aresta_id_reversa = (vertice2.rotulo, vertice1.rotulo)
+                else:
+                    aresta_id = tuple(sorted([vertice1.rotulo, vertice2.rotulo]))
+                    aresta_id_reversa = aresta_id
+                
+                # Verificar se a aresta já existe ou se é antiparalela
+                if aresta_id not in arestas_existentes and aresta_id_reversa not in arestas_existentes:
+                    arestas_existentes.add(aresta_id)
+                    break
+            
+            rotulo = f'A{i}'
+            peso = random.randint(1, 10) if pesos_aleatorios else 0
+            grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
+        
+        return grafo

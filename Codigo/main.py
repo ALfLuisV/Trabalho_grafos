@@ -7,24 +7,25 @@ from aresta import listar_arestas
 def mostrar_menu():
     print("\nMenu de Opções:")
     print("0. Carregar grafo a partir de arquivo JSON")
-    print("1. Adicionar vértice")
-    print("2. Adicionar aresta")
-    print("3. Exibir grafo")
-    print("4. Alterar vértice")
-    print("5. Alterar aresta")
-    print("6. Deletar vértice")
-    print("7. Deletar aresta")
-    print("8. Checar adjacência entre vértices")
-    print("9. Checar adjacência entre arestas")
-    print("10. Checagem da existência de arestas")
-    print("11. Checagem da quantidade de vértices e arestas")
-    print("12. Checagem de grafo vazio e completo")
-    print("13. Checagem de articulações (por busca em profundidade)")
-    print("14. Exibir matriz de adjacencia:")
-    print("15. Exibir matriz de incidencia")
-    print("16. Verificar conectividade")
-    print("17. Exibir lista de adjacência")
-    print("18. Sair")
+    print("1. Criar grafo aleatorio baseado em seu numero de vertices")
+    print("2. Adicionar vértice")
+    print("3. Adicionar aresta")
+    print("4. Exibir grafo")
+    print("5. Alterar vértice")
+    print("6. Alterar aresta")
+    print("7. Deletar vértice")
+    print("8. Deletar aresta")
+    print("9. Checar adjacência entre vértices")
+    print("10. Checar adjacência entre arestas")
+    print("11. Checagem da existência de arestas")
+    print("12. Checagem da quantidade de vértices e arestas")
+    print("13. Checagem de grafo vazio e completo")
+    print("14. Checagem de articulações (por busca em profundidade)")
+    print("15. Exibir matriz de adjacencia:")
+    print("16. Exibir matriz de incidencia")
+    print("17. Verificar conectividade")
+    print("18. Exibir lista de adjacência")
+    print("19. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -201,6 +202,7 @@ def exibir_lista_adjacencia(grafo: Grafo):
         print(f"{vertice}: {adjacentes_str}")
         
         
+        
 def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     try:
         with open(nome_arquivo, 'r') as f:
@@ -230,38 +232,49 @@ def carregar_grafo_json(nome_arquivo: str) -> Grafo:
 
     return None
 
+def salvar_grafo_json(grafo, nome_arquivo):
+    grafo_dict = {
+        "vertices": [{"rotulo": v.rotulo, "peso": v.peso} for v in grafo.vertices],
+        "arestas": [{"rotulo": a.rotulo, "peso": a.peso, "vertice1": a.vertices[0].rotulo, "vertice2": a.vertices[1].rotulo} for a in grafo.arestas],
+        "direcionado": grafo.direcionado
+    }
+    with open(nome_arquivo, 'w') as f:
+        json.dump(grafo_dict, f, indent=4)
 
 def main():
-    # direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
-    # grafo = Grafo(direcionado=direcionado)
-    # criar_vertices_iniciais(grafo)
-    
     grafo = None
 
     while True:
-        opcao = mostrar_menu()       
+        opcao = mostrar_menu()
         match opcao:
             case '0': 
                 nome_arquivo = input("Digite o nome do arquivo JSON (ex: grafo.json): ")
-                grafo = carregar_grafo_json(nome_arquivo)            
-            case '1': adicionar_vertice_ao_grafo(grafo)
-            case '2': adicionar_aresta_ao_grafo(grafo)
-            case '3': print(grafo)
-            case '4': alterar_vertice_do_grafo(grafo)
-            case '5': alterar_aresta_do_grafo(grafo)
-            case '6': deletar_vertice_do_grafo(grafo)
-            case '7': deletar_aresta_do_grafo(grafo)
-            case '8': checar_adjacencia_vertices(grafo)
-            case '9': checar_adjacencia_arestas(grafo)
-            case '10': checar_existencia_arestas(grafo)
-            case '11': checar_vertices_arestas(grafo)
-            case '12': grafo_vazio_completo(grafo)
-            case '13': checar_articulacoes(grafo)
-            case '14': exibir_matriz_adj(grafo)
-            case '15': exibir_matriz_inci(grafo)
-            case '16': verificar_conectividade(grafo)
-            case '17': exibir_lista_adjacencia(grafo)
-            case '18': break
+                grafo = carregar_grafo_json(nome_arquivo) 
+            case '1': 
+                grafo = Grafo(direcionado=False)
+                grafo = grafo.criarGrafo()
+                salvar = input("Deseja salvar o grafo em um arquivo JSON? (s/n): ").strip().lower() == 's'
+                if salvar:
+                    nome_arquivo = input("Digite o nome do arquivo JSON para salvar o grafo (ex: novo_grafo.json): ")
+                    salvar_grafo_json(grafo, nome_arquivo)
+            case '2': adicionar_vertice_ao_grafo(grafo)
+            case '3': adicionar_aresta_ao_grafo(grafo)
+            case '4': print(grafo)
+            case '5': alterar_vertice_do_grafo(grafo)
+            case '6': alterar_aresta_do_grafo(grafo)
+            case '7': deletar_vertice_do_grafo(grafo)
+            case '8': deletar_aresta_do_grafo(grafo)
+            case '9': checar_adjacencia_vertices(grafo)
+            case '10': checar_adjacencia_arestas(grafo)
+            case '11': checar_existencia_arestas(grafo)
+            case '12': checar_vertices_arestas(grafo)
+            case '13': grafo_vazio_completo(grafo)
+            case '14': checar_articulacoes(grafo)
+            case '15': exibir_matriz_adj(grafo)
+            case '16': exibir_matriz_inci(grafo)
+            case '17': verificar_conectividade(grafo)
+            case '18': exibir_lista_adjacencia(grafo)
+            case '19': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
