@@ -2,6 +2,7 @@
 import random
 from vertice import Vertice
 from aresta import Aresta
+from aresta import listar_arestas
 
 
 class Grafo:
@@ -95,8 +96,6 @@ class Grafo:
 
         return "O grafo é completo!"
     
-#Checagem de articulações:
-
     def checar_articulacoes(self):
         """Encontra e retorna os pontos de articulação do grafo."""
         def buscaProfundidade(v, visited): 
@@ -221,7 +220,7 @@ class Grafo:
         
         return matrizInc
     
-    def verificar_conectividade_nd(self):
+    def _simplismente_conexo(self):
         vetorAlc = []
 
         verticeRef = self.vertices[0]
@@ -255,7 +254,7 @@ class Grafo:
                 break
         
         if conexo:
-            return "O grafo é conexo!"
+            return "O grafo é simplismente conexo!"
         
         return "O grafo não é conexo!"
 
@@ -272,7 +271,57 @@ class Grafo:
             else:
                 return "O grafo não é conexo!"
         else:
-            return self.verificar_conectividade_nd()
+            return self._simplismente_conexo()
+        
+        
+
+    def verificar_conectividade_naive(self):
+        """
+        Permite ao usuário escolher uma aresta para remover e verifica a conectividade do grafo após a remoção.
+        """
+        while True:
+            print("\nArestas disponíveis para remover:")
+            listar_arestas(self.arestas)
+
+            escolha = input("\nDigite o índice da aresta que deseja remover (ou 'sair' para finalizar): ").strip()
+
+            if escolha.lower() == "sair":
+                print("Encerrando verificação interativa.")
+                break
+
+            if not escolha.isdigit():
+                print("Entrada inválida. Digite um índice numérico ou 'sair'.")
+                continue
+
+            escolha = int(escolha)
+
+            if escolha < 0 or escolha >= len(self.arestas):
+                print("Índice fora do intervalo. Tente novamente.")
+                continue
+
+            # Selecionar a aresta escolhida
+            aresta_escolhida = self.arestas[escolha]
+
+            # Remover a aresta temporariamente
+            self.remover_aresta(aresta_escolhida)
+
+            # Verificar conectividade
+            conectividade = self.verificar_conectividade()
+
+            # Mostrar resultado ao usuário
+            print(f"\nAresta removida: {aresta_escolhida.rotulo}")
+            print(f"Conectividade do grafo: {conectividade}")
+
+            # Perguntar se o usuário deseja restaurar a aresta
+            restaurar = input("Deseja restaurar a aresta removida? (s/n): ").strip().lower()
+            if restaurar == "s":
+                self.adicionar_aresta(
+                    aresta_escolhida.rotulo,
+                    aresta_escolhida.peso,
+                    aresta_escolhida.vertices[0],
+                    aresta_escolhida.vertices[1]
+                )
+                print("Aresta restaurada.")
 
     def _fortemente_conexo(self):
         """Verifica se o grafo direcionado é fortemente conexo."""

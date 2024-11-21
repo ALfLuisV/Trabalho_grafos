@@ -24,8 +24,9 @@ def mostrar_menu():
     print("15. Exibir matriz de adjacencia:")
     print("16. Exibir matriz de incidencia")
     print("17. Verificar conectividade")
-    print("18. Exibir lista de adjacência")
-    print("19. Sair")
+    print("18. Verificar conectividade (naive)")
+    print("19. Exibir lista de adjacência")
+    print("20. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -43,6 +44,8 @@ def criar_vertices_iniciais(grafo):
             print(f"Vértice {rotulo} criado com sucesso.")
     except ValueError:
         print("Erro: o número de vértices deve ser um número inteiro.")
+    
+    input("Pressione Enter para continuar...")
 
 def adicionar_vertice_ao_grafo(grafo: Grafo):
     rotulo = input("Digite o rótulo do vértice: ")
@@ -50,6 +53,7 @@ def adicionar_vertice_ao_grafo(grafo: Grafo):
     peso = int(peso_str) if peso_str else 0
     grafo.adicionar_vertice(rotulo, peso)
     print(f"Vértice {rotulo} adicionado com sucesso.")
+    input("Pressione Enter para continuar...")
 
 def adicionar_aresta_ao_grafo(grafo: Grafo):
     if len(grafo.vertices) < 2:
@@ -76,6 +80,8 @@ def adicionar_aresta_ao_grafo(grafo: Grafo):
         
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def alterar_vertice_do_grafo(grafo: Grafo):
     listar_vertices(grafo.vertices)
@@ -89,6 +95,8 @@ def alterar_vertice_do_grafo(grafo: Grafo):
         print(f"Vértice {vertice.rotulo} atualizado com sucesso.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def alterar_aresta_do_grafo(grafo: Grafo):
     listar_arestas(grafo.arestas)
@@ -102,6 +110,8 @@ def alterar_aresta_do_grafo(grafo: Grafo):
         print(f"Aresta {aresta.rotulo} atualizada com sucesso.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def deletar_vertice_do_grafo(grafo: Grafo):
     listar_vertices(grafo.vertices)
@@ -112,6 +122,8 @@ def deletar_vertice_do_grafo(grafo: Grafo):
         print(f"Vértice {vertice.rotulo} e suas arestas foram deletados com sucesso.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def deletar_aresta_do_grafo(grafo: Grafo):
     listar_arestas(grafo.arestas)
@@ -122,6 +134,8 @@ def deletar_aresta_do_grafo(grafo: Grafo):
         print(f"Aresta {aresta.rotulo} foi deletada com sucesso.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def checar_adjacencia_vertices(grafo: Grafo):
     listar_vertices(grafo.vertices)
@@ -135,6 +149,8 @@ def checar_adjacencia_vertices(grafo: Grafo):
             print(f"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} não são adjacentes.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def checar_adjacencia_arestas(grafo: Grafo):
     listar_arestas(grafo.arestas)
@@ -148,20 +164,27 @@ def checar_adjacencia_arestas(grafo: Grafo):
             print(f"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} não são adjacentes.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
+        
+    input("Pressione Enter para continuar...")
 
 def checar_existencia_arestas(grafo: Grafo):
     print(grafo.checar_arestas())
+    input("Pressione Enter para continuar...")
 
 def checar_vertices_arestas(grafo: Grafo):
     print(grafo.verificar_arestas())
+    input("Pressione Enter para continuar...")
     
 # Checagem de existencia de articulaões
 def checar_articulacoes(grafo: Grafo):
     print(grafo.checar_articulacoes())
+    input("Pressione Enter para continuar...")
 
 def grafo_vazio_completo(grafo: Grafo):
     # Exibe o rótulo de cada vértice para uma visualização mais clara
     print(grafo.checar_grafo())
+    input("Pressione Enter para continuar...")
+    
 
 def exibir_matriz_adj(grafo: Grafo):
     """Exibe o grafo em forma de matriz de adjacencia"""
@@ -169,6 +192,8 @@ def exibir_matriz_adj(grafo: Grafo):
         print(grafo.exibir_matriz_adjacenciaND())
     else:
         print(grafo.exibir_matriz_adjacenciaD())
+        
+    input("Pressione Enter para continuar...")
 
 def exibir_matriz_inci(grafo: Grafo):
     """Exibe a matriz de incidencia do grafo"""
@@ -176,9 +201,15 @@ def exibir_matriz_inci(grafo: Grafo):
         print(grafo.exibir_matriz_incidenciaND())
     else:
         print(grafo.exibir_matriz_incidenciaD())
+    
+    input("Pressione Enter para continuar...")
 
 def verificar_conectividade(grafo: Grafo):
     print(grafo.verificar_conectividade())
+    input("Pressione Enter para continuar...")
+    
+def verificar_conectividade_naive(grafo: Grafo):
+    print(grafo.verificar_conectividade_naive())
 
 def exibir_lista_adjacencia(grafo: Grafo):
     """Exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não."""
@@ -201,7 +232,7 @@ def exibir_lista_adjacencia(grafo: Grafo):
         adjacentes_str = ", ".join(adjacentes)
         print(f"{vertice}: {adjacentes_str}")
         
-        
+    input("Pressione Enter para continuar...")
         
 def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     try:
@@ -273,8 +304,9 @@ def main():
             case '15': exibir_matriz_adj(grafo)
             case '16': exibir_matriz_inci(grafo)
             case '17': verificar_conectividade(grafo)
-            case '18': exibir_lista_adjacencia(grafo)
-            case '19': break
+            case '18': verificar_conectividade_naive(grafo)
+            case '19': exibir_lista_adjacencia(grafo)
+            case '20': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
