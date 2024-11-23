@@ -26,7 +26,8 @@ def mostrar_menu():
     print("17. Verificar conectividade")
     print("18. Verificar conectividade (naive)")
     print("19. Exibir lista de adjacência")
-    print("20. Sair")
+    print("20. Exportar CSV")
+    print("21. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -205,6 +206,7 @@ def exibir_matriz_inci(grafo: Grafo):
     input("Pressione Enter para continuar...")
 
 def verificar_conectividade(grafo: Grafo):
+
     print(grafo.verificar_conectividade())
     input("Pressione Enter para continuar...")
     
@@ -271,6 +273,9 @@ def salvar_grafo_json(grafo, nome_arquivo):
     }
     with open(nome_arquivo, 'w') as f:
         json.dump(grafo_dict, f, indent=4)
+def exportar_csv(grafo: Grafo):
+    nome = input('Insira o nome do arquivo (ex: "Grafo1"):')
+    grafo.gerar_csv(nome, grafo.direcionado)
 
 def main():
     grafo = None
@@ -306,7 +311,8 @@ def main():
             case '17': verificar_conectividade(grafo)
             case '18': verificar_conectividade_naive(grafo)
             case '19': exibir_lista_adjacencia(grafo)
-            case '20': break
+            case '20': exportar_csv(grafo)
+            case '21': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
