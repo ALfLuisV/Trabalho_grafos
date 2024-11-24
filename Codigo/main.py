@@ -3,6 +3,8 @@ import json
 from grafo import Grafo
 from vertice import listar_vertices
 from aresta import listar_arestas
+from algoritmo import kosaraju
+from algoritmo import encontrar_pontes_tarjan
 
 def mostrar_menu():
     print("\nMenu de Opções:")
@@ -27,8 +29,10 @@ def mostrar_menu():
     print("18. Verificar conectividade")
     print("19. Verificar conectividade (naive)")
     print("20. Exibir lista de adjacência")
-    print("21. Exportar CSV")
-    print("22. Sair")
+    print("21. Verificar componentes fortemente conectos com Kosaraju")
+    print("22. Encontrar pontes (Tarjan)")
+    print("23. Exportar CSV")
+    print("24. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -207,7 +211,6 @@ def exibir_matriz_inci(grafo: Grafo):
     input("Pressione Enter para continuar...")
 
 def verificar_conectividade(grafo: Grafo):
-
     print(grafo.verificar_conectividade())
     input("Pressione Enter para continuar...")
     
@@ -236,6 +239,13 @@ def exibir_lista_adjacencia(grafo: Grafo):
         print(f"{vertice}: {adjacentes_str}")
         
     input("Pressione Enter para continuar...")
+
+def verificar_componentes_fortemente_conexos(grafo: Grafo):
+    componentes = kosaraju(grafo)
+    print("Componentes fortemente conectados:")
+    for i, componente in enumerate(componentes):
+        print(f"Componente {
+            i + 1}: {[vertice.rotulo for vertice in componente]}")
         
 def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     try:
@@ -321,8 +331,12 @@ def main():
             case '18': verificar_conectividade(grafo)
             case '19': verificar_conectividade_naive(grafo)
             case '20': exibir_lista_adjacencia(grafo)
-            case '21': exportar_csv(grafo)
-            case '22': break
+            case '21': verificar_componentes_fortemente_conexos(grafo)
+            case '22':
+                pontes = encontrar_pontes_tarjan(grafo)
+                print("Pontes encontradas:", pontes)
+            case '23': exportar_csv(grafo)
+            case '24': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
