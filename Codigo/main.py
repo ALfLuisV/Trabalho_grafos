@@ -330,9 +330,10 @@ def carregar_grafo_json(nome_arquivo: str) -> Grafo:
         print("Erro: O arquivo JSON está malformado.")
 
     return None
+
 def executar_fleury(grafo: Grafo):
     """
-    Executa o algoritmo de Fleury em um grafo e salva o resultado em um arquivo.
+    Executa o algoritmo de Fleury em um grafo e salva o resultado em um arquivo com nome incremental.
     Parâmetros:
         grafo: Instância de Grafo.
     """
@@ -346,10 +347,10 @@ def executar_fleury(grafo: Grafo):
         os.makedirs(pasta_resultados)
 
     # Medir tempo de execução
-    #inicio_tempo = time.time()
+    inicio_tempo = time.time()
     auxGrafo = grafo
     resultado = fleury(auxGrafo)
-    #tempo_execucao = time.time() - inicio_tempo
+    tempo_execucao = time.time() - inicio_tempo
 
     # Criar o conteúdo do arquivo
     if isinstance(resultado, list):
@@ -357,14 +358,21 @@ def executar_fleury(grafo: Grafo):
     else:
         conteudo = f"Erro durante a execução: {resultado}\n"
 
-    #conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
+    conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
+
+    # Verificar se o arquivo já existe e criar um novo nome incremental
+    arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury.txt")
+    contador = 1
+    while os.path.exists(arquivo_saida):
+        arquivo_saida = os.path.join(pasta_resultados, f"resultado_fleury_{contador}.txt")
+        contador += 1
 
     # Escrever o resultado em um arquivo
-    arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury.txt")
     with open(arquivo_saida, "w") as arquivo:
         arquivo.write(conteudo)
 
     print(f"Resultado salvo em '{arquivo_saida}'")
+
 
 def executar_fleury_tarjan(grafo: Grafo):
     """
@@ -494,6 +502,7 @@ def main():
             case '24': executar_fleury(grafo)
             case '25': executar_fleury_tarjan(grafo)
             case '26': break
+            case '99': ajustar_grafo_grau_2(grafo)
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":

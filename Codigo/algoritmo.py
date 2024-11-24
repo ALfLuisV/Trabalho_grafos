@@ -123,12 +123,9 @@ def e_ponte(grafo, aresta):
     return resultado
 
 
-
-    return componentes
-
 def encontrar_pontes_tarjan(grafo):
     """
-    Encontra todas as pontes em um grafo usando o algoritmo de Tarjan.
+    Encontra todas as pontes em um grafo usando o algoritmo de Tarjan (versão iterativa).
     :param grafo: Instância de Grafo.
     :return: Lista de tuplas representando as pontes (v1, v2).
     """
@@ -138,34 +135,45 @@ def encontrar_pontes_tarjan(grafo):
     visitados = set()
     pontes = []
 
-    def dfs(vertice, parent=None):
-        """
-        Função auxiliar para realizar DFS e encontrar pontes.
-        :param vertice: Vértice atual.
-        :param parent: Vértice pai na árvore DFS.
-        """
-        visitados.add(vertice)
-        ids[vertice] = lows[vertice] = tempo[0]
-        tempo[0] += 1
+    def dfs_iterativa(vertice_inicial):
+        stack = [(vertice_inicial, None)]
+        caminho = []
 
-        for aresta in vertice.arestas:
-            vizinho = aresta.vertices[1] if aresta.vertices[0] == vertice else aresta.vertices[0]
-            if vizinho == parent:
-                continue
-            if vizinho not in visitados:
-                dfs(vizinho, vertice)
-                lows[vertice] = min(lows[vertice], lows[vizinho])
+        while stack:
+            vertice, parent = stack.pop()
 
-                if lows[vizinho] > ids[vertice]:
-                    pontes.append((vertice.rotulo, vizinho.rotulo))
-            else:
-                lows[vertice] = min(lows[vertice], ids[vizinho])
+            if vertice not in visitados:
+                visitados.add(vertice)
+                ids[vertice] = lows[vertice] = tempo[0]
+                tempo[0] += 1
+                caminho.append((vertice, parent))
+
+                for aresta in vertice.arestas:
+                    vizinho = (
+                        aresta.vertices[1] if aresta.vertices[0] == vertice else aresta.vertices[0]
+                    )
+                    if vizinho == parent:
+                        continue
+                    if vizinho not in visitados:
+                        stack.append((vizinho, vertice))
+                    else:
+                        lows[vertice] = min(lows[vertice], ids[vizinho])
+
+        # Processar as arestas e identificar pontes
+        while caminho:
+            v, p = caminho.pop()
+            if p is not None:
+                lows[p] = min(lows[p], lows[v])
+                if lows[v] > ids[p]:
+                    pontes.append((p.rotulo, v.rotulo))
 
     for vertice in grafo.vertices:
         if vertice not in visitados:
-            dfs(vertice)
+            dfs_iterativa(vertice)
 
     return pontes
+
+
 
 def fleury_com_tarjan(grafo):
     """

@@ -487,43 +487,6 @@ class Grafo:
             1, 10) if pesos_aleatorios else 0) for i in range(num_vertices)]
         for vertice in vertices:
             grafo.adicionar_vertice(vertice.rotulo, vertice.peso)
-
-        # Adicionar arestas aleatórias
-        num_arestas = random.randint(
-            num_vertices, num_vertices * (num_vertices - 1) // 2)
-        arestas_existentes = set()
-        for i in range(num_arestas):
-            while True:
-                vertice1, vertice2 = random.sample(vertices, 2)
-
-                # Verificar se a aresta é um loop
-                if vertice1 == vertice2:
-                    continue
-
-                if direcionado:
-                    aresta_id = (vertice1.rotulo, vertice2.rotulo)
-                    aresta_id_reversa = (vertice2.rotulo, vertice1.rotulo)
-                else:
-                    aresta_id = tuple(
-                        sorted([vertice1.rotulo, vertice2.rotulo]))
-                    aresta_id_reversa = aresta_id
-
-                # Verificar se a aresta já existe ou se é antiparalela
-                if aresta_id not in arestas_existentes and aresta_id_reversa not in arestas_existentes:
-                    arestas_existentes.add(aresta_id)
-                    break
-
-            rotulo = f'A{i}'
-            peso = random.randint(1, 10) if pesos_aleatorios else 0
-            grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
-            
-            end_time = time.perf_counter()
-            
-            tempo_execucao = (end_time - start_time)
-
-        print(grafo.arestas)
-        print()
-        print(f"Tempo de execução para gerar o grafo: {tempo_execucao:.4f} segundos")
         return grafo
 
 
