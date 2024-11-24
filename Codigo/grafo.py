@@ -70,7 +70,8 @@ class Grafo:
         return f"Grafo (Direcionado: {self.direcionado}):\nVertices: {vertices_str}\nArestas:\n{arestas_str}"
 
     def checar_arestas(self):
-        """Metodo que checa a existencia de arestas em um grafo"""
+        """Metodo que checa a existencia de arestas em um grafo, se não existir, através da informação do tamanho do 
+        array de arestas, ou ele retorna o conteudo do array (se for >=1), ou retorna a mensagem "o grafo não possui arestas" """
         if len(self.arestas) == 0:
             return "O grafo não possui arestas"
 
@@ -80,6 +81,17 @@ class Grafo:
         """Retorna a quantidade de arestas e vértices no grafo."""
         return "O grafo possui " + str(len(self.arestas)) + " arestas, e " + str(len(self.vertices)) + " vertices"
 
+
+#     O método `checar_grafo` verifica se um grafo é vazio ou completo. Primeiro, verifica se a 
+# lista de vértices (`self.vertices`) está vazia. Caso esteja, retorna que o grafo está vazio. Caso contrário, 
+# percorre cada vértice do grafo e calcula suas conexões utilizando as arestas. Para isso, considera os vértices 
+# conectados tanto como origem quanto como destino das arestas.
+# Se o número de conexões de um vértice for diferente do total de vértices menos um 
+# (ou seja, se ele não está conectado a todos os outros vértices), o método conclui que o grafo não é 
+# completo e retorna essa mensagem. Caso todos os vértices estejam adequadamente conectados, o método 
+# retorna que o grafo é completo.
+# Essa abordagem permite verificar rapidamente a completude ou o vazio do grafo, garantindo que as relações 
+# entre os vértices sejam analisadas corretamente.
     def checar_grafo(self):
         """Verifica se o grafo é vazio ou se ele é completo."""
         if len(self.vertices) == 0:
@@ -147,15 +159,22 @@ class Grafo:
                 vizinhos.add(aresta.vertices[0].rotulo)
         return vizinhos
 
+
+# O método `exibir_matriz_adjacenciaND` constrói e retorna a matriz de adjacência de um grafo não direcionado. 
+# Nessa matriz, cada linha e coluna representam vértices, e o valor `1` indica que há uma aresta conectando os 
+# dois vértices, enquanto `0` indica ausência de conexão.
+# O método inicia criando uma lista vazia chamada `matrizAdj` para armazenar as linhas da matriz. Para 
+# cada par de vértices (`vertice1` e `vertice2`), verifica-se se existe uma conexão entre eles. Se os vértices 
+# forem iguais, o valor `0` é adicionado para evitar loops. Caso contrário, o método percorre as arestas do grafo
+#  para verificar se há uma conexão direta entre os dois vértices, considerando ambas as direções (de `vertice1` 
+# para `vertice2` ou vice-versa). Se uma conexão é encontrada, o valor `1` é adicionado à linha; caso contrário, 
+# adiciona-se `0`.
+# Após processar todas as conexões para um vértice, a linha é adicionada à matriz. No final, a matriz completa 
+# é retornada, representando as conexões entre os vértices de forma simétrica, característica de grafos não 
+# direcionados.
     def exibir_matriz_adjacenciaND(self):
         """Monta a matriz de adjacencia para grafos não direcionados"""
         matrizAdj = []
-        print("vertices::::")
-        for v in self.arestas:
-            print("Vertice inicial::::")
-            print(v.vertices[0])
-            print("Vertice final::::")
-            print(v.vertices[1])
 
         for vertice1 in self.vertices:
             linha = []
@@ -174,7 +193,19 @@ class Grafo:
                     linha.append(0)
             matrizAdj.append(linha)
         return matrizAdj
+    
 
+# O método `exibir_matriz_adjacenciaD` constrói e retorna a matriz de adjacência de um grafo direcionado. 
+# Nesta matriz, cada linha e coluna representam vértices, e o valor `1` indica que há uma aresta direcionada 
+# do vértice da linha para o vértice da coluna, enquanto `0` indica ausência de conexão.
+# O método começa criando uma lista vazia chamada `matrizAdj` para armazenar as linhas da matriz. Para 
+# cada par de vértices (`vertice1` e `vertice2`), verifica-se se existe uma aresta que conecta `vertice1` 
+# a `vertice2`. Se os vértices forem iguais, o valor `0` é adicionado para evitar loops. Caso contrário, um 
+# laço percorre as arestas do grafo para verificar a existência de uma conexão. Se encontrada, o valor `1` é 
+# adicionado à linha; caso contrário, adiciona-se `0`. Após processar todas as colunas para um vértice, a linha 
+# completa é adicionada à matriz.
+# Por fim, o método retorna a matriz de adjacência, que fornece uma representação clara das conexões
+#  direcionadas no grafo, indicando de forma precisa quais vértices estão conectados e a direção das conexões.
     def exibir_matriz_adjacenciaD(self):
         """Monta a matriz de adjacencia para grafos  direcionados"""
         matrizAdj = []
@@ -197,6 +228,17 @@ class Grafo:
             matrizAdj.append(linha)
         return matrizAdj
 
+
+# O método `exibir_matriz_incidenciaND` constrói e retorna a matriz de incidência de um grafo não direcionado. 
+# Nessa matriz, cada linha representa um vértice, e cada coluna representa uma aresta. Os valores indicam a 
+# relação entre vértices e arestas: `1` se o vértice está conectado à aresta e `0` caso contrário.
+# O método inicia criando uma lista vazia chamada `matrizInc`, que armazenará as linhas da matriz. Para cada 
+# vértice no grafo, ele cria uma nova linha (`linha`) e itera sobre todas as arestas. Durante essa iteração, 
+# verifica se o vértice atual é um dos dois extremos da aresta (origem ou destino). Se for, adiciona `1` à linha, 
+# caso contrário, adiciona `0`. Após processar todas as arestas para o vértice atual, a linha completa é adicionada 
+# à matriz. Quando todos os vértices são processados, a matriz de incidência completa é retornada. Essa matriz 
+# fornece uma representação clara das conexões entre vértices e arestas em grafos não direcionados, identificando 
+# de forma simples quais vértices estão conectados por cada aresta.
     def exibir_matriz_incidenciaND(self):
         """Monta a matriz de incidencia de um grafo não direcionado"""
         matrizInc = []
@@ -213,7 +255,23 @@ class Grafo:
                     linha.append(0)
             matrizInc.append(linha)
         return matrizInc
+    
 
+# O método `exibir_matriz_incidenciaD` cria e retorna a matriz de incidência de um grafo direcionado, 
+# onde cada linha da matriz representa um vértice, e cada coluna representa uma aresta. Os valores na 
+# matriz indicam a relação entre vértices e arestas: `-1` quando a aresta sai de um vértice, `1` quando a a
+# resta entra em um vértice, e `0` quando a aresta não está conectada ao vértice.
+# O método começa inicializando uma lista vazia chamada `matrizInc`, que armazenará as linhas da matriz. 
+# Em seguida, ele itera sobre todos os vértices do grafo (`self.vertices`). Para cada vértice, uma nova linha 
+# (`linha`) é criada para representar a conexão desse vértice com todas as arestas. O método então percorre 
+# todas as arestas do grafo (`self.arestas`) e verifica a relação entre o vértice atual e cada aresta. Se a 
+# aresta tem o vértice atual como origem (`aresta.vertices[0] == vertice`), o valor `-1` é adicionado à linha. 
+# Se o vértice é o destino da aresta (`aresta.vertices[1] == vertice`), o valor `1` é adicionado. Caso o vértice 
+# não esteja conectado à aresta, o valor `0` é adicionado.
+# Depois de processar todas as arestas para o vértice atual, a linha completa é adicionada à matriz de 
+# incidência. Quando todos os vértices são processados, e suas respectivas linhas são adicionadas, a matriz de 
+# incidência completa é retornada pelo método. Essa matriz fornece uma representação tabular clara do grafo 
+# direcionado, permitindo identificar as conexões entre vértices e arestas de forma precisa e eficiente.
     def exibir_matriz_incidenciaD(self):
         """Monta a matriz de incidencia de um grafo direcionado"""
         matrizInc = []
@@ -232,7 +290,19 @@ class Grafo:
             matrizInc.append(linha)
 
         return matrizInc
+    
 
+# O método `_simplismente_conexo` verifica se um grafo é conexo ou simplesmente conexo, 
+# dependendo se ele é direcionado. Ele inicia escolhendo o primeiro vértice (`verticeRef`) 
+# como ponto de partida e cria uma lista (`vetorAlc`) para armazenar os vértices alcançáveis. 
+# Primeiramente, adiciona ao `vetorAlc` os vértices diretamente conectados a `verticeRef` por meio das arestas.
+# Depois, em um loop `while`, verifica todas as conexões indiretas: para cada vértice já presente em `vetorAlc`, 
+# explora as arestas que partem dele e adiciona à lista os vértices conectados que ainda não foram processados. 
+# Isso continua até que todos os vértices acessíveis tenham sido analisados.
+# No final, o método verifica se todos os vértices do grafo estão presentes em `vetorAlc`. Se estiverem, 
+# retorna que o grafo é "conexo" ou "simplesmente conexo", dependendo se é direcionado ou não. Caso contrário, 
+# indica que o grafo não é conexo. Esse método é eficiente ao explorar conexões diretas e indiretas para 
+# determinar a conectividade do grafo.
     def _simplismente_conexo(self, direcionado):
         vetorAlc = []
 
@@ -270,7 +340,7 @@ class Grafo:
         if conexo:
             if direcionado is True:
                 return "O grafo é simplismente conexo!"
-           
+
             return "O grafo é conexo!"
 
         return "O grafo não é conexo!"
@@ -428,8 +498,23 @@ class Grafo:
         print(grafo.arestas)
         return grafo
 
-    def gerar_csv(self, nome_arquivo, direcionado):
 
+
+# O método `gerar_csv` cria um arquivo CSV representando a matriz de incidência ou de adjacência de um grafo, 
+# dependendo se ele é direcionado ou não. Ele recebe `self` (objeto do grafo), `nome_arquivo` (nome base do arquivo)
+#  e `direcionado` (indica se o grafo é direcionado). 
+# Se o grafo for **não direcionado**, o nome do arquivo é ajustado com a extensão ".csv". 
+# A matriz de incidência é exibida no console e o arquivo é aberto para escrita em UTF-8. 
+# A primeira linha do CSV contém os rótulos dos vértices separados por ponto e vírgula. 
+# Em seguida, a matriz de adjacência não direcionada é obtida e processada linha a linha: 
+# para cada vértice, seu rótulo e os valores das conexões são escritos no arquivo. 
+# Após processar a matriz, o arquivo é fechado, e uma mensagem de sucesso é exibida. 
+# Em caso de erro, uma mensagem é exibida no console.
+# Para **grafos direcionados**, o processo é semelhante, mas utiliza as versões direcionadas da 
+# matriz de incidência e de adjacência. O método adapta a escrita conforme o tipo do grafo e exporta os
+#  dados no formato CSV, sempre tratando adequadamente rótulos e valores. Ele também informa o sucesso ou 
+# erro do processo no console.
+    def gerar_csv(self, nome_arquivo, direcionado):
         """Gera um arquivo CSV com a matriz de incidência do grafo."""
         if direcionado is False:
             try:
@@ -444,7 +529,7 @@ class Grafo:
                         file.write(vertice.rotulo)
                     else:
                         file.write(vertice.rotulo + ";")
-                
+
                 file.write("\n")
 
                 matriz_adj = self.exibir_matriz_adjacenciaND()
@@ -464,7 +549,7 @@ class Grafo:
                 print("Grafo exportado com sucesso!")
             except Exception as e:
                 print(f"Ocorreu um erro na exportação do grafo: {e}")
-        else :
+        else:
             try:
                 nome_arquivo = nome_arquivo + ".csv"
 
@@ -477,10 +562,10 @@ class Grafo:
                         file.write(vertice.rotulo)
                     else:
                         file.write(vertice.rotulo + ";")
-                
+
                 file.write("\n")
 
-                matriz_adj = self.exibir_matriz_adjacenciaD() 
+                matriz_adj = self.exibir_matriz_adjacenciaD()
 
                 for i, vertice in enumerate(self.vertices):
                     file.write(vertice.rotulo + ";")
@@ -497,29 +582,65 @@ class Grafo:
                 print("Grafo exportado com sucesso!")
             except Exception as e:
                 print(f"Ocorreu um erro na exportação do grafo: {e}")
-    
+
+
+# O método `ler_grafo_from_csv` tem como objetivo carregar um grafo a partir de um arquivo CSV.
+# Ele começa imprimindo uma mensagem indicando o início do processo de leitura. Em seguida,
+# tenta abrir o arquivo especificado (`nomeCsv`) no modo de leitura, utilizando a codificação UTF-8 para
+# garantir compatibilidade com caracteres especiais. Caso ocorra algum erro durante a leitura,
+# a execução será desviada para o bloco `except`, onde uma mensagem de erro será exibida.
+# Inicialmente, dois arrays auxiliares são criados: `array_de_vertices` e `array_de_arestas`.
+# O primeiro armazenará os vértices do grafo, enquanto o segundo armazenará as arestas.
+# O método utiliza um loop `for` com `enumerate` para iterar sobre as linhas do arquivo CSV, onde a
+# variável `counter` representa o índice da linha, e `line` contém o conteúdo da linha atual.
+# Na primeira iteração (`counter == 0`), a linha correspondente é tratada como a lista de vértices
+#  do grafo. O primeiro caractere da linha, geralmente um ponto-e-vírgula, é removido com `line[1:]`, e
+# o último caractere (um possível caractere de nova linha) é removido com `line[:-1]`. A linha resultante é
+#  dividida em um array de vértices utilizando o método `split(";")`. Esse array é armazenado em
+# `array_de_vertices`. Em seguida, cada vértice é adicionado ao grafo utilizando o método `self.adicionar_vertice`.
+# Para as linhas subsequentes (`counter > 0`), o método interpreta os dados como a matriz de adjacência do grafo.
+# Novamente, os primeiros e últimos caracteres são removidos, e a linha resultante é dividida em um array de
+# arestas. Este array é adicionado a `array_de_arestas`, que acumula as informações de adjacência.
+# Após carregar os dados de vértices e arestas, o método inicia um processo de construção do grafo
+# com base na matriz de adjacência. Ele utiliza dois loops aninhados para iterar sobre cada combinação de
+# vértices (`k` e `j`), representados pelos índices de `array_de_vertices`. Se os índices forem iguais (`k == j`)
+# ou se o valor correspondente na matriz de adjacência (`array_de_arestas[k][j]`) for `'0'`, a
+# iteração atual é ignorada utilizando o comando `continue`. Caso contrário, é criada uma aresta
+# entre os dois vértices, utilizando o método `self.adicionar_aresta`. O rótulo da aresta é gerado
+# dinamicamente como `"A" + str(counter)`, e um contador é incrementado para garantir que cada aresta
+# tenha um rótulo único.
+# Por fim, se todo o processo for concluído sem erros, uma mensagem de sucesso é exibida.
+# Caso contrário, qualquer exceção capturada será exibida no console, detalhando o erro ocorrido
+# durante a exportação do grafo.
     def ler_grafo_from_csv(self, nomeCsv):
         print("Iniciando a leitura")
         try:
-            file = open(nomeCsv, 'r', encoding="utf-8") #abre o arquivo em modo de leitura
+            # abre o arquivo em modo de leitura
+            file = open(nomeCsv, 'r', encoding="utf-8")
 
             array_de_vertices = []
-            array_de_arestas=[]
+            array_de_arestas = []
             for counter, line in enumerate(file):
                 if counter == 0:
-                    new_line = line[1:]  # remove the first character of the string which is a ";"
-                    new_line1 = new_line[:-1]  # remove the last character of the string which is "\n"
-                    array_de_vertices = new_line1.split(";")  # split and create a new array with vertex labels
+                    # remove the first character of the string which is a ";"
+                    new_line = line[1:]
+                    # remove the last character of the string which is "\n"
+                    new_line1 = new_line[:-1]
+                    # split and create a new array with vertex labels
+                    array_de_vertices = new_line1.split(";")
 
-                          # print(array_de_vertices)
-            
+                    # print(array_de_vertices)
+
                     for v in array_de_vertices:
                         self.adicionar_vertice(v)
                 else:
-                    new_line = line[3:]  # remove the first character of the string which is a ";"
-                    new_line1 = new_line[:-1]  # remove the last character of the string which is "\n"
-                    array_arestas = new_line1.split(";")  # split and create a new array with edge labels
-                    array_de_arestas.append(array_arestas)        
+                    # remove the first character of the string which is a ";"
+                    new_line = line[3:]
+                    # remove the last character of the string which is "\n"
+                    new_line1 = new_line[:-1]
+                    # split and create a new array with edge labels
+                    array_arestas = new_line1.split(";")
+                    array_de_arestas.append(array_arestas)
 
             counter = 0
             for k, vertice1 in enumerate(array_de_vertices):
@@ -527,19 +648,10 @@ class Grafo:
                     if k == j or array_de_arestas[k][j] == '0':
                         continue
                     rotulo = "A"+str(counter)
-                    self.adicionar_aresta(rotulo, 0, self.vertices[k], self.vertices[j])
-                    counter += 1         
+                    self.adicionar_aresta(
+                        rotulo, 0, self.vertices[k], self.vertices[j])
+                    counter += 1
 
             print("Grafo carregado com sucesso!!!")
         except Exception as e:
-                print(f"Ocorreu um erro na exportação do grafo: {e}")
-        
-        
-            
-
-
-
-
-
-                
-
+            print(f"Ocorreu um erro na exportação do grafo: {e}")
