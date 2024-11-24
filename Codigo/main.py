@@ -4,6 +4,8 @@ from vertice import listar_vertices
 from aresta import listar_arestas
 from algoritmo import kosaraju
 from algoritmo import fleury
+import os
+import time
 
 
 def mostrar_menu():
@@ -326,22 +328,70 @@ def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     return None
 def executar_fleury(grafo: Grafo):
     """
-    Executa o algoritmo de Fleury em um grafo e exibe o resultado.
+    Executa o algoritmo de Fleury em um grafo e salva o resultado em um arquivo.
     Parâmetros:
         grafo: Instância de Grafo.
     """
     if not grafo:
         print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
-    else:
-        auxGrafo = grafo
-        resultado = fleury(auxGrafo)
-        if isinstance(resultado, list):
-            print("Ciclo Euleriano encontrado:")
-            print(resultado)
-        else:
-            print(resultado)  # Mensagem de erro retornada pela função fleury
-    input("Pressione Enter para continuar...")
+        return
 
+    # Criar diretório para salvar o arquivo de saída
+    pasta_resultados = "resultados"
+    if not os.path.exists(pasta_resultados):
+        os.makedirs(pasta_resultados)
+
+    # Medir tempo de execução
+    inicio_tempo = time.time()
+    auxGrafo = grafo
+    resultado = fleury(auxGrafo)
+    tempo_execucao = time.time() - inicio_tempo
+
+    # Criar o conteúdo do arquivo
+    if isinstance(resultado, list):
+        conteudo = "Ciclo Euleriano encontrado:\n" + " -> ".join(resultado) + "\n"
+    else:
+        conteudo = f"Erro durante a execução: {resultado}\n"
+
+    conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
+
+    # Escrever o resultado em um arquivo
+    arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury.txt")
+    with open(arquivo_saida, "w") as arquivo:
+        arquivo.write(conteudo)
+
+    print(f"Resultado salvo em '{arquivo_saida}'")
+    
+def ajustar_grafo_grau_2(grafo):
+    """
+    Ajusta um grafo para que todos os vértices tenham grau 2, conectando 
+    vértices sequencialmente (1 com 2, 2 com 3, ...).
+    Parâmetros:
+        grafo: Instância de Grafo.
+    """
+    if len(grafo.vertices) < 2:
+        print("Erro: O grafo deve ter pelo menos dois vértices.")
+        return
+
+    # Limpar as arestas existentes
+    grafo.arestas.clear()
+    for vertice in grafo.vertices:
+        vertice.arestas.clear()
+
+    # Adicionar arestas sequenciais
+    for i in range(len(grafo.vertices) - 1):
+        vertice_atual = grafo.vertices[i]
+        proximo_vertice = grafo.vertices[i + 1]
+        rotulo_aresta = f"A{i+1}"
+        grafo.adicionar_aresta(rotulo_aresta, 0, vertice_atual, proximo_vertice)
+
+    # Conectar o último vértice ao primeiro para formar um ciclo
+    if len(grafo.vertices) > 2:
+        rotulo_aresta = f"A{len(grafo.vertices)}"
+        grafo.adicionar_aresta(rotulo_aresta, 0, grafo.vertices[-1], grafo.vertices[0])
+
+    print("Grafo ajustado com sucesso para que todos os vértices tenham grau 2.")
+    print(grafo)
 
 def main():
     grafo = None  # Inicializar a variável do grafo
@@ -378,6 +428,7 @@ def main():
             case '18': verificar_conectividade_naive(grafo)
             case '19': exibir_lista_adjacencia(grafo)
             case '21': executar_fleury(grafo)
+            case '22': ajustar_grafo_grau_2(grafo)
 
             case '20': break
             case _: print("Opção inválida. Tente novamente.")

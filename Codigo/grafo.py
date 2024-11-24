@@ -340,16 +340,22 @@ class Grafo:
         visitados = set()
         self._dfs_visit(start, visitados)
         return len(visitados) == len(self.vertices)
-
+    
     def _dfs_visit(self, vertice, visitados):
-        """Auxiliar para realizar DFS."""
-        visitados.add(vertice)
-        for aresta in vertice.arestas:
-            vizinho = aresta.vertices[1] if aresta.vertices[0] == vertice else aresta.vertices[0]
-            if self.direcionado and aresta.vertices[0] != vertice:
-                continue
-            if vizinho not in visitados:
-                self._dfs_visit(vizinho, visitados)
+        """
+        Realiza DFS iterativa a partir de um vértice.
+        """
+        pilha = [vertice]
+        while pilha:
+            atual = pilha.pop()
+            if atual not in visitados:
+                visitados.add(atual)
+                # Adicionar vizinhos à pilha
+                for aresta in atual.arestas:
+                    vizinho = aresta.vertices[1] if aresta.vertices[0] == atual else aresta.vertices[0]
+                    if vizinho not in visitados:
+                        pilha.append(vizinho)
+
 
     def _converter_nao_direcionado(self):
         """Converte o grafo direcionado em não direcionado."""
