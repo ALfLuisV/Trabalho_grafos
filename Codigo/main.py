@@ -483,7 +483,9 @@ def main():
             case '1': 
                 direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
                 grafo = Grafo(direcionado)
-                grafo.ler_grafo_from_csv("grafod.csv")
+                file_name = input('Insira o nome do arquivo(não informe a extensão ".csv"):')
+                file_name = file_name + ".csv"
+                grafo.ler_grafo_from_csv(file_name)
                 
             case '2': 
                 grafo = Grafo(direcionado=False)
