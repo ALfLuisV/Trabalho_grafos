@@ -32,59 +32,11 @@
         "documentation": {}
     },
     {
-        "label": "Vertice",
-        "importPath": "vertice",
-        "description": "vertice",
-        "isExtraImport": true,
-        "detail": "vertice",
-        "documentation": {}
-    },
-    {
         "label": "listar_vertices",
         "importPath": "vertice",
         "description": "vertice",
         "isExtraImport": true,
         "detail": "vertice",
-        "documentation": {}
-    },
-    {
-        "label": "Aresta",
-        "importPath": "aresta",
-        "description": "aresta",
-        "isExtraImport": true,
-        "detail": "aresta",
-        "documentation": {}
-    },
-    {
-        "label": "Aresta",
-        "importPath": "aresta",
-        "description": "aresta",
-        "isExtraImport": true,
-        "detail": "aresta",
-        "documentation": {}
-    },
-    {
-        "label": "listar_arestas",
-        "importPath": "aresta",
-        "description": "aresta",
-        "isExtraImport": true,
-        "detail": "aresta",
-        "documentation": {}
-    },
-    {
-        "label": "listar_arestas",
-        "importPath": "aresta",
-        "description": "aresta",
-        "isExtraImport": true,
-        "detail": "aresta",
-        "documentation": {}
-    },
-    {
-        "label": "deepcopy",
-        "importPath": "copy",
-        "description": "copy",
-        "isExtraImport": true,
-        "detail": "copy",
         "documentation": {}
     },
     {
@@ -94,6 +46,30 @@
         "importPath": "random",
         "description": "random",
         "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "Aresta",
+        "importPath": "aresta",
+        "description": "aresta",
+        "isExtraImport": true,
+        "detail": "aresta",
+        "documentation": {}
+    },
+    {
+        "label": "listar_arestas",
+        "importPath": "aresta",
+        "description": "aresta",
+        "isExtraImport": true,
+        "detail": "aresta",
+        "documentation": {}
+    },
+    {
+        "label": "listar_arestas",
+        "importPath": "aresta",
+        "description": "aresta",
+        "isExtraImport": true,
+        "detail": "aresta",
         "documentation": {}
     },
     {
@@ -115,6 +91,22 @@
     },
     {
         "label": "fleury",
+        "importPath": "algoritmo",
+        "description": "algoritmo",
+        "isExtraImport": true,
+        "detail": "algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "fleury_com_tarjan",
+        "importPath": "algoritmo",
+        "description": "algoritmo",
+        "isExtraImport": true,
+        "detail": "algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_pontes_tarjan",
         "importPath": "algoritmo",
         "description": "algoritmo",
         "isExtraImport": true,
@@ -167,6 +159,24 @@
         "documentation": {}
     },
     {
+        "label": "encontrar_pontes_tarjan",
+        "kind": 2,
+        "importPath": "Codigo.algoritmo",
+        "description": "Codigo.algoritmo",
+        "peekOfCode": "def encontrar_pontes_tarjan(grafo):\n    \"\"\"\n    Encontra todas as pontes em um grafo usando o algoritmo de Tarjan.\n    :param grafo: Instância de Grafo.\n    :return: Lista de tuplas representando as pontes (v1, v2).\n    \"\"\"\n    tempo = [0]\n    ids = {}\n    lows = {}\n    visitados = set()",
+        "detail": "Codigo.algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "fleury_com_tarjan",
+        "kind": 2,
+        "importPath": "Codigo.algoritmo",
+        "description": "Codigo.algoritmo",
+        "peekOfCode": "def fleury_com_tarjan(grafo):\n    \"\"\"\n    Implementação do algoritmo de Fleury usando Tarjan para detectar pontes.\n    :param grafo: Instância de Grafo.\n    :return: Lista com o caminho Euleriano ou mensagem de erro.\n    \"\"\"\n    if not grafo._verificar_conectividade_simples():\n        return \"O grafo não é conexo! Não é possível encontrar um caminho Euleriano.\"\n    vertices_grau_impar = [v for v in grafo.vertices if len(v.arestas) % 2 != 0]\n    if len(vertices_grau_impar) > 2:",
+        "detail": "Codigo.algoritmo",
+        "documentation": {}
+    },
+    {
         "label": "Aresta",
         "kind": 6,
         "importPath": "Codigo.aresta",
@@ -207,7 +217,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def mostrar_menu():\n    print(\"\\nMenu de Opções:\")\n    print(\"0. Carregar grafo a partir de arquivo JSON\")\n    print(\"1. Criar grafo aleatorio baseado em seu numero de vertices\")\n    print(\"2. Adicionar vértice\")\n    print(\"3. Adicionar aresta\")\n    print(\"4. Exibir grafo\")\n    print(\"5. Alterar vértice\")\n    print(\"6. Alterar aresta\")\n    print(\"7. Deletar vértice\")",
+        "peekOfCode": "def mostrar_menu():\n    print(\"\\nMenu de Opções:\")\n    print(\"0. Carregar grafo a partir de arquivo JSON\")\n    print(\"1. Carregar grafo a partir de arquivo CSV\")\n    print(\"2. Criar grafo aleatório baseado em seu número de vértices\")\n    print(\"3. Adicionar vértice\")\n    print(\"4. Adicionar aresta\")\n    print(\"5. Exibir grafo\")\n    print(\"6. Alterar vértice\")\n    print(\"7. Alterar aresta\")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -374,6 +384,15 @@
         "documentation": {}
     },
     {
+        "label": "verificar_componentes_fortemente_conexos",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def verificar_componentes_fortemente_conexos(grafo: Grafo):\n    componentes = kosaraju(grafo)\n    print(\"Componentes fortemente conectados:\")\n    for i, componente in enumerate(componentes):\n        print(f\"Componente {\n            i + 1}: {[vertice.rotulo for vertice in componente]}\")\ndef carregar_grafo_json(nome_arquivo: str) -> Grafo:\n    try:\n        with open(nome_arquivo, 'r') as f:\n            dados = json.load(f)",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
         "label": "carregar_grafo_json",
         "kind": 2,
         "importPath": "Codigo.main",
@@ -419,6 +438,15 @@
         "documentation": {}
     },
     {
+        "label": "executar_fleury_tarjan",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def executar_fleury_tarjan(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n        return\n    # Criar diretório para salvar o arquivo de saída",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
         "label": "ajustar_grafo_grau_2",
         "kind": 2,
         "importPath": "Codigo.main",
@@ -428,12 +456,39 @@
         "documentation": {}
     },
     {
+        "label": "exportar_csv",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def exportar_csv(grafo: Grafo):\n    nome = input('Insira o nome do arquivo (ex: \"Grafo1\"):')\n    grafo.gerar_csv(nome, grafo.direcionado)\ndef ler_from_csv(grafo: Grafo):\n    grafo.ler_grafo_from_csv()\ndef main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "ler_from_csv",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def ler_from_csv(grafo: Grafo):\n    grafo.ler_grafo_from_csv()\ndef main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '0': \n                nome_arquivo = input(\"Digite o nome do arquivo JSON (ex: grafo.json): \")\n                grafo = carregar_grafo_json(nome_arquivo) ",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
         "label": "main",
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '0': \n                nome_arquivo = input(\"Digite o nome do arquivo JSON (ex: grafo.json): \")\n                grafo = carregar_grafo_json(nome_arquivo) \n            case '1': \n                grafo = Grafo(direcionado=False)",
+        "peekOfCode": "def main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '0': \n                nome_arquivo = input(\"Digite o nome do arquivo JSON (ex: grafo.json): \")\n                grafo = carregar_grafo_json(nome_arquivo) \n            case '1': \n                direcionado = input(\"O grafo é direcionado? (s/n): \").strip().lower() == 's'",
         "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "criar_vertices_iniciais",
+        "kind": 2,
+        "importPath": "Codigo.tempCodeRunnerFile",
+        "description": "Codigo.tempCodeRunnerFile",
+        "peekOfCode": "def criar_vertices_iniciais(grafo):\n    try:\n        num_vertices = int(input(\"Quantos vértices deseja criar? \"))\n        if num_vertices < 1:",
+        "detail": "Codigo.tempCodeRunnerFile",
         "documentation": {}
     },
     {

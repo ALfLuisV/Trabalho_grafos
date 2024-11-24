@@ -112,7 +112,8 @@ def e_ponte(grafo, aresta):
     grafo.remover_aresta(aresta_removida)
 
     # Verificar conectividade do grafo após a remoção
-    conexo_apos_remocao = grafo._simplismente_conexo()
+    print(grafo.direcionado)
+    conexo_apos_remocao = grafo._simplismente_conexo(grafo.direcionado)
 
     # Restaurar a aresta removida
     grafo.adicionar_aresta(aresta.rotulo, aresta.peso, origem, destino)
@@ -165,3 +166,53 @@ def encontrar_pontes_tarjan(grafo):
             dfs(vertice)
 
     return pontes
+
+def fleury_com_tarjan(grafo):
+    """
+    Implementação do algoritmo de Fleury usando Tarjan para detectar pontes.
+    :param grafo: Instância de Grafo.
+    :return: Lista com o caminho Euleriano ou mensagem de erro.
+    """
+    if not grafo._verificar_conectividade_simples():
+        return "O grafo não é conexo! Não é possível encontrar um caminho Euleriano."
+
+    vertices_grau_impar = [v for v in grafo.vertices if len(v.arestas) % 2 != 0]
+    if len(vertices_grau_impar) > 2:
+        return "O grafo possui mais de 2 vértices de grau ímpar. Não é euleriano."
+
+    # Criar uma cópia do grafo para manipulação
+    ciclo = []
+
+    # Iniciar com um vértice de grau ímpar ou qualquer outro vértice
+    vertice_atual = grafo.vertices[
+        grafo.vertices.index(vertices_grau_impar[0] if vertices_grau_impar else grafo.vertices[0])
+    ]
+
+    while len(grafo.arestas) > 0:
+        pontes = encontrar_pontes_tarjan(grafo)
+        arestas_validas = [
+            aresta
+            for aresta in vertice_atual.arestas
+            if (aresta.vertices[0].rotulo, aresta.vertices[1].rotulo) not in pontes and
+               (aresta.vertices[1].rotulo, aresta.vertices[0].rotulo) not in pontes
+        ]
+
+        # Se não houver arestas não-pontes, escolher qualquer uma
+        if len(arestas_validas) == 0:
+            aresta_escolhida = vertice_atual.arestas[0]
+        else:
+            aresta_escolhida = arestas_validas[0]
+
+        # Adicionar a aresta ao ciclo e remover do grafo
+        ciclo.append(aresta_escolhida.rotulo)
+        grafo.remover_aresta(aresta_escolhida)
+
+        # Atualizar o vértice atual para o próximo
+        vertice_atual = (
+            aresta_escolhida.vertices[1]
+            if aresta_escolhida.vertices[0] == vertice_atual
+            else aresta_escolhida.vertices[0]
+        )
+
+    return ciclo
+

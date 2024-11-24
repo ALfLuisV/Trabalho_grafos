@@ -4,6 +4,7 @@ from vertice import listar_vertices
 from aresta import listar_arestas
 from algoritmo import kosaraju
 from algoritmo import fleury
+from algoritmo import fleury_com_tarjan
 import os
 import time
 
@@ -35,7 +36,9 @@ def mostrar_menu():
     print("21. Verificar componentes fortemente conectos com Kosaraju")
     print("22. Encontrar pontes (Tarjan)")
     print("23. Exportar CSV")
-    print("24. Sair")
+    print("24. Executar Fleury")
+    print("25. Executar Fleury com Tarjan")
+    print("26. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -373,6 +376,49 @@ def executar_fleury(grafo: Grafo):
         arquivo.write(conteudo)
 
     print(f"Resultado salvo em '{arquivo_saida}'")
+
+def executar_fleury_tarjan(grafo: Grafo):
+    """
+    Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.
+    Parâmetros:
+        grafo: Instância de Grafo.
+    """
+    if not grafo:
+        print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
+        return
+
+    # Criar diretório para salvar o arquivo de saída
+    pasta_resultados = "resultados"
+    if not os.path.exists(pasta_resultados):
+        os.makedirs(pasta_resultados)
+
+    # Medir tempo de execução
+    inicio_tempo = time.time()
+    auxGrafo = grafo
+    resultado = fleury_com_tarjan(auxGrafo)
+    tempo_execucao = time.time() - inicio_tempo
+
+    # Criar o conteúdo do arquivo
+    if isinstance(resultado, list):
+        conteudo = "Caminho Euleriano encontrado (usando Tarjan):\n" + " -> ".join(resultado) + "\n"
+    else:
+        conteudo = f"Erro durante a execução: {resultado}\n"
+
+    conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
+
+    # Verificar se o arquivo já existe e criar um novo nome incremental
+    arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury_tarjan.txt")
+    contador = 1
+    while os.path.exists(arquivo_saida):
+        arquivo_saida = os.path.join(pasta_resultados, f"resultado_fleury_tarjan_{contador}.txt")
+        contador += 1
+
+    # Escrever o resultado em um arquivo
+    with open(arquivo_saida, "w") as arquivo:
+        arquivo.write(conteudo)
+
+    print(f"Resultado salvo em '{arquivo_saida}'")
+
     
 def ajustar_grafo_grau_2(grafo):
     """
@@ -455,7 +501,9 @@ def main():
                 pontes = encontrar_pontes_tarjan(grafo)
                 print("Pontes encontradas:", pontes)
             case '23': exportar_csv(grafo)
-            case '24': break
+            case '24': executar_fleury(grafo)
+            case '25': executar_fleury_tarjan(grafo)
+            case '26': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
