@@ -50,8 +50,7 @@ def criar_vertices_iniciais(grafo):
 
         for i in range(num_vertices):
             rotulo = f"V{i+1}"
-            peso_str = input(f"Digite o peso para o vértice {
-                             rotulo} (ou deixe em branco para padrão 0): ")
+            peso_str = input(f"Digite o peso para o vértice {rotulo} (ou deixe em branco para padrão 0): ")
             peso = int(peso_str) if peso_str else 0
             grafo.adicionar_vertice(rotulo, peso)
             print(f"Vértice {rotulo} criado com sucesso.")
@@ -91,8 +90,7 @@ def adicionar_aresta_ao_grafo(grafo: Grafo):
         vertice2 = grafo.vertices[idx2]
 
         grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
-        print(f"Aresta {rotulo} entre {vertice1.rotulo} e {
-              vertice2.rotulo} adicionada com sucesso.")
+        print(f"Aresta {rotulo} entre {vertice1.rotulo} e {vertice2.rotulo} adicionada com sucesso.")
 
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
@@ -104,10 +102,8 @@ def alterar_vertice_do_grafo(grafo: Grafo):
     try:
         idx = int(input("Digite o índice do vértice que deseja alterar: "))
         vertice = grafo.vertices[idx]
-        novo_rotulo = input(f"Digite o novo rótulo para o vértice {
-                            vertice.rotulo}: ")
-        novo_peso_str = input(f"Digite o novo peso para o vértice {
-                              vertice.rotulo} (ou deixe em branco para manter o peso atual {vertice.peso}): ")
+        novo_rotulo = input(f"Digite o novo rótulo para o vértice {vertice.rotulo}: ")
+        novo_peso_str = input(f"Digite o novo peso para o vértice {vertice.rotulo} (ou deixe em branco para manter o peso atual {vertice.peso}): ")
         novo_peso = int(novo_peso_str) if novo_peso_str else vertice.peso
         grafo.alterar_vertice(vertice, novo_rotulo, novo_peso)
         print(f"Vértice {vertice.rotulo} atualizado com sucesso.")
@@ -123,8 +119,7 @@ def alterar_aresta_do_grafo(grafo: Grafo):
         aresta = grafo.arestas[idx]
         novo_rotulo = input(
             f"Digite o novo rótulo para a aresta {aresta.rotulo}: ")
-        novo_peso_str = input(f"Digite o novo peso para a aresta {
-                              aresta.rotulo} (ou deixe em branco para manter o peso atual {aresta.peso}): ")
+        novo_peso_str = input(f"Digite o novo peso para a aresta {aresta.rotulo} (ou deixe em branco para manter o peso atual {aresta.peso}): ")
         novo_peso = int(novo_peso_str) if novo_peso_str else aresta.peso
         grafo.alterar_aresta(aresta, novo_rotulo, novo_peso)
         print(f"Aresta {aresta.rotulo} atualizada com sucesso.")
@@ -166,11 +161,9 @@ def checar_adjacencia_vertices(grafo: Grafo):
         adjacente = grafo.checar_adjacencia_vertices(
             grafo.vertices[idx1], grafo.vertices[idx2])
         if adjacente:
-            print(f"Os vértices {grafo.vertices[idx1].rotulo} e {
-                  grafo.vertices[idx2].rotulo} são adjacentes.")
+            print(f"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} são adjacentes.")
         else:
-            print(f"Os vértices {grafo.vertices[idx1].rotulo} e {
-                  grafo.vertices[idx2].rotulo} não são adjacentes.")
+            print(f"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} não são adjacentes.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
         
@@ -184,11 +177,9 @@ def checar_adjacencia_arestas(grafo: Grafo):
         adjacente = grafo.checar_adjacencia_arestas(
             grafo.arestas[idx1], grafo.arestas[idx2])
         if adjacente:
-            print(f"As arestas {grafo.arestas[idx1].rotulo} e {
-                  grafo.arestas[idx2].rotulo} são adjacentes.")
+            print(f"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} são adjacentes.")
         else:
-            print(f"As arestas {grafo.arestas[idx1].rotulo} e {
-                  grafo.arestas[idx2].rotulo} não são adjacentes.")
+            print(f"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} não são adjacentes.")
     except (ValueError, IndexError):
         print("Erro: índice inválido ou entrada incorreta.")
         
@@ -265,8 +256,7 @@ def verificar_componentes_fortemente_conexos(grafo: Grafo):
     componentes = kosaraju(grafo)
     print("Componentes fortemente conectados:")
     for i, componente in enumerate(componentes):
-        print(f"Componente {
-            i + 1}: {[vertice.rotulo for vertice in componente]}")
+        print(f"Componente {i + 1}: {[vertice.rotulo for vertice in componente]}")
         
 def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     try:
@@ -310,8 +300,7 @@ def verificar_componentes_fortemente_conexos(grafo: Grafo):
     componentes = kosaraju(grafo)
     print("Componentes fortemente conectados:")
     for i, componente in enumerate(componentes):
-        print(f"Componente {
-            i + 1}: {[vertice.rotulo for vertice in componente]}")
+        print(f"Componente {i + 1}: {[vertice.rotulo for vertice in componente]}")
         
 def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     try:
@@ -357,10 +346,10 @@ def executar_fleury(grafo: Grafo):
         os.makedirs(pasta_resultados)
 
     # Medir tempo de execução
-    inicio_tempo = time.time()
+    #inicio_tempo = time.time()
     auxGrafo = grafo
     resultado = fleury(auxGrafo)
-    tempo_execucao = time.time() - inicio_tempo
+    #tempo_execucao = time.time() - inicio_tempo
 
     # Criar o conteúdo do arquivo
     if isinstance(resultado, list):
@@ -368,7 +357,7 @@ def executar_fleury(grafo: Grafo):
     else:
         conteudo = f"Erro durante a execução: {resultado}\n"
 
-    conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
+    #conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
 
     # Escrever o resultado em um arquivo
     arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury.txt")
@@ -473,6 +462,7 @@ def main():
                 
             case '2': 
                 grafo = Grafo(direcionado=False)
+                
                 grafo = grafo.criarGrafo()
                 salvar = input("Deseja salvar o grafo em um arquivo JSON? (s/n): ").strip().lower() == 's'
                 if salvar:

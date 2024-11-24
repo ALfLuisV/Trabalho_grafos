@@ -1,5 +1,6 @@
 # grafo.py
 import random
+import time
 from vertice import Vertice
 from aresta import Aresta
 from aresta import listar_arestas
@@ -345,6 +346,13 @@ class Grafo:
 
         return "O grafo não é conexo!"
 
+# O metodo `verificar_conectividade` verifica o tipo de conectividade do grafo. Se o grafo for direcionado,
+# ele chama os métodos `_fortemente_conexo` e `_semi_fortemente_conexo` para verificar se o grafo é fortemente conexo ou semi-fortemente conexo, respectivamente.
+# Se o grafo for não direcionado, ele chama o método `_simplismente_conexo` para verificar se o grafo é simplesmente conexo.
+#caso contrario, retorna a mensagem "O grafo não é conexo".
+# O método `_fortemente_conexo` percorre todos os vértices do grafo a partir de uma busca por profundidade e verifica se é possível alcançar todos os outros vértices a partir de cada vértice. Se algum vértice não for alcançável, o método retorna `False`, indicando que o grafo não é fortemente conexo. Caso contrário, retorna `True`.
+# O método `_semi_fortemente_conexo` converte o grafo direcionado em um grafo não direcionado e chama o método `_verificar_conectividade_simples` para verificar se o grafo possui exatamente dois vértices de grau ímpar. Se a condição for atendida, o método retorna `True`, indicando que o grafo é semi-fortemente conexo. Caso contrário, retorna `False`.
+
     def verificar_conectividade(self):
         """Verifica o tipo de conectividade do grafo."""
         if not self.vertices:
@@ -359,6 +367,11 @@ class Grafo:
                 return "O grafo não é conexo!"
         else:
             return self._simplismente_conexo(self.direcionado)
+
+# O método `verificar_conectividade_naive` verifica a conectividade de um grafo apos a remoção de uma aresta.
+# Lista todas as arestas disponiveis utilizando o metodo 'listar_arestas' e solicita ao usuário que escolha uma aresta para remover temporariamente.
+# Ele armazena a aresta removida temporariamente, verifica a conectividade do grafo chamando o metodo 'verificar_conectividade' e exibe o resultado.
+# Em seguida, pergunta se o usuário deseja restaurar a aresta removida. Se a resposta for afirmativa, a aresta é restaurada, caso contrario, a aresta é removida permanentemente do grafo.
 
     def verificar_conectividade_naive(self):
         """
@@ -464,6 +477,9 @@ class Grafo:
         num_vertices = int(input("Digite o número de vértices: "))
         pesos_aleatorios = input(
             "Os pesos das arestas e vértices serão aleatórios? (s/n) n = todos os pesos = 0: ").strip().lower() == 's'
+        
+        start_time = time.perf_counter()
+        
         grafo = Grafo(direcionado=direcionado)
 
         # Adicionar vértices
@@ -500,8 +516,14 @@ class Grafo:
             rotulo = f'A{i}'
             peso = random.randint(1, 10) if pesos_aleatorios else 0
             grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
+            
+            end_time = time.perf_counter()
+            
+            tempo_execucao = (end_time - start_time)
 
         print(grafo.arestas)
+        print()
+        print(f"Tempo de execução para gerar o grafo: {tempo_execucao:.4f} segundos")
         return grafo
 
 
