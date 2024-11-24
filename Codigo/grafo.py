@@ -233,7 +233,7 @@ class Grafo:
 
         return matrizInc
 
-    def _simplismente_conexo(self):
+    def _simplismente_conexo(self, direcionado):
         vetorAlc = []
 
         verticeRef = self.vertices[0]
@@ -268,7 +268,10 @@ class Grafo:
                 break
 
         if conexo:
-            return "O grafo é simplismente conexo!"
+            if direcionado is True:
+                return "O grafo é simplismente conexo!"
+           
+            return "O grafo é conexo!"
 
         return "O grafo não é conexo!"
 
@@ -285,7 +288,7 @@ class Grafo:
             else:
                 return "O grafo não é conexo!"
         else:
-            return self._simplismente_conexo()
+            return self._simplismente_conexo(self.direcionado)
 
     def verificar_conectividade_naive(self):
         """
@@ -422,9 +425,11 @@ class Grafo:
             peso = random.randint(1, 10) if pesos_aleatorios else 0
             grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
 
+        print(grafo.arestas)
         return grafo
 
     def gerar_csv(self, nome_arquivo, direcionado):
+
         """Gera um arquivo CSV com a matriz de incidência do grafo."""
         if direcionado is False:
             try:
@@ -475,7 +480,7 @@ class Grafo:
                 
                 file.write("\n")
 
-                matriz_adj = self.exibir_matriz_adjacenciaD()
+                matriz_adj = self.exibir_matriz_adjacenciaD() 
 
                 for i, vertice in enumerate(self.vertices):
                     file.write(vertice.rotulo + ";")
@@ -492,5 +497,51 @@ class Grafo:
                 print("Grafo exportado com sucesso!")
             except Exception as e:
                 print(f"Ocorreu um erro na exportação do grafo: {e}")
+    
+    def ler_grafo_from_csv(self, nomeCsv):
+        direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
+        self.direcionado = direcionado
+        try:
+            file = open(nomeCsv, 'r', encoding="utf-8") #abre o arquivo em modo de leitura
 
+            array_de_vertices = []
+            array_de_arestas=[]
+            for counter, line in enumerate(file):
+                if counter == 0:
+                    new_line = line[1:]  # remove the first character of the string which is a ";"
+                    new_line1 = new_line[:-1]  # remove the last character of the string which is "\n"
+                    array_de_vertices = new_line1.split(";")  # split and create a new array with vertex labels
+
+                        # print(array_de_vertices)
+
+                    for v in array_de_vertices:
+                        self.adicionar_vertice(v)
+                        
+
+                else:
+                    new_line = line[3:]  # remove the first character of the string which is a ";"
+                    new_line1 = new_line[:-1]  # remove the last character of the string which is "\n"
+                    array_arestas = new_line1.split(";")  # split and create a new array with edge labels
+                    array_de_arestas.append(array_arestas)
+
+            counter = 0
+            for k, vertice1 in enumerate(array_de_vertices):
+                for j, vertice2 in enumerate(array_de_vertices):
+                    if k == j or array_de_arestas[k][j] == '0':
+                        continue
+                    rotulo = "A"+str(counter)
+                    self.adicionar_aresta(rotulo, 0, self.vertices[k], self.vertices[j])
+                    counter += 1
+            print("Grafo carregado com sucesso!!!")
+        except Exception as e:
+                print(f"Ocorreu um erro na exportação do grafo: {e}")
+        
+        
+            
+
+
+
+
+
+                
 
