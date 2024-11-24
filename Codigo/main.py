@@ -3,6 +3,7 @@ from grafo import Grafo
 from vertice import listar_vertices
 from aresta import listar_arestas
 from algoritmo import kosaraju
+from algoritmo import fleury
 
 
 def mostrar_menu():
@@ -323,12 +324,26 @@ def carregar_grafo_json(nome_arquivo: str) -> Grafo:
         print("Erro: O arquivo JSON está malformado.")
 
     return None
+def executar_fleury(grafo: Grafo):
+    """
+    Executa o algoritmo de Fleury em um grafo e exibe o resultado.
+    Parâmetros:
+        grafo: Instância de Grafo.
+    """
+    if not grafo:
+        print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
+    else:
+        resultado = fleury(grafo)
+        if isinstance(resultado, list):
+            print("Ciclo Euleriano encontrado:")
+            print(" -> ".join([f"{aresta.rotulo} ({aresta.vertices[0].rotulo}-{aresta.vertices[1].rotulo})" for aresta in resultado]))
+        else:
+            print(resultado)  # Mensagem de erro retornada pela função fleury
+    input("Pressione Enter para continuar...")
+
 
 def main():
-    # direcionado = input(
-    #     "O grafo é direcionado? (s/n): ").strip().lower() == 's'
-    # grafo = Grafo(direcionado=direcionado)
-    # criar_vertices_iniciais(grafo)
+    grafo = None  # Inicializar a variável do grafo
 
     while True:
         opcao = mostrar_menu()
@@ -361,6 +376,8 @@ def main():
             case '17': verificar_conectividade(grafo)
             case '18': verificar_conectividade_naive(grafo)
             case '19': exibir_lista_adjacencia(grafo)
+            case '21': executar_fleury(grafo)
+
             case '20': break
             case _: print("Opção inválida. Tente novamente.")
 

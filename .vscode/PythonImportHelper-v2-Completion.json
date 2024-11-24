@@ -1,5 +1,29 @@
 [
     {
+        "label": "Grafo",
+        "importPath": "grafo",
+        "description": "grafo",
+        "isExtraImport": true,
+        "detail": "grafo",
+        "documentation": {}
+    },
+    {
+        "label": "Grafo",
+        "importPath": "grafo",
+        "description": "grafo",
+        "isExtraImport": true,
+        "detail": "grafo",
+        "documentation": {}
+    },
+    {
+        "label": "Vertice",
+        "importPath": "vertice",
+        "description": "vertice",
+        "isExtraImport": true,
+        "detail": "vertice",
+        "documentation": {}
+    },
+    {
         "label": "Vertice",
         "importPath": "vertice",
         "description": "vertice",
@@ -32,6 +56,14 @@
         "documentation": {}
     },
     {
+        "label": "Aresta",
+        "importPath": "aresta",
+        "description": "aresta",
+        "isExtraImport": true,
+        "detail": "aresta",
+        "documentation": {}
+    },
+    {
         "label": "listar_arestas",
         "importPath": "aresta",
         "description": "aresta",
@@ -40,11 +72,72 @@
         "documentation": {}
     },
     {
-        "label": "Grafo",
-        "importPath": "grafo",
-        "description": "grafo",
+        "label": "listar_arestas",
+        "importPath": "aresta",
+        "description": "aresta",
         "isExtraImport": true,
-        "detail": "grafo",
+        "detail": "aresta",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "kosaraju",
+        "importPath": "algoritmo",
+        "description": "algoritmo",
+        "isExtraImport": true,
+        "detail": "algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "fleury",
+        "importPath": "algoritmo",
+        "description": "algoritmo",
+        "isExtraImport": true,
+        "detail": "algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "kosaraju",
+        "kind": 2,
+        "importPath": "Codigo.algoritmo",
+        "description": "Codigo.algoritmo",
+        "peekOfCode": "def kosaraju(grafo: Grafo):\n    # 1º Passo: Realizar uma DFS e salvar os tempos de término\n    tempos_termino = []\n    visitados = set()\n    def dfs1(vertice, tempo):\n        visitados.add(vertice.rotulo)\n        for aresta in vertice.arestas:\n            if aresta.vertices[0] == vertice:\n                prox_vertice = aresta.vertices[1]\n                if prox_vertice.rotulo not in visitados:",
+        "detail": "Codigo.algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "fleury",
+        "kind": 2,
+        "importPath": "Codigo.algoritmo",
+        "description": "Codigo.algoritmo",
+        "peekOfCode": "def fleury(grafo):\n    \"\"\"\n    Verifica se o grafo é euleriano e retorna o ciclo euleriano se possível.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    Retorno:\n        Lista representando o ciclo euleriano ou mensagem de erro.\n    \"\"\"\n    if not grafo._verificar_conectividade_simples():\n        return \"O grafo não é conexo! Não é possível encontrar um ciclo euleriano.\"",
+        "detail": "Codigo.algoritmo",
+        "documentation": {}
+    },
+    {
+        "label": "e_ponte",
+        "kind": 2,
+        "importPath": "Codigo.algoritmo",
+        "description": "Codigo.algoritmo",
+        "peekOfCode": "def e_ponte(grafo, aresta):\n    \"\"\"\n    Verifica se uma aresta é uma ponte (se sua remoção desconecta o grafo).\n    Parâmetros:\n        grafo: Instância de Grafo.\n        aresta: Instância de Aresta.\n    Retorno:\n        True se for ponte, False caso contrário.\n    \"\"\"\n    # Remover temporariamente a aresta",
+        "detail": "Codigo.algoritmo",
         "documentation": {}
     },
     {
@@ -52,7 +145,7 @@
         "kind": 6,
         "importPath": "Codigo.aresta",
         "description": "Codigo.aresta",
-        "peekOfCode": "class Aresta:\n    def __init__(self, rotulo: str, peso: int, vertice1: Vertice, vertice2: Vertice):\n        self.rotulo = rotulo      # Identificador da aresta (rótulo)\n        self.peso = peso          # Peso da aresta\n        self.vertices = (vertice1, vertice2)  # Aresta conecta dois vértices\n    def __str__(self):\n        return f\"Aresta {self.rotulo}: de {self.vertices[0].rotulo} para {self.vertices[1].rotulo} com peso {self.peso}\"\ndef listar_arestas(arestas):\n    \"\"\"Função para exibir todas as arestas disponíveis com índices.\"\"\"\n    for i, aresta in enumerate(arestas):",
+        "peekOfCode": "class Aresta:\n    def __init__(self, rotulo: str, peso: int, vertice1: Vertice, vertice2: Vertice):\n        self.rotulo = rotulo      # Identificador da aresta (rótulo)\n        self.peso = peso          # Peso da aresta\n        self.vertices = (vertice1, vertice2)  # Aresta conecta dois vértices\n    def __str__(self):\n        return f\"Aresta {self.rotulo}: de {self.vertices[0].rotulo} para {self.vertices[1].rotulo} com peso {self.peso}\"\n    def __repr__(self):\n        return self.__str__()\ndef listar_arestas(arestas):",
         "detail": "Codigo.aresta",
         "documentation": {}
     },
@@ -88,7 +181,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def mostrar_menu():\n    print(\"\\nMenu de Opções:\")\n    print(\"1. Adicionar vértice\")\n    print(\"2. Adicionar aresta\")\n    print(\"3. Exibir grafo\")\n    print(\"4. Alterar vértice\")\n    print(\"5. Alterar aresta\")\n    print(\"6. Deletar vértice\")\n    print(\"7. Deletar aresta\")\n    print(\"8. Checar adjacência entre vértices\")",
+        "peekOfCode": "def mostrar_menu():\n    print(\"\\nMenu de Opções:\")\n    print(\"0. Carregar grafo a partir de arquivo JSON\")\n    print(\"1. Criar grafo aleatorio baseado em seu numero de vertices\")\n    print(\"2. Adicionar vértice\")\n    print(\"3. Adicionar aresta\")\n    print(\"4. Exibir grafo\")\n    print(\"5. Alterar vértice\")\n    print(\"6. Alterar aresta\")\n    print(\"7. Deletar vértice\")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -97,7 +190,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def criar_vertices_iniciais(grafo):\n    try:\n        num_vertices = int(input(\"Quantos vértices deseja criar? \"))\n        if num_vertices < 1:\n            print(\"Erro: o número de vértices deve ser pelo menos 1.\")\n            return\n        for i in range(num_vertices):\n            rotulo = f\"V{i+1}\"  \n            peso_str = input(f\"Digite o peso para o vértice {rotulo} (ou deixe em branco para padrão 0): \")\n            peso = int(peso_str) if peso_str else 0",
+        "peekOfCode": "def criar_vertices_iniciais(grafo):\n    try:\n        num_vertices = int(input(\"Quantos vértices deseja criar? \"))\n        if num_vertices < 1:\n            print(\"Erro: o número de vértices deve ser pelo menos 1.\")\n            return\n        for i in range(num_vertices):\n            rotulo = f\"V{i+1}\"\n            peso_str = input(f\"Digite o peso para o vértice {\n                             rotulo} (ou deixe em branco para padrão 0): \")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -106,7 +199,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def adicionar_vertice_ao_grafo(grafo: Grafo):\n    rotulo = input(\"Digite o rótulo do vértice: \")\n    peso_str = input(\"Digite o peso do vértice (ou deixe em branco para padrão 0): \")\n    peso = int(peso_str) if peso_str else 0\n    grafo.adicionar_vertice(rotulo, peso)\n    print(f\"Vértice {rotulo} adicionado com sucesso.\")\ndef adicionar_aresta_ao_grafo(grafo: Grafo):\n    if len(grafo.vertices) < 2:\n        print(\"Erro: é necessário ter pelo menos dois vértices para adicionar uma aresta.\")\n        return",
+        "peekOfCode": "def adicionar_vertice_ao_grafo(grafo: Grafo):\n    rotulo = input(\"Digite o rótulo do vértice: \")\n    peso_str = input(\n        \"Digite o peso do vértice (ou deixe em branco para padrão 0): \")\n    peso = int(peso_str) if peso_str else 0\n    grafo.adicionar_vertice(rotulo, peso)\n    print(f\"Vértice {rotulo} adicionado com sucesso.\")\n    input(\"Pressione Enter para continuar...\")\ndef adicionar_aresta_ao_grafo(grafo: Grafo):\n    if len(grafo.vertices) < 2:",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -115,7 +208,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def adicionar_aresta_ao_grafo(grafo: Grafo):\n    if len(grafo.vertices) < 2:\n        print(\"Erro: é necessário ter pelo menos dois vértices para adicionar uma aresta.\")\n        return\n    rotulo = input(\"Digite o rótulo da aresta: \")\n    peso_str = input(\"Digite o peso da aresta (ou deixe em branco para padrão 0): \")\n    peso = int(peso_str) if peso_str else 0\n    try:\n        print(\"\\nEscolha o primeiro vértice:\")\n        listar_vertices(grafo.vertices)",
+        "peekOfCode": "def adicionar_aresta_ao_grafo(grafo: Grafo):\n    if len(grafo.vertices) < 2:\n        print(\"Erro: é necessário ter pelo menos dois vértices para adicionar uma aresta.\")\n        return\n    rotulo = input(\"Digite o rótulo da aresta: \")\n    peso_str = input(\n        \"Digite o peso da aresta (ou deixe em branco para padrão 0): \")\n    peso = int(peso_str) if peso_str else 0\n    try:\n        print(\"\\nEscolha o primeiro vértice:\")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -124,7 +217,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def alterar_vertice_do_grafo(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja alterar: \"))\n        vertice = grafo.vertices[idx]\n        novo_rotulo = input(f\"Digite o novo rótulo para o vértice {vertice.rotulo}: \")\n        novo_peso_str = input(f\"Digite o novo peso para o vértice {vertice.rotulo} (ou deixe em branco para manter o peso atual {vertice.peso}): \")\n        novo_peso = int(novo_peso_str) if novo_peso_str else vertice.peso\n        grafo.alterar_vertice(vertice, novo_rotulo, novo_peso)\n        print(f\"Vértice {vertice.rotulo} atualizado com sucesso.\")",
+        "peekOfCode": "def alterar_vertice_do_grafo(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja alterar: \"))\n        vertice = grafo.vertices[idx]\n        novo_rotulo = input(f\"Digite o novo rótulo para o vértice {\n                            vertice.rotulo}: \")\n        novo_peso_str = input(f\"Digite o novo peso para o vértice {\n                              vertice.rotulo} (ou deixe em branco para manter o peso atual {vertice.peso}): \")\n        novo_peso = int(novo_peso_str) if novo_peso_str else vertice.peso",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -133,7 +226,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def alterar_aresta_do_grafo(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja alterar: \"))\n        aresta = grafo.arestas[idx]\n        novo_rotulo = input(f\"Digite o novo rótulo para a aresta {aresta.rotulo}: \")\n        novo_peso_str = input(f\"Digite o novo peso para a aresta {aresta.rotulo} (ou deixe em branco para manter o peso atual {aresta.peso}): \")\n        novo_peso = int(novo_peso_str) if novo_peso_str else aresta.peso\n        grafo.alterar_aresta(aresta, novo_rotulo, novo_peso)\n        print(f\"Aresta {aresta.rotulo} atualizada com sucesso.\")",
+        "peekOfCode": "def alterar_aresta_do_grafo(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja alterar: \"))\n        aresta = grafo.arestas[idx]\n        novo_rotulo = input(\n            f\"Digite o novo rótulo para a aresta {aresta.rotulo}: \")\n        novo_peso_str = input(f\"Digite o novo peso para a aresta {\n                              aresta.rotulo} (ou deixe em branco para manter o peso atual {aresta.peso}): \")\n        novo_peso = int(novo_peso_str) if novo_peso_str else aresta.peso",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -142,7 +235,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def deletar_vertice_do_grafo(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja deletar: \"))\n        vertice = grafo.vertices[idx]\n        grafo.remover_vertice(vertice)\n        print(f\"Vértice {vertice.rotulo} e suas arestas foram deletados com sucesso.\")\n    except (ValueError, IndexError):\n        print(\"Erro: índice inválido ou entrada incorreta.\")\ndef deletar_aresta_do_grafo(grafo: Grafo):",
+        "peekOfCode": "def deletar_vertice_do_grafo(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx = int(input(\"Digite o índice do vértice que deseja deletar: \"))\n        vertice = grafo.vertices[idx]\n        grafo.remover_vertice(vertice)\n        print(\n            f\"Vértice {vertice.rotulo} e suas arestas foram deletados com sucesso.\")\n    except (ValueError, IndexError):\n        print(\"Erro: índice inválido ou entrada incorreta.\")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -151,7 +244,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def deletar_aresta_do_grafo(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja deletar: \"))\n        aresta = grafo.arestas[idx]\n        grafo.remover_aresta(aresta)\n        print(f\"Aresta {aresta.rotulo} foi deletada com sucesso.\")\n    except (ValueError, IndexError):\n        print(\"Erro: índice inválido ou entrada incorreta.\")\ndef checar_adjacencia_vertices(grafo: Grafo):",
+        "peekOfCode": "def deletar_aresta_do_grafo(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx = int(input(\"Digite o índice da aresta que deseja deletar: \"))\n        aresta = grafo.arestas[idx]\n        grafo.remover_aresta(aresta)\n        print(f\"Aresta {aresta.rotulo} foi deletada com sucesso.\")\n    except (ValueError, IndexError):\n        print(\"Erro: índice inválido ou entrada incorreta.\")\n    input(\"Pressione Enter para continuar...\")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -160,7 +253,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def checar_adjacencia_vertices(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx1 = int(input(\"Digite o índice do primeiro vértice: \"))\n        idx2 = int(input(\"Digite o índice do segundo vértice: \"))\n        adjacente = grafo.checar_adjacencia_vertices(grafo.vertices[idx1], grafo.vertices[idx2])\n        if adjacente:\n            print(f\"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} são adjacentes.\")\n        else:\n            print(f\"Os vértices {grafo.vertices[idx1].rotulo} e {grafo.vertices[idx2].rotulo} não são adjacentes.\")",
+        "peekOfCode": "def checar_adjacencia_vertices(grafo: Grafo):\n    listar_vertices(grafo.vertices)\n    try:\n        idx1 = int(input(\"Digite o índice do primeiro vértice: \"))\n        idx2 = int(input(\"Digite o índice do segundo vértice: \"))\n        adjacente = grafo.checar_adjacencia_vertices(\n            grafo.vertices[idx1], grafo.vertices[idx2])\n        if adjacente:\n            print(f\"Os vértices {grafo.vertices[idx1].rotulo} e {\n                  grafo.vertices[idx2].rotulo} são adjacentes.\")",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -169,7 +262,133 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def checar_adjacencia_arestas(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx1 = int(input(\"Digite o índice da primeira aresta: \"))\n        idx2 = int(input(\"Digite o índice da segunda aresta: \"))\n        adjacente = grafo.checar_adjacencia_arestas(grafo.arestas[idx1], grafo.arestas[idx2])\n        if adjacente:\n            print(f\"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} são adjacentes.\")\n        else:\n            print(f\"As arestas {grafo.arestas[idx1].rotulo} e {grafo.arestas[idx2].rotulo} não são adjacentes.\")",
+        "peekOfCode": "def checar_adjacencia_arestas(grafo: Grafo):\n    listar_arestas(grafo.arestas)\n    try:\n        idx1 = int(input(\"Digite o índice da primeira aresta: \"))\n        idx2 = int(input(\"Digite o índice da segunda aresta: \"))\n        adjacente = grafo.checar_adjacencia_arestas(\n            grafo.arestas[idx1], grafo.arestas[idx2])\n        if adjacente:\n            print(f\"As arestas {grafo.arestas[idx1].rotulo} e {\n                  grafo.arestas[idx2].rotulo} são adjacentes.\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "checar_existencia_arestas",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def checar_existencia_arestas(grafo: Grafo):\n    print(grafo.checar_arestas())\n    input(\"Pressione Enter para continuar...\")\ndef checar_vertices_arestas(grafo: Grafo):\n    print(grafo.verificar_arestas())\n    input(\"Pressione Enter para continuar...\")\n# Checagem de existencia de articulaões\ndef checar_articulacoes(grafo: Grafo):\n    print(grafo.checar_articulacoes())\n    input(\"Pressione Enter para continuar...\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "checar_vertices_arestas",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def checar_vertices_arestas(grafo: Grafo):\n    print(grafo.verificar_arestas())\n    input(\"Pressione Enter para continuar...\")\n# Checagem de existencia de articulaões\ndef checar_articulacoes(grafo: Grafo):\n    print(grafo.checar_articulacoes())\n    input(\"Pressione Enter para continuar...\")\ndef grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "checar_articulacoes",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def checar_articulacoes(grafo: Grafo):\n    print(grafo.checar_articulacoes())\n    input(\"Pressione Enter para continuar...\")\ndef grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if (grafo.direcionado is False):",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "grafo_vazio_completo",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if (grafo.direcionado is False):\n        print(grafo.exibir_matriz_adjacenciaND())\n    else:\n        print(grafo.exibir_matriz_adjacenciaD())",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_matriz_adj",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if (grafo.direcionado is False):\n        print(grafo.exibir_matriz_adjacenciaND())\n    else:\n        print(grafo.exibir_matriz_adjacenciaD())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_inci(grafo: Grafo):\n    \"\"\"Exibe a matriz de incidencia do grafo\"\"\"\n    if (grafo.direcionado is False):",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_matriz_inci",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def exibir_matriz_inci(grafo: Grafo):\n    \"\"\"Exibe a matriz de incidencia do grafo\"\"\"\n    if (grafo.direcionado is False):\n        print(grafo.exibir_matriz_incidenciaND())\n    else:\n        print(grafo.exibir_matriz_incidenciaD())\n    input(\"Pressione Enter para continuar...\")\ndef verificar_conectividade(grafo: Grafo):\n    print(grafo.verificar_conectividade())\n    input(\"Pressione Enter para continuar...\")",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "verificar_conectividade",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def verificar_conectividade(grafo: Grafo):\n    print(grafo.verificar_conectividade())\n    input(\"Pressione Enter para continuar...\")\ndef verificar_conectividade_naive(grafo: Grafo):\n    print(grafo.verificar_conectividade_naive())\ndef exibir_lista_adjacencia(grafo: Grafo):\n    \"\"\"Exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não.\"\"\"\n    lista_adjacencia = {}\n    for vertice in grafo.vertices:\n        lista_adjacencia[vertice.rotulo] = []",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "verificar_conectividade_naive",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def verificar_conectividade_naive(grafo: Grafo):\n    print(grafo.verificar_conectividade_naive())\ndef exibir_lista_adjacencia(grafo: Grafo):\n    \"\"\"Exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não.\"\"\"\n    lista_adjacencia = {}\n    for vertice in grafo.vertices:\n        lista_adjacencia[vertice.rotulo] = []\n    for aresta in grafo.arestas:\n        origem, destino = aresta.vertices\n        # Adicionar adjacência para grafos direcionados e não direcionados",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_lista_adjacencia",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def exibir_lista_adjacencia(grafo: Grafo):\n    \"\"\"Exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não.\"\"\"\n    lista_adjacencia = {}\n    for vertice in grafo.vertices:\n        lista_adjacencia[vertice.rotulo] = []\n    for aresta in grafo.arestas:\n        origem, destino = aresta.vertices\n        # Adicionar adjacência para grafos direcionados e não direcionados\n        lista_adjacencia[origem.rotulo].append(destino.rotulo)\n        if not grafo.direcionado:",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "carregar_grafo_json",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def carregar_grafo_json(nome_arquivo: str) -> Grafo:\n    try:\n        with open(nome_arquivo, 'r') as f:\n            dados = json.load(f)\n        grafo = Grafo(direcionado=dados[\"direcionado\"])\n        vertices = {}\n        for vertice_data in dados[\"vertices\"]:\n            vertice = grafo.adicionar_vertice(vertice_data[\"rotulo\"], vertice_data[\"peso\"])\n            vertices[vertice_data[\"rotulo\"]] = vertice\n        for aresta_data in dados[\"arestas\"]:",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "salvar_grafo_json",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def salvar_grafo_json(grafo, nome_arquivo):\n    grafo_dict = {\n        \"vertices\": [{\"rotulo\": v.rotulo, \"peso\": v.peso} for v in grafo.vertices],\n        \"arestas\": [{\"rotulo\": a.rotulo, \"peso\": a.peso, \"vertice1\": a.vertices[0].rotulo, \"vertice2\": a.vertices[1].rotulo} for a in grafo.arestas],\n        \"direcionado\": grafo.direcionado\n    }\n    with open(nome_arquivo, 'w') as f:\n        json.dump(grafo_dict, f, indent=4)\ndef verificar_componentes_fortemente_conexos(grafo: Grafo):\n    componentes = kosaraju(grafo)",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "verificar_componentes_fortemente_conexos",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def verificar_componentes_fortemente_conexos(grafo: Grafo):\n    componentes = kosaraju(grafo)\n    print(\"Componentes fortemente conectados:\")\n    for i, componente in enumerate(componentes):\n        print(f\"Componente {\n            i + 1}: {[vertice.rotulo for vertice in componente]}\")\ndef carregar_grafo_json(nome_arquivo: str) -> Grafo:\n    try:\n        with open(nome_arquivo, 'r') as f:\n            dados = json.load(f)",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "carregar_grafo_json",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def carregar_grafo_json(nome_arquivo: str) -> Grafo:\n    try:\n        with open(nome_arquivo, 'r') as f:\n            dados = json.load(f)\n        grafo = Grafo(direcionado=dados[\"direcionado\"])\n        vertices = {}\n        for vertice_data in dados[\"vertices\"]:\n            vertice = grafo.adicionar_vertice(vertice_data[\"rotulo\"], vertice_data[\"peso\"])\n            vertices[vertice_data[\"rotulo\"]] = vertice\n        for aresta_data in dados[\"arestas\"]:",
+        "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "executar_fleury",
+        "kind": 2,
+        "importPath": "Codigo.main",
+        "description": "Codigo.main",
+        "peekOfCode": "def executar_fleury(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury em um grafo e exibe o resultado.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n    else:\n        resultado = fleury(grafo)",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -178,7 +397,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def main():\n    direcionado = input(\"O grafo é direcionado? (s/n): \").strip().lower() == 's'\n    grafo = Grafo(direcionado=direcionado)\n    criar_vertices_iniciais(grafo)\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '1': adicionar_vertice_ao_grafo(grafo)\n            case '2': adicionar_aresta_ao_grafo(grafo)\n            case '3': print(grafo)",
+        "peekOfCode": "def main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '0': \n                nome_arquivo = input(\"Digite o nome do arquivo JSON (ex: grafo.json): \")\n                grafo = carregar_grafo_json(nome_arquivo) \n            case '1': \n                grafo = Grafo(direcionado=False)",
         "detail": "Codigo.main",
         "documentation": {}
     },
