@@ -206,19 +206,44 @@ def grafo_vazio_completo(grafo: Grafo):
 
 def exibir_matriz_adj(grafo: Grafo):
     """Exibe o grafo em forma de matriz de adjacencia"""
-    if (grafo.direcionado is False):
-        print(grafo.exibir_matriz_adjacenciaND())
+    if(grafo.direcionado is False):
+        matrizND = grafo.exibir_matriz_adjacenciaND()
+        string = '  '
+        for v in grafo.vertices:
+            string = string + v.rotulo + ' '
+        print(string)
+        for e, row in enumerate(matrizND):
+            print(grafo.vertices[e].rotulo + " " + " ".join(map(str, row)))
     else:
-        print(grafo.exibir_matriz_adjacenciaD())
-        
+        matrizD = grafo.exibir_matriz_adjacenciaD()
+        string = '  '
+        for v in grafo.vertices:
+            string = string + v.rotulo + ' '
+        print(string)
+        for e, row in enumerate(matrizD):
+            print(grafo.vertices[e].rotulo + " " + " ".join(map(str, row)))
     input("Pressione Enter para continuar...")
 
 def exibir_matriz_inci(grafo: Grafo):
     """Exibe a matriz de incidencia do grafo"""
-    if (grafo.direcionado is False):
-        print(grafo.exibir_matriz_incidenciaND())
+
+    if(grafo.direcionado is False):
+        matrizND = grafo.exibir_matriz_incidenciaND()
+        string = '  '
+        for v in grafo.arestas:
+            string = string + v.rotulo + ' '
+        print(string)
+        for e, row in enumerate(matrizND):
+            print(grafo.vertices[e].rotulo + " " + " ".join(map(str, row)))
+
     else:
-        print(grafo.exibir_matriz_incidenciaD())
+        matrizD = grafo.exibir_matriz_incidenciaD()
+        string = '  '
+        for v in grafo.arestas:
+            string = string + v.rotulo + ' '
+        print(string)
+        for e, row in enumerate(matrizD):
+            print(grafo.vertices[e].rotulo + " " + " ".join(map(str, row)))
     
     input("Pressione Enter para continuar...")
 
@@ -466,7 +491,9 @@ def main():
             case '1': 
                 direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
                 grafo = Grafo(direcionado)
-                grafo.ler_grafo_from_csv("grafod.csv")
+                file_name = input('Insira o nome do arquivo(não informe a extensão ".csv"):')
+                file_name = file_name + ".csv"
+                grafo.ler_grafo_from_csv(file_name)
                 
             case '2': 
                 grafo = Grafo(direcionado=False)
