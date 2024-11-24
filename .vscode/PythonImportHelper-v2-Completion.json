@@ -80,6 +80,14 @@
         "documentation": {}
     },
     {
+        "label": "deepcopy",
+        "importPath": "copy",
+        "description": "copy",
+        "isExtraImport": true,
+        "detail": "copy",
+        "documentation": {}
+    },
+    {
         "label": "random",
         "kind": 6,
         "isExtraImport": true,
@@ -127,7 +135,7 @@
         "kind": 2,
         "importPath": "Codigo.algoritmo",
         "description": "Codigo.algoritmo",
-        "peekOfCode": "def fleury(grafo):\n    \"\"\"\n    Verifica se o grafo é euleriano e retorna o ciclo euleriano se possível.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    Retorno:\n        Lista representando o ciclo euleriano ou mensagem de erro.\n    \"\"\"\n    if not grafo._verificar_conectividade_simples():\n        return \"O grafo não é conexo! Não é possível encontrar um ciclo euleriano.\"",
+        "peekOfCode": "def fleury(grafo):\n    \"\"\"\n    Implementação do algoritmo de Fleury para encontrar um ciclo euleriano.\n    \"\"\"\n    if not grafo._verificar_conectividade_simples():\n        return \"O grafo não é conexo! Não é possível encontrar um ciclo euleriano.\"\n    vertices_grau_impar = [v for v in grafo.vertices if len(v.arestas) % 2 != 0]\n    if len(vertices_grau_impar) > 2:\n        return \"O grafo possui mais de 2 vértices de grau ímpar. Não é euleriano.\"\n    # Criar uma cópia do grafo para manipulação",
         "detail": "Codigo.algoritmo",
         "documentation": {}
     },
@@ -136,7 +144,7 @@
         "kind": 2,
         "importPath": "Codigo.algoritmo",
         "description": "Codigo.algoritmo",
-        "peekOfCode": "def e_ponte(grafo, aresta):\n    \"\"\"\n    Verifica se uma aresta é uma ponte (se sua remoção desconecta o grafo).\n    Parâmetros:\n        grafo: Instância de Grafo.\n        aresta: Instância de Aresta.\n    Retorno:\n        True se for ponte, False caso contrário.\n    \"\"\"\n    # Remover temporariamente a aresta",
+        "peekOfCode": "def e_ponte(grafo, aresta):\n    \"\"\"\n    Verifica se uma aresta é uma ponte (se sua remoção desconecta o grafo).\n    Parâmetros:\n        grafo: Instância de Grafo.\n        aresta: Instância de Aresta.\n    Retorno:\n        True se for ponte, False caso contrário.\n    \"\"\"\n    print(f\"DEBUG: Verificando se a aresta {aresta.rotulo} é uma ponte.\")",
         "detail": "Codigo.algoritmo",
         "documentation": {}
     },
@@ -388,7 +396,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def executar_fleury(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury em um grafo e exibe o resultado.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n    else:\n        resultado = fleury(grafo)",
+        "peekOfCode": "def executar_fleury(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury em um grafo e exibe o resultado.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n    else:\n        auxGrafo = grafo",
         "detail": "Codigo.main",
         "documentation": {}
     },

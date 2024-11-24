@@ -1,6 +1,7 @@
 from grafo import Grafo
 from vertice import Vertice
 from aresta import Aresta
+from copy import deepcopy
 
 def kosaraju(grafo: Grafo):
     # 1º Passo: Realizar uma DFS e salvar os tempos de término
@@ -56,11 +57,7 @@ def kosaraju(grafo: Grafo):
 
 def fleury(grafo):
     """
-    Verifica se o grafo é euleriano e retorna o ciclo euleriano se possível.
-    Parâmetros:
-        grafo: Instância de Grafo.
-    Retorno:
-        Lista representando o ciclo euleriano ou mensagem de erro.
+    Implementação do algoritmo de Fleury para encontrar um ciclo euleriano.
     """
     if not grafo._verificar_conectividade_simples():
         return "O grafo não é conexo! Não é possível encontrar um ciclo euleriano."
@@ -69,41 +66,43 @@ def fleury(grafo):
     if len(vertices_grau_impar) > 2:
         return "O grafo possui mais de 2 vértices de grau ímpar. Não é euleriano."
 
-    arestas_restantes = list(set(grafo.arestas))  # Remover duplicatas
-    ciclo_euleriano = []
+    # Criar uma cópia do grafo para manipulação
+    grafo_auxiliar = deepcopy(grafo)
+    ciclo = []
 
-    vertice_atual = vertices_grau_impar[0] if vertices_grau_impar else grafo.vertices[0]
+    # Iniciar com um vértice de grau ímpar ou qualquer outro vértice
+    vertice_atual = grafo_auxiliar.vertices[
+        grafo.vertices.index(vertices_grau_impar[0] if vertices_grau_impar else grafo.vertices[0])
+    ]
 
-    while arestas_restantes:
-        aresta = None
+    while len(grafo_auxiliar.arestas) > 0:
+        arestas_validas = []
 
-        # Priorizar arestas que não são pontes
-        for a in vertice_atual.arestas:
-            if a in arestas_restantes and not e_ponte(grafo, a):
-                aresta = a
-                break
+        for idx, aresta in enumerate(vertice_atual.arestas):
+            if not e_ponte(grafo_auxiliar, aresta):
+                arestas_validas.append((idx, aresta))
 
-        # Se todas as arestas restantes forem pontes, selecionar uma
-        if not aresta:
-            for a in vertice_atual.arestas:
-                if a in arestas_restantes:
-                    aresta = a
-                    break
+        # Se nenhuma aresta válida, escolher qualquer uma
+        if len(arestas_validas) == 0:
+            idx = 0
+        else:
+            # Preferir arestas que não sejam pontes
+            idx = arestas_validas[0][0]
 
-        if not aresta:
-            return "Erro: Não foi possível continuar o ciclo Euleriano. Verifique o grafo."
+        aresta_escolhida = vertice_atual.arestas[idx]
+        ciclo.append(aresta_escolhida.rotulo)
 
-        # Adicionar a aresta ao ciclo e remover das arestas restantes
-        print(f"Removendo aresta: {aresta}")
-        ciclo_euleriano.append(aresta)
-        arestas_restantes.remove(aresta)
+        # Atualizar o vértice atual para o próximo
+        vertice_atual = (
+            aresta_escolhida.vertices[1]
+            if aresta_escolhida.vertices[0] == vertice_atual
+            else aresta_escolhida.vertices[0]
+        )
 
-        # Caminhar para o próximo vértice
-        vertice_atual = aresta.vertices[1] if aresta.vertices[0] == vertice_atual else aresta.vertices[0]
-        print(f"Movendo para {vertice_atual.rotulo}")
+        # Remover a aresta do grafo auxiliar
+        grafo_auxiliar.remover_aresta(aresta_escolhida)
 
-    return ciclo_euleriano
-
+    return ciclo
 
 def e_ponte(grafo, aresta):
     """
@@ -114,11 +113,28 @@ def e_ponte(grafo, aresta):
     Retorno:
         True se for ponte, False caso contrário.
     """
-    # Remover temporariamente a aresta
-    grafo.remover_aresta(aresta)
+    print(f"DEBUG: Verificando se a aresta {aresta.rotulo} é uma ponte.")
+    # Encontrar o índice da aresta no grafo
+    idx = grafo.arestas.index(aresta)
+
+    # Remover a aresta temporariamente usando o índice
+    aresta_removida = grafo.arestas[idx]
+    origem, destino = aresta_removida.vertices
+    grafo.remover_aresta(aresta_removida)
+    print(f"DEBUG: Aresta {aresta_removida.rotulo} removida temporariamente.")
+
+    # Verificar conectividade do grafo após a remoção
     conexo_apos_remocao = grafo._simplismente_conexo()
-    print(conexo_apos_remocao)
-    # Restaurar a aresta
-    grafo.adicionar_aresta(aresta.rotulo, aresta.peso, aresta.vertices[0], aresta.vertices[1])
-    return not conexo_apos_remocao
+    print(f"DEBUG: Grafo é conexo após remoção: {conexo_apos_remocao}.")
+
+    # Restaurar a aresta removida
+    grafo.adicionar_aresta(aresta.rotulo, aresta.peso, origem, destino)
+    print(f"DEBUG: Aresta {aresta.rotulo} restaurada.")
+
+    # Retornar True se a remoção desconectou o grafo
+    resultado = not conexo_apos_remocao
+    print(f"DEBUG: Aresta {aresta.rotulo} é ponte: {resultado}.")
+    return resultado
+
+
 

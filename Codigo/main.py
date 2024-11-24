@@ -333,10 +333,11 @@ def executar_fleury(grafo: Grafo):
     if not grafo:
         print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
     else:
-        resultado = fleury(grafo)
+        auxGrafo = grafo
+        resultado = fleury(auxGrafo)
         if isinstance(resultado, list):
             print("Ciclo Euleriano encontrado:")
-            print(" -> ".join([f"{aresta.rotulo} ({aresta.vertices[0].rotulo}-{aresta.vertices[1].rotulo})" for aresta in resultado]))
+            print(resultado)
         else:
             print(resultado)  # Mensagem de erro retornada pela função fleury
     input("Pressione Enter para continuar...")

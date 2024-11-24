@@ -12,21 +12,11 @@
     {"rotulo": "A2", "peso": 0, "origem": "V1", "destino": "V3"},
     {"rotulo": "A3", "peso": 0, "origem": "V1", "destino": "V4"},
     {"rotulo": "A4", "peso": 0, "origem": "V1", "destino": "V5"},
-    {"rotulo": "A5", "peso": 0, "origem": "V2", "destino": "V1"},
-    {"rotulo": "A6", "peso": 0, "origem": "V2", "destino": "V3"},
-    {"rotulo": "A7", "peso": 0, "origem": "V2", "destino": "V4"},
-    {"rotulo": "A8", "peso": 0, "origem": "V2", "destino": "V5"},
-    {"rotulo": "A9", "peso": 0, "origem": "V3", "destino": "V1"},
-    {"rotulo": "A10", "peso": 0, "origem": "V3", "destino": "V2"},
-    {"rotulo": "A11", "peso": 0, "origem": "V3", "destino": "V4"},
-    {"rotulo": "A12", "peso": 0, "origem": "V3", "destino": "V5"},
-    {"rotulo": "A13", "peso": 0, "origem": "V4", "destino": "V1"},
-    {"rotulo": "A14", "peso": 0, "origem": "V4", "destino": "V2"},
-    {"rotulo": "A15", "peso": 0, "origem": "V4", "destino": "V3"},
-    {"rotulo": "A16", "peso": 0, "origem": "V4", "destino": "V5"},
-    {"rotulo": "A17", "peso": 0, "origem": "V5", "destino": "V1"},
-    {"rotulo": "A18", "peso": 0, "origem": "V5", "destino": "V2"},
-    {"rotulo": "A19", "peso": 0, "origem": "V5", "destino": "V3"},
-    {"rotulo": "A20", "peso": 0, "origem": "V5", "destino": "V4"}
+    {"rotulo": "A5", "peso": 0, "origem": "V2", "destino": "V3"},
+    {"rotulo": "A6", "peso": 0, "origem": "V2", "destino": "V4"},
+    {"rotulo": "A7", "peso": 0, "origem": "V2", "destino": "V5"},
+    {"rotulo": "A8", "peso": 0, "origem": "V3", "destino": "V4"},
+    {"rotulo": "A9", "peso": 0, "origem": "V4", "destino": "V5"},
+    {"rotulo": "A10", "peso": 0, "origem": "V3", "destino": "V5"}
   ]
 }
