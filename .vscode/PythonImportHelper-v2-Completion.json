@@ -325,7 +325,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def checar_articulacoes(grafo: Grafo):\n    print(grafo.checar_articulacoes())\n    input(\"Pressione Enter para continuar...\")\ndef grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if (grafo.direcionado is False):",
+        "peekOfCode": "def checar_articulacoes(grafo: Grafo):\n    print(grafo.checar_articulacoes())\n    input(\"Pressione Enter para continuar...\")\ndef grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if(grafo.direcionado is False):",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -334,7 +334,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if (grafo.direcionado is False):\n        print(grafo.exibir_matriz_adjacenciaND())\n    else:\n        print(grafo.exibir_matriz_adjacenciaD())",
+        "peekOfCode": "def grafo_vazio_completo(grafo: Grafo):\n    # Exibe o rótulo de cada vértice para uma visualização mais clara\n    print(grafo.checar_grafo())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if(grafo.direcionado is False):\n        matrizND = grafo.exibir_matriz_adjacenciaND()\n        string = '  '\n        for v in grafo.vertices:",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -343,7 +343,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if (grafo.direcionado is False):\n        print(grafo.exibir_matriz_adjacenciaND())\n    else:\n        print(grafo.exibir_matriz_adjacenciaD())\n    input(\"Pressione Enter para continuar...\")\ndef exibir_matriz_inci(grafo: Grafo):\n    \"\"\"Exibe a matriz de incidencia do grafo\"\"\"\n    if (grafo.direcionado is False):",
+        "peekOfCode": "def exibir_matriz_adj(grafo: Grafo):\n    \"\"\"Exibe o grafo em forma de matriz de adjacencia\"\"\"\n    if(grafo.direcionado is False):\n        matrizND = grafo.exibir_matriz_adjacenciaND()\n        string = '  '\n        for v in grafo.vertices:\n            string = string + v.rotulo + ' '\n        print(string)\n        for e, row in enumerate(matrizND):\n            print(grafo.vertices[e].rotulo + \" \" + \" \".join(map(str, row)))",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -352,7 +352,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def exibir_matriz_inci(grafo: Grafo):\n    \"\"\"Exibe a matriz de incidencia do grafo\"\"\"\n    if (grafo.direcionado is False):\n        print(grafo.exibir_matriz_incidenciaND())\n    else:\n        print(grafo.exibir_matriz_incidenciaD())\n    input(\"Pressione Enter para continuar...\")\ndef verificar_conectividade(grafo: Grafo):\n    print(grafo.verificar_conectividade())\n    input(\"Pressione Enter para continuar...\")",
+        "peekOfCode": "def exibir_matriz_inci(grafo: Grafo):\n    \"\"\"Exibe a matriz de incidencia do grafo\"\"\"\n    if(grafo.direcionado is False):\n        matrizND = grafo.exibir_matriz_incidenciaND()\n        string = '  '\n        for v in grafo.arestas:\n            string = string + v.rotulo + ' '\n        print(string)\n        for e, row in enumerate(matrizND):\n            print(grafo.vertices[e].rotulo + \" \" + \" \".join(map(str, row)))",
         "detail": "Codigo.main",
         "documentation": {}
     },
