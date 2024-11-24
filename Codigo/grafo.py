@@ -499,8 +499,7 @@ class Grafo:
                 print(f"Ocorreu um erro na exportação do grafo: {e}")
     
     def ler_grafo_from_csv(self, nomeCsv):
-        direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
-        self.direcionado = direcionado
+        print("Iniciando a leitura")
         try:
             file = open(nomeCsv, 'r', encoding="utf-8") #abre o arquivo em modo de leitura
 
@@ -512,17 +511,15 @@ class Grafo:
                     new_line1 = new_line[:-1]  # remove the last character of the string which is "\n"
                     array_de_vertices = new_line1.split(";")  # split and create a new array with vertex labels
 
-                        # print(array_de_vertices)
-
+                          # print(array_de_vertices)
+            
                     for v in array_de_vertices:
                         self.adicionar_vertice(v)
-                        
-
                 else:
                     new_line = line[3:]  # remove the first character of the string which is a ";"
                     new_line1 = new_line[:-1]  # remove the last character of the string which is "\n"
                     array_arestas = new_line1.split(";")  # split and create a new array with edge labels
-                    array_de_arestas.append(array_arestas)
+                    array_de_arestas.append(array_arestas)        
 
             counter = 0
             for k, vertice1 in enumerate(array_de_vertices):
@@ -531,7 +528,8 @@ class Grafo:
                         continue
                     rotulo = "A"+str(counter)
                     self.adicionar_aresta(rotulo, 0, self.vertices[k], self.vertices[j])
-                    counter += 1
+                    counter += 1         
+
             print("Grafo carregado com sucesso!!!")
         except Exception as e:
                 print(f"Ocorreu um erro na exportação do grafo: {e}")

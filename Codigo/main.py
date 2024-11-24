@@ -292,8 +292,10 @@ def main():
                 nome_arquivo = input("Digite o nome do arquivo JSON (ex: grafo.json): ")
                 grafo = carregar_grafo_json(nome_arquivo) 
             case '1': 
-                grafo = Grafo(direcionado=False)
+                direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
+                grafo = Grafo(direcionado)
                 grafo.ler_grafo_from_csv("grafod.csv")
+                
             case '2': 
                 grafo = Grafo(direcionado=False)
                 grafo = grafo.criarGrafo()
