@@ -1,0 +1,16 @@
+{
+  "direcionado": false,
+  "vertices": [
+      {"rotulo": "A", "peso": 0},
+      {"rotulo": "B", "peso": 0},
+      {"rotulo": "C", "peso": 0},
+      {"rotulo": "D", "peso": 0},
+      {"rotulo": "E", "peso": 0}
+  ],
+  "arestas": [
+      {"rotulo": "1", "peso": 0, "origem": "A", "destino": "B"},
+      {"rotulo": "2", "peso": 0, "origem": "B", "destino": "C"},
+      {"rotulo": "3", "peso": 0, "origem": "C", "destino": "D"},
+      {"rotulo": "4", "peso": 0, "origem": "D", "destino": "E"}
+  ]
+}

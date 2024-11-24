@@ -7,30 +7,35 @@ from algoritmo import fleury
 import os
 import time
 
+from algoritmo import encontrar_pontes_tarjan
 
 def mostrar_menu():
     print("\nMenu de Opções:")
     print("0. Carregar grafo a partir de arquivo JSON")
-    print("1. Criar grafo aleatorio baseado em seu numero de vertices")
-    print("2. Adicionar vértice")
-    print("3. Adicionar aresta")
-    print("4. Exibir grafo")
-    print("5. Alterar vértice")
-    print("6. Alterar aresta")
-    print("7. Deletar vértice")
-    print("8. Deletar aresta")
-    print("9. Checar adjacência entre vértices")
-    print("10. Checar adjacência entre arestas")
-    print("11. Checagem da existência de arestas")
-    print("12. Checagem da quantidade de vértices e arestas")
-    print("13. Checagem de grafo vazio e completo")
-    print("14. Checagem de articulações (por busca em profundidade)")
-    print("15. Exibir matriz de adjacencia:")
-    print("16. Exibir matriz de incidencia")
-    print("17. Verificar conectividade")
-    print("18. Verificar conectividade (naive)")
-    print("19. Exibir lista de adjacência")
-    print("20. Sair")
+    print("1. Carregar grafo a partir de arquivo CSV")
+    print("2. Criar grafo aleatório baseado em seu número de vértices")
+    print("3. Adicionar vértice")
+    print("4. Adicionar aresta")
+    print("5. Exibir grafo")
+    print("6. Alterar vértice")
+    print("7. Alterar aresta")
+    print("8. Deletar vértice")
+    print("9. Deletar aresta")
+    print("10. Checar adjacência entre vértices")
+    print("11. Checar adjacência entre arestas")
+    print("12. Checagem da existência de arestas")
+    print("13. Checagem da quantidade de vértices e arestas")
+    print("14. Checagem de grafo vazio e completo")
+    print("15. Checagem de articulações (por busca em profundidade)")
+    print("16. Exibir matriz de adjacência")
+    print("17. Exibir matriz de incidência")
+    print("18. Verificar conectividade")
+    print("19. Verificar conectividade (naive)")
+    print("20. Exibir lista de adjacência")
+    print("21. Verificar componentes fortemente conectos com Kosaraju")
+    print("22. Encontrar pontes (Tarjan)")
+    print("23. Exportar CSV")
+    print("24. Sair")
     return input("Escolha uma opção: ")
 
 def criar_vertices_iniciais(grafo):
@@ -252,6 +257,13 @@ def exibir_lista_adjacencia(grafo: Grafo):
         print(f"{vertice}: {adjacentes_str}")
         
     input("Pressione Enter para continuar...")
+
+def verificar_componentes_fortemente_conexos(grafo: Grafo):
+    componentes = kosaraju(grafo)
+    print("Componentes fortemente conectados:")
+    for i, componente in enumerate(componentes):
+        print(f"Componente {
+            i + 1}: {[vertice.rotulo for vertice in componente]}")
         
 def carregar_grafo_json(nome_arquivo: str) -> Grafo:
     try:
@@ -392,6 +404,12 @@ def ajustar_grafo_grau_2(grafo):
 
     print("Grafo ajustado com sucesso para que todos os vértices tenham grau 2.")
     print(grafo)
+def exportar_csv(grafo: Grafo):
+    nome = input('Insira o nome do arquivo (ex: "Grafo1"):')
+    grafo.gerar_csv(nome, grafo.direcionado)
+
+def ler_from_csv(grafo: Grafo):
+    grafo.ler_grafo_from_csv()
 
 def main():
     grafo = None  # Inicializar a variável do grafo
@@ -403,34 +421,41 @@ def main():
                 nome_arquivo = input("Digite o nome do arquivo JSON (ex: grafo.json): ")
                 grafo = carregar_grafo_json(nome_arquivo) 
             case '1': 
+                direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
+                grafo = Grafo(direcionado)
+                grafo.ler_grafo_from_csv("grafod.csv")
+                
+            case '2': 
                 grafo = Grafo(direcionado=False)
                 grafo = grafo.criarGrafo()
                 salvar = input("Deseja salvar o grafo em um arquivo JSON? (s/n): ").strip().lower() == 's'
                 if salvar:
                     nome_arquivo = input("Digite o nome do arquivo JSON para salvar o grafo (ex: novo_grafo.json): ")
                     salvar_grafo_json(grafo, nome_arquivo)
-            case '2': adicionar_vertice_ao_grafo(grafo)
-            case '3': adicionar_aresta_ao_grafo(grafo)
-            case '4': print(grafo)
-            case '5': alterar_vertice_do_grafo(grafo)
-            case '6': alterar_aresta_do_grafo(grafo)
-            case '7': deletar_vertice_do_grafo(grafo)
-            case '8': deletar_aresta_do_grafo(grafo)
-            case '9': checar_adjacencia_vertices(grafo)
-            case '10': checar_adjacencia_arestas(grafo)
-            case '11': checar_existencia_arestas(grafo)
-            case '12': checar_vertices_arestas(grafo)
-            case '13': grafo_vazio_completo(grafo)
-            case '14': checar_articulacoes(grafo)
-            case '15': exibir_matriz_adj(grafo)
-            case '16': exibir_matriz_inci(grafo)
-            case '17': verificar_conectividade(grafo)
-            case '18': verificar_conectividade_naive(grafo)
-            case '19': exibir_lista_adjacencia(grafo)
-            case '21': executar_fleury(grafo)
-            case '22': ajustar_grafo_grau_2(grafo)
-
-            case '20': break
+            case '3': adicionar_vertice_ao_grafo(grafo)
+            case '4': adicionar_aresta_ao_grafo(grafo)
+            case '5': print(grafo)
+            case '6': alterar_vertice_do_grafo(grafo)
+            case '7': alterar_aresta_do_grafo(grafo)
+            case '8': deletar_vertice_do_grafo(grafo)
+            case '9': deletar_aresta_do_grafo(grafo)
+            case '10': checar_adjacencia_vertices(grafo)
+            case '11': checar_adjacencia_arestas(grafo)
+            case '12': checar_existencia_arestas(grafo)
+            case '13': checar_vertices_arestas(grafo)
+            case '14': grafo_vazio_completo(grafo)
+            case '15': checar_articulacoes(grafo)
+            case '16': exibir_matriz_adj(grafo)
+            case '17': exibir_matriz_inci(grafo)
+            case '18': verificar_conectividade(grafo)
+            case '19': verificar_conectividade_naive(grafo)
+            case '20': exibir_lista_adjacencia(grafo)
+            case '21': verificar_componentes_fortemente_conexos(grafo)
+            case '22':
+                pontes = encontrar_pontes_tarjan(grafo)
+                print("Pontes encontradas:", pontes)
+            case '23': exportar_csv(grafo)
+            case '24': break
             case _: print("Opção inválida. Tente novamente.")
 
 if __name__ == "__main__":
