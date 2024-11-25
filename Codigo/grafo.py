@@ -687,9 +687,9 @@ class Grafo:
                     self.adicionar_aresta(
                         rotulo, 0, self.vertices[k], self.vertices[j])
                     counter += 1
-                meio = len(self.arestas) // 2
-                self.arestas = self.arestas[:meio]
-                print("Grafo carregado com sucesso!!!")
+            meio = len(self.arestas) // 2
+            self.arestas = self.arestas[:meio]
+            print("Grafo carregado com sucesso!!!")
 
             print("Grafo carregado com sucesso!!!")
         except Exception as e:
