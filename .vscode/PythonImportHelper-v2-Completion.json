@@ -16,6 +16,14 @@
         "documentation": {}
     },
     {
+        "label": "encontrar_pontes_naive",
+        "importPath": "grafo",
+        "description": "grafo",
+        "isExtraImport": true,
+        "detail": "grafo",
+        "documentation": {}
+    },
+    {
         "label": "Vertice",
         "importPath": "vertice",
         "description": "vertice",
@@ -209,6 +217,15 @@
         "importPath": "Codigo.grafo",
         "description": "Codigo.grafo",
         "peekOfCode": "class Grafo:\n    def __init__(self, direcionado: bool):\n        self.vertices = []        # Lista de vértices no grafo\n        self.arestas = []         # Lista de arestas no grafo\n        self.direcionado = direcionado  # Determina se o grafo é direcionado\n    def adicionar_vertice(self, rotulo: str, peso: int = 0):\n        \"\"\"Adiciona um vértice ao grafo.\"\"\"\n        vertice = Vertice(rotulo, peso)\n        self.vertices.append(vertice)\n        return vertice",
+        "detail": "Codigo.grafo",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_pontes_naive",
+        "kind": 2,
+        "importPath": "Codigo.grafo",
+        "description": "Codigo.grafo",
+        "peekOfCode": "def encontrar_pontes_naive(self):\n    \"\"\"\n    Identifica e retorna as arestas que são pontes no grafo.\n    \"\"\"\n    def contar_componentes():\n        \"\"\"\n        Conta o número de componentes conectados no grafo.\n        \"\"\"\n        visited = set()\n        componentes = 0",
         "detail": "Codigo.grafo",
         "documentation": {}
     },
@@ -480,15 +497,6 @@
         "description": "Codigo.main",
         "peekOfCode": "def main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '0': \n                nome_arquivo = input(\"Digite o nome do arquivo JSON (ex: grafo.json): \")\n                grafo = carregar_grafo_json(nome_arquivo) \n            case '1': \n                direcionado = input(\"O grafo é direcionado? (s/n): \").strip().lower() == 's'",
         "detail": "Codigo.main",
-        "documentation": {}
-    },
-    {
-        "label": "criar_vertices_iniciais",
-        "kind": 2,
-        "importPath": "Codigo.tempCodeRunnerFile",
-        "description": "Codigo.tempCodeRunnerFile",
-        "peekOfCode": "def criar_vertices_iniciais(grafo):\n    try:\n        num_vertices = int(input(\"Quantos vértices deseja criar? \"))\n        if num_vertices < 1:",
-        "detail": "Codigo.tempCodeRunnerFile",
         "documentation": {}
     },
     {
