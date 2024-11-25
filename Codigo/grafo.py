@@ -707,7 +707,7 @@ class Grafo:
 
 
 
-def encontrar_pontes(self):
+def encontrar_pontes_naive(self):
     """
     Identifica e retorna as arestas que são pontes no grafo.
     """
