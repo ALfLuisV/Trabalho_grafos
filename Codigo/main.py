@@ -9,6 +9,7 @@ import os
 import time
 
 from algoritmo import encontrar_pontes_tarjan
+from grafo import encontrar_pontes
 
 def mostrar_menu():
     print("\nMenu de Opções:")
@@ -529,6 +530,7 @@ def main():
             case '24': executar_fleury(grafo)
             case '25': executar_fleury_tarjan(grafo)
             case '26': break
+            case '98': print(encontrar_pontes(grafo))
             case '99': ajustar_grafo_grau_2(grafo)
             case _: print("Opção inválida. Tente novamente.")
 
