@@ -688,6 +688,71 @@ class Grafo:
                         rotulo, 0, self.vertices[k], self.vertices[j])
                     counter += 1
 
+            a = 0
+            while a < len(self.arestas):
+                aresta1 = self.arestas[a]
+                b = a + 1
+                while b < len(self.arestas):
+                    aresta2 = self.arestas[b]
+                    if aresta1.vertices[0] == aresta2.vertices[1] and aresta1.vertices[1] == aresta2.vertices[0]:
+                        del self.arestas[b]
+                    else:
+                        b += 1
+                a += 1
+        
+
             print("Grafo carregado com sucesso!!!")
         except Exception as e:
             print(f"Ocorreu um erro na exportação do grafo: {e}")
+
+
+
+def encontrar_pontes(self):
+    """
+    Identifica e retorna as arestas que são pontes no grafo.
+    """
+    def contar_componentes():
+        """
+        Conta o número de componentes conectados no grafo.
+        """
+        visited = set()
+        componentes = 0
+
+        def dfs(v):
+            visited.add(v)
+            for vizinho in self.obter_vizinhos(v.rotulo):
+                vizinho_vertice = next(vert for vert in self.vertices if vert.rotulo == vizinho)
+                if vizinho_vertice not in visited:
+                    dfs(vizinho_vertice)
+
+        for vertice in self.vertices:
+            if vertice not in visited:
+                componentes += 1
+                dfs(vertice)
+
+        return componentes
+
+    # Componentes conectados inicialmente
+    componentes_iniciais = contar_componentes()
+
+    pontes = []
+
+    for aresta in self.arestas[:]:
+        # Remover a aresta temporariamente
+        self.remover_aresta(aresta)
+
+        # Contar componentes conectados após a remoção
+        componentes_apos_remocao = contar_componentes()
+
+        # Restaurar a aresta
+        self.adicionar_aresta(
+            aresta.rotulo, aresta.peso, aresta.vertices[0], aresta.vertices[1]
+        )
+
+        # Se o número de componentes aumentou, é uma ponte
+        if componentes_apos_remocao > componentes_iniciais:
+            pontes.append(aresta.rotulo)
+
+    if not pontes:
+        return "O grafo não possui arestas que são pontes."
+    return f"As pontes no grafo são: {', '.join(pontes)}"
