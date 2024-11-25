@@ -112,7 +112,6 @@ def e_ponte(grafo, aresta):
     grafo.remover_aresta(aresta_removida)
 
     # Verificar conectividade do grafo após a remoção
-    print(grafo.direcionado)
     conexo_apos_remocao = grafo._simplismente_conexo(grafo.direcionado)
 
     # Restaurar a aresta removida
