@@ -136,11 +136,19 @@ class Grafo:
         # Usa uma cópia da lista para evitar problemas de iteração
         for vertice in self.vertices[:]:
             rotulo = vertice.rotulo  # Salva o rótulo do vértice
-            # Remove o vértice para verificar se é uma articulação
+            # Remove o vértice e suas arestas associadas para verificar se é uma articulação
             self.vertices.remove(vertice)
+            arestas_removidas = [aresta for aresta in self.arestas if vertice in aresta.vertices]
+            for aresta in arestas_removidas:
+                self.arestas.remove(aresta)
+
             # Conta os componentes após a remoção
             componentes_apos_remocao = contar_componentes()
-            self.vertices.append(vertice)  # Restaura o vértice removido
+
+            # Restaura o vértice e suas arestas
+            self.vertices.append(vertice)
+            self.arestas.extend(arestas_removidas)
+
             # Se o número de componentes aumentou, é uma articulação
             if componentes_apos_remocao > componentes_iniciais:
                 # Adiciona o vértice à lista de articulações
