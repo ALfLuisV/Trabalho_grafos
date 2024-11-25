@@ -433,7 +433,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def executar_fleury(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury em um grafo e salva o resultado em um arquivo com nome incremental.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n        return\n    # Criar diretório para salvar o arquivo de saída",
+        "peekOfCode": "def executar_fleury(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury em um grafo e salva o resultado em um arquivo com nome incremental.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n        return\n    if grafo.direcionado:",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -442,7 +442,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def executar_fleury_tarjan(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n        return\n    # Criar diretório para salvar o arquivo de saída",
+        "peekOfCode": "def executar_fleury_tarjan(grafo: Grafo):\n    \"\"\"\n    Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.\n    Parâmetros:\n        grafo: Instância de Grafo.\n    \"\"\"\n    if not grafo:\n        print(\"Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.\")\n        return\n    if grafo.direcionado:",
         "detail": "Codigo.main",
         "documentation": {}
     },

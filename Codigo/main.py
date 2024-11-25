@@ -368,6 +368,10 @@ def executar_fleury(grafo: Grafo):
         print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
         return
 
+    if grafo.direcionado:
+        print("Erro: O algoritmo de Fleury não suporta grafos direcionados.")
+        return
+
     # Criar diretório para salvar o arquivo de saída
     pasta_resultados = "resultados"
     if not os.path.exists(pasta_resultados):
@@ -402,6 +406,51 @@ def executar_fleury(grafo: Grafo):
 
 
 def executar_fleury_tarjan(grafo: Grafo):
+    """
+    Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.
+    Parâmetros:
+        grafo: Instância de Grafo.
+    """
+    if not grafo:
+        print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
+        return
+
+    if grafo.direcionado:
+        print("Erro: O algoritmo de Fleury com Tarjan não suporta grafos direcionados.")
+        return
+
+    # Criar diretório para salvar o arquivo de saída
+    pasta_resultados = "resultados"
+    if not os.path.exists(pasta_resultados):
+        os.makedirs(pasta_resultados)
+
+    # Medir tempo de execução
+    inicio_tempo = time.time()
+    auxGrafo = grafo
+    resultado = fleury_com_tarjan(auxGrafo)
+    tempo_execucao = time.time() - inicio_tempo
+
+    # Criar o conteúdo do arquivo
+    if isinstance(resultado, list):
+        conteudo = "Caminho Euleriano encontrado (usando Tarjan):\n" + " -> ".join(resultado) + "\n"
+    else:
+        conteudo = f"Erro durante a execução: {resultado}\n"
+
+    conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
+
+    # Verificar se o arquivo já existe e criar um novo nome incremental
+    arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury_tarjan.txt")
+    contador = 1
+    while os.path.exists(arquivo_saida):
+        arquivo_saida = os.path.join(pasta_resultados, f"resultado_fleury_tarjan_{contador}.txt")
+        contador += 1
+
+    # Escrever o resultado em um arquivo
+    with open(arquivo_saida, "w") as arquivo:
+        arquivo.write(conteudo)
+
+    print(f"Resultado salvo em '{arquivo_saida}'")
+
     """
     Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.
     Parâmetros:
