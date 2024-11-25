@@ -687,9 +687,19 @@ class Grafo:
                     self.adicionar_aresta(
                         rotulo, 0, self.vertices[k], self.vertices[j])
                     counter += 1
-            meio = len(self.arestas) // 2
-            self.arestas = self.arestas[:meio]
-            print("Grafo carregado com sucesso!!!")
+
+            a = 0
+            while a < len(self.arestas):
+                aresta1 = self.arestas[a]
+                b = a + 1
+                while b < len(self.arestas):
+                    aresta2 = self.arestas[b]
+                    if aresta1.vertices[0] == aresta2.vertices[1] and aresta1.vertices[1] == aresta2.vertices[0]:
+                        del self.arestas[b]
+                    else:
+                        b += 1
+                a += 1
+        
 
             print("Grafo carregado com sucesso!!!")
         except Exception as e:
