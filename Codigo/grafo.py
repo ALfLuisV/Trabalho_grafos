@@ -589,7 +589,7 @@ class Grafo:
             try:
                 nome_arquivo = nome_arquivo + ".csv"
 
-                print(self.exibir_matriz_incidenciaND())
+                # print(self.exibir_matriz_incidenciaND())
 
                 file = open(nome_arquivo, "w", encoding="utf-8")
                 file.write(";")
