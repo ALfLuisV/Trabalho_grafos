@@ -7,6 +7,7 @@ from algoritmo import fleury
 from algoritmo import fleury_com_tarjan
 import os
 import time
+from copy import deepcopy
 
 from algoritmo import encontrar_pontes_tarjan
 from grafo import encontrar_pontes_naive
@@ -345,7 +346,7 @@ def executar_fleury(grafo: Grafo):
 
     # Medir tempo de execução
     inicio_tempo = time.time()
-    auxGrafo = grafo
+    auxGrafo = deepcopy(grafo)
     resultado = fleury(auxGrafo)
     tempo_execucao = time.time() - inicio_tempo
 
@@ -392,7 +393,7 @@ def executar_fleury_tarjan(grafo: Grafo):
 
     # Medir tempo de execução
     inicio_tempo = time.time()
-    auxGrafo = grafo
+    auxGrafo = deepcopy(grafo)
     resultado = fleury_com_tarjan(auxGrafo)
     tempo_execucao = time.time() - inicio_tempo
 

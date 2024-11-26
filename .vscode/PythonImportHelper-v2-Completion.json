@@ -140,6 +140,14 @@
         "documentation": {}
     },
     {
+        "label": "deepcopy",
+        "importPath": "copy",
+        "description": "copy",
+        "isExtraImport": true,
+        "detail": "copy",
+        "documentation": {}
+    },
+    {
         "label": "kosaraju",
         "kind": 2,
         "importPath": "Codigo.algoritmo",
@@ -423,25 +431,7 @@
         "kind": 2,
         "importPath": "Codigo.main",
         "description": "Codigo.main",
-        "peekOfCode": "def salvar_grafo_json(grafo, nome_arquivo):\n    grafo_dict = {\n        \"vertices\": [{\"rotulo\": v.rotulo, \"peso\": v.peso} for v in grafo.vertices],\n        \"arestas\": [{\"rotulo\": a.rotulo, \"peso\": a.peso, \"vertice1\": a.vertices[0].rotulo, \"vertice2\": a.vertices[1].rotulo} for a in grafo.arestas],\n        \"direcionado\": grafo.direcionado\n    }\n    with open(nome_arquivo, 'w') as f:\n        json.dump(grafo_dict, f, indent=4)\ndef verificar_componentes_fortemente_conexos(grafo: Grafo):\n    componentes = kosaraju(grafo)",
-        "detail": "Codigo.main",
-        "documentation": {}
-    },
-    {
-        "label": "verificar_componentes_fortemente_conexos",
-        "kind": 2,
-        "importPath": "Codigo.main",
-        "description": "Codigo.main",
-        "peekOfCode": "def verificar_componentes_fortemente_conexos(grafo: Grafo):\n    componentes = kosaraju(grafo)\n    print(\"Componentes fortemente conectados:\")\n    for i, componente in enumerate(componentes):\n        print(f\"Componente {i + 1}: {[vertice.rotulo for vertice in componente]}\")\ndef carregar_grafo_json(nome_arquivo: str) -> Grafo:\n    try:\n        with open(nome_arquivo, 'r') as f:\n            dados = json.load(f)\n        grafo = Grafo(direcionado=dados[\"direcionado\"])",
-        "detail": "Codigo.main",
-        "documentation": {}
-    },
-    {
-        "label": "carregar_grafo_json",
-        "kind": 2,
-        "importPath": "Codigo.main",
-        "description": "Codigo.main",
-        "peekOfCode": "def carregar_grafo_json(nome_arquivo: str) -> Grafo:\n    try:\n        with open(nome_arquivo, 'r') as f:\n            dados = json.load(f)\n        grafo = Grafo(direcionado=dados[\"direcionado\"])\n        vertices = {}\n        for vertice_data in dados[\"vertices\"]:\n            vertice = grafo.adicionar_vertice(vertice_data[\"rotulo\"], vertice_data[\"peso\"])\n            vertices[vertice_data[\"rotulo\"]] = vertice\n        for aresta_data in dados[\"arestas\"]:",
+        "peekOfCode": "def salvar_grafo_json(grafo, nome_arquivo):\n    grafo_dict = {\n        \"vertices\": [{\"rotulo\": v.rotulo, \"peso\": v.peso} for v in grafo.vertices],\n        \"arestas\": [{\"rotulo\": a.rotulo, \"peso\": a.peso, \"origem\": a.vertices[0].rotulo, \"destino\": a.vertices[1].rotulo} for a in grafo.arestas],\n        \"direcionado\": grafo.direcionado\n    }\n    with open(nome_arquivo, 'w') as f:\n        json.dump(grafo_dict, f, indent=4)\ndef executar_fleury(grafo: Grafo):\n    \"\"\"",
         "detail": "Codigo.main",
         "documentation": {}
     },
@@ -497,6 +487,15 @@
         "description": "Codigo.main",
         "peekOfCode": "def main():\n    grafo = None  # Inicializar a variável do grafo\n    while True:\n        opcao = mostrar_menu()\n        match opcao:\n            case '0': \n                nome_arquivo = input(\"Digite o nome do arquivo JSON (ex: grafo.json): \")\n                grafo = carregar_grafo_json(nome_arquivo) \n            case '1': \n                direcionado = input(\"O grafo é direcionado? (s/n): \").strip().lower() == 's'",
         "detail": "Codigo.main",
+        "documentation": {}
+    },
+    {
+        "label": "carregar_grafo_json",
+        "kind": 2,
+        "importPath": "Codigo.tempCodeRunnerFile",
+        "description": "Codigo.tempCodeRunnerFile",
+        "peekOfCode": "def carregar_grafo_json(nome_arquivo: str) -> Grafo:\n#     try:\n#         with open(nome_arquivo, 'r') as f:\n#             dados = json.load(f)\n#         grafo = Grafo(direcionado=dados[\"direcionado\"])\n#         vertices = {}\n#         for vertice_data in dados[\"vertices\"]:\n#             vertice = grafo.adicionar_vertice(vertice_data[\"rotulo\"], vertice_data[\"peso\"])\n#             vertices[vertice_data[\"rotulo\"]] = vertice\n#         for aresta_data in dados[\"arestas\"]:",
+        "detail": "Codigo.tempCodeRunnerFile",
         "documentation": {}
     },
     {
