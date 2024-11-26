@@ -524,6 +524,14 @@ class Grafo:
         pesos_aleatorios = input(
             "Os pesos das arestas e vértices serão aleatórios? (s/n) n = todos os pesos = 0: ").strip().lower() == 's'
         
+        arestas_aleatorias = input(
+            "O número de arestas será aleatório? (s/n): ").strip().lower() == 's'
+        
+        if arestas_aleatorias:
+            num_arestas = random.randint(num_vertices - 1, num_vertices * (num_vertices - 1) // 2)
+        else:
+            num_arestas = int(input("Digite o número de arestas: "))
+        
         start_time = time.perf_counter()
         
         grafo = Grafo(direcionado=direcionado)
@@ -535,8 +543,6 @@ class Grafo:
             grafo.adicionar_vertice(vertice.rotulo, vertice.peso)
 
         # Adicionar arestas aleatórias
-        num_arestas = random.randint(
-            num_vertices, num_vertices * (num_vertices - 1) // 2)
         arestas_existentes = set()
         for i in range(num_arestas):
             while True:
@@ -550,8 +556,7 @@ class Grafo:
                     aresta_id = (vertice1.rotulo, vertice2.rotulo)
                     aresta_id_reversa = (vertice2.rotulo, vertice1.rotulo)
                 else:
-                    aresta_id = tuple(
-                        sorted([vertice1.rotulo, vertice2.rotulo]))
+                    aresta_id = tuple(sorted([vertice1.rotulo, vertice2.rotulo]))
                     aresta_id_reversa = aresta_id
 
                 # Verificar se a aresta já existe ou se é antiparalela

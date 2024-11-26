@@ -317,7 +317,7 @@ def carregar_grafo_json(nome_arquivo: str) -> Grafo:
 def salvar_grafo_json(grafo, nome_arquivo):
     grafo_dict = {
         "vertices": [{"rotulo": v.rotulo, "peso": v.peso} for v in grafo.vertices],
-        "arestas": [{"rotulo": a.rotulo, "peso": a.peso, "vertice1": a.vertices[0].rotulo, "vertice2": a.vertices[1].rotulo} for a in grafo.arestas],
+        "arestas": [{"rotulo": a.rotulo, "peso": a.peso, "origem": a.vertices[0].rotulo, "destino": a.vertices[1].rotulo} for a in grafo.arestas],
         "direcionado": grafo.direcionado
     }
     with open(nome_arquivo, 'w') as f:
