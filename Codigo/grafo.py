@@ -439,9 +439,47 @@ class Grafo:
         return True
 
     def _semi_fortemente_conexo(self):
-        """Verifica se o grafo é semi-fortemente conexo."""
-        grafo_und = self._converter_nao_direcionado()
-        return grafo_und._verificar_conectividade_simples()
+        # """Verifica se o grafo é semi-fortemente conexo."""
+        # grafo_und = self._converter_nao_direcionado()
+        # return grafo_und._verificar_conectividade_simples()
+
+        def retornar_array(vertice):
+            vetorAlc = []
+
+            verticeRef = vertice
+
+            for aresta in self.arestas:
+                if (aresta.vertices[0] == verticeRef):
+                    if (aresta.vertices[1] in vetorAlc):
+                        continue
+                    vetorAlc.append(aresta.vertices[1])
+
+            i = 0
+
+            while i < len(vetorAlc):
+                # Pega o vértice atual de `vetorAlc` para processar
+                verticeRef2 = vetorAlc[i]
+
+                # Itera sobre as arestas para verificar conexões
+                for aresta in self.arestas:
+                    if aresta.vertices[0] == verticeRef2:
+                        if aresta.vertices[1] not in vetorAlc:
+                            # Adiciona o vértice conectado a `vetorAlc`
+                            vetorAlc.append(aresta.vertices[1])
+
+                i += 1  # Incrementa o índice para o próximo vértice a ser processado
+
+            vetorAlc.append(verticeRef.rotulo)
+            print(vetorAlc)
+            return vetorAlc
+        
+        vetorDeVerificacao = []
+
+        for vertice in self.vertices:
+            vetor = retornar_array(vertice)
+            vetorDeVerificacao.append(vetor)
+        
+        print(vetorDeVerificacao)
 
     def _dfs_direcionado(self, start):
         """Realiza DFS em um grafo direcionado a partir de um vértice."""
@@ -552,159 +590,181 @@ class Grafo:
 # erro do processo no console.
     def gerar_csv(self, nome_arquivo, direcionado):
         """Gera um arquivo CSV com a matriz de incidência do grafo."""
-        if direcionado is False:
-            try:
-                nome_arquivo = nome_arquivo + ".csv"
+        if len(self.arestas) == 0:
+            nome_arquivo = nome_arquivo + ".gml"
+            file = open(nome_arquivo, "w", encoding="utf-8")
+            file.write("graph\n")
+            file.write("[\n")
+            for vertice in self.vertices:
+                file.write("node\n")
+                file.write("[\n")
+                file.write("id" + " " + vertice.rotulo + "\n")
+                file.write("]\n")
+            file.write("]")
+            print("Grafo exportado com sucesso! (Para fins de funcionamento, o grafo foi exportado em GML.)")
+        else:
+            if direcionado is False:
+                try:
+                    nome_arquivo = nome_arquivo + ".csv"
 
-                print(self.exibir_matriz_incidenciaND())
+                    print(self.exibir_matriz_incidenciaND())
 
-                file = open(nome_arquivo, "w", encoding="utf-8")
-                file.write(";")
-                for i, vertice in enumerate(self.vertices):
-                    if i == len(self.vertices) - 1:  # Último elemento
-                        file.write(vertice.rotulo)
-                    else:
-                        file.write(vertice.rotulo + ";")
-
-                file.write("\n")
-
-                matriz_adj = self.exibir_matriz_adjacenciaND()
-
-                for i, vertice in enumerate(self.vertices):
-                    file.write(vertice.rotulo + ";")
-
-                    for j, value in enumerate(matriz_adj[i]):
-
-                        if j == len(matriz_adj[i]) - 1:  # Último elemento
-                            file.write(str(value))
+                    file = open(nome_arquivo, "w", encoding="utf-8")
+                    file.write(";")
+                    for i, vertice in enumerate(self.vertices):
+                        if i == len(self.vertices) - 1:  # Último elemento
+                            file.write(vertice.rotulo)
                         else:
-                            file.write(str(value) + ";")
+                            file.write(vertice.rotulo + ";")
 
                     file.write("\n")
 
-                print("Grafo exportado com sucesso!")
+                    matriz_adj = self.exibir_matriz_adjacenciaND()
+
+                    for i, vertice in enumerate(self.vertices):
+                        file.write(vertice.rotulo + ";")
+
+                        for j, value in enumerate(matriz_adj[i]):
+
+                            if j == len(matriz_adj[i]) - 1:  # Último elemento
+                                file.write(str(value))
+                            else:
+                                file.write(str(value) + ";")
+
+                        file.write("\n")
+
+                    print("Grafo exportado com sucesso!")
+                except Exception as e:
+                    print(f"Ocorreu um erro na exportação do grafo: {e}")
+            else:
+                try:
+                    nome_arquivo = nome_arquivo + ".csv"
+
+                    # print(self.exibir_matriz_incidenciaND())
+
+                    file = open(nome_arquivo, "w", encoding="utf-8")
+                    file.write(";")
+                    for i, vertice in enumerate(self.vertices):
+                        if i == len(self.vertices) - 1:  # Último elemento
+                            file.write(vertice.rotulo)
+                        else:
+                            file.write(vertice.rotulo + ";")
+
+                    file.write("\n")
+
+                    matriz_adj = self.exibir_matriz_adjacenciaD()
+
+                    for i, vertice in enumerate(self.vertices):
+                        file.write(vertice.rotulo + ";")
+
+                        for j, value in enumerate(matriz_adj[i]):
+
+                            if j == len(matriz_adj[i]) - 1:  # Último elemento
+                                file.write(str(value))
+                            else:
+                                file.write(str(value) + ";")
+
+                        file.write("\n")
+
+                    print("Grafo exportado com sucesso!")
+                except Exception as e:
+                    print(f"Ocorreu um erro na exportação do grafo: {e}")
+
+
+    def ler_grafo_from_csv(self, nomeCsv, entrada):
+        print("Iniciando a leitura")
+        
+        if(entrada == '0'):
+            try:
+                # abre o arquivo em modo de leitura
+                file = open(nomeCsv, 'r', encoding="utf-8")
+
+                array_de_vertices = []
+                array_de_arestas = []
+                for counter, line in enumerate(file):
+                    if counter == 0:
+                        # remove the first character of the string which is a ";"
+                        new_line = line[1:]
+                        # remove the last character of the string which is "\n"
+                        new_line1 = new_line[:-1]
+                        # split and create a new array with vertex labels
+                        array_de_vertices = new_line1.split(";")
+
+                        # print(array_de_vertices)
+
+                        for v in array_de_vertices:
+                            self.adicionar_vertice(v)
+                    else:
+                        # remove the first character of the string which is a ";"
+                        new_line = line[3:]
+                        # remove the last character of the string which is "\n"
+                        new_line1 = new_line[:-1]
+                        # split and create a new array with edge labels
+                        array_arestas = new_line1.split(";")
+                        array_de_arestas.append(array_arestas)
+
+                counter = 0
+                for k, vertice1 in enumerate(array_de_vertices):
+                    for j, vertice2 in enumerate(array_de_vertices):
+                        if k == j or array_de_arestas[k][j] == '0':
+                            continue
+                        rotulo = "A"+str(counter)
+                        self.adicionar_aresta(
+                            rotulo, 0, self.vertices[k], self.vertices[j])
+                        counter += 1
+
+                a = 0
+                while a < len(self.arestas):
+                    aresta1 = self.arestas[a]
+                    b = a + 1
+                    while b < len(self.arestas):
+                        aresta2 = self.arestas[b]
+                        if aresta1.vertices[0] == aresta2.vertices[1] and aresta1.vertices[1] == aresta2.vertices[0]:
+                            del self.arestas[b]
+                        else:
+                            b += 1
+                    a += 1
+            
+
+                print("Grafo carregado com sucesso!!!")
             except Exception as e:
                 print(f"Ocorreu um erro na exportação do grafo: {e}")
         else:
-            try:
-                nome_arquivo = nome_arquivo + ".csv"
-
-                # print(self.exibir_matriz_incidenciaND())
-
-                file = open(nome_arquivo, "w", encoding="utf-8")
-                file.write(";")
-                for i, vertice in enumerate(self.vertices):
-                    if i == len(self.vertices) - 1:  # Último elemento
-                        file.write(vertice.rotulo)
-                    else:
-                        file.write(vertice.rotulo + ";")
-
-                file.write("\n")
-
-                matriz_adj = self.exibir_matriz_adjacenciaD()
-
-                for i, vertice in enumerate(self.vertices):
-                    file.write(vertice.rotulo + ";")
-
-                    for j, value in enumerate(matriz_adj[i]):
-
-                        if j == len(matriz_adj[i]) - 1:  # Último elemento
-                            file.write(str(value))
-                        else:
-                            file.write(str(value) + ";")
-
-                    file.write("\n")
-
-                print("Grafo exportado com sucesso!")
-            except Exception as e:
-                print(f"Ocorreu um erro na exportação do grafo: {e}")
-
-
-# O método `ler_grafo_from_csv` tem como objetivo carregar um grafo a partir de um arquivo CSV.
-# Ele começa imprimindo uma mensagem indicando o início do processo de leitura. Em seguida,
-# tenta abrir o arquivo especificado (`nomeCsv`) no modo de leitura, utilizando a codificação UTF-8 para
-# garantir compatibilidade com caracteres especiais. Caso ocorra algum erro durante a leitura,
-# a execução será desviada para o bloco `except`, onde uma mensagem de erro será exibida.
-# Inicialmente, dois arrays auxiliares são criados: `array_de_vertices` e `array_de_arestas`.
-# O primeiro armazenará os vértices do grafo, enquanto o segundo armazenará as arestas.
-# O método utiliza um loop `for` com `enumerate` para iterar sobre as linhas do arquivo CSV, onde a
-# variável `counter` representa o índice da linha, e `line` contém o conteúdo da linha atual.
-# Na primeira iteração (`counter == 0`), a linha correspondente é tratada como a lista de vértices
-#  do grafo. O primeiro caractere da linha, geralmente um ponto-e-vírgula, é removido com `line[1:]`, e
-# o último caractere (um possível caractere de nova linha) é removido com `line[:-1]`. A linha resultante é
-#  dividida em um array de vértices utilizando o método `split(";")`. Esse array é armazenado em
-# `array_de_vertices`. Em seguida, cada vértice é adicionado ao grafo utilizando o método `self.adicionar_vertice`.
-# Para as linhas subsequentes (`counter > 0`), o método interpreta os dados como a matriz de adjacência do grafo.
-# Novamente, os primeiros e últimos caracteres são removidos, e a linha resultante é dividida em um array de
-# arestas. Este array é adicionado a `array_de_arestas`, que acumula as informações de adjacência.
-# Após carregar os dados de vértices e arestas, o método inicia um processo de construção do grafo
-# com base na matriz de adjacência. Ele utiliza dois loops aninhados para iterar sobre cada combinação de
-# vértices (`k` e `j`), representados pelos índices de `array_de_vertices`. Se os índices forem iguais (`k == j`)
-# ou se o valor correspondente na matriz de adjacência (`array_de_arestas[k][j]`) for `'0'`, a
-# iteração atual é ignorada utilizando o comando `continue`. Caso contrário, é criada uma aresta
-# entre os dois vértices, utilizando o método `self.adicionar_aresta`. O rótulo da aresta é gerado
-# dinamicamente como `"A" + str(counter)`, e um contador é incrementado para garantir que cada aresta
-# tenha um rótulo único.
-# Por fim, se todo o processo for concluído sem erros, uma mensagem de sucesso é exibida.
-# Caso contrário, qualquer exceção capturada será exibida no console, detalhando o erro ocorrido
-# durante a exportação do grafo.
-    def ler_grafo_from_csv(self, nomeCsv):
-        print("Iniciando a leitura")
-        try:
             # abre o arquivo em modo de leitura
             file = open(nomeCsv, 'r', encoding="utf-8")
-
             array_de_vertices = []
             array_de_arestas = []
+
+            # A variável `line` contém a linha atual, e `counter` contém o índice da linha.
+            aresta_counter = 0
             for counter, line in enumerate(file):
-                if counter == 0:
-                    # remove the first character of the string which is a ";"
-                    new_line = line[1:]
-                    # remove the last character of the string which is "\n"
-                    new_line1 = new_line[:-1]
-                    # split and create a new array with vertex labels
-                    array_de_vertices = new_line1.split(";")
+                if counter >= 2:
+                    new_line1 = line[:-1]
+                    new_line2 = new_line1.split(" ")
 
-                    # print(array_de_vertices)
+                    if new_line2[0] == 'id':
+                        self.adicionar_vertice(new_line2[1])
+                    
+                    elif new_line2[0] == 'source':
 
-                    for v in array_de_vertices:
-                        self.adicionar_vertice(v)
-                else:
-                    # remove the first character of the string which is a ";"
-                    new_line = line[3:]
-                    # remove the last character of the string which is "\n"
-                    new_line1 = new_line[:-1]
-                    # split and create a new array with edge labels
-                    array_arestas = new_line1.split(";")
-                    array_de_arestas.append(array_arestas)
+                        verticeInicial = new_line2[1]
+                        next_line = file.readline()  # Lê a próxima linha do arquivo
+                        new_line_next = next_line[:-1].split(" ")
+                        verticeFinal = new_line_next[1]
+                        verticeA = list(filter(lambda obj: obj.rotulo == verticeInicial, self.vertices))
+                        verticeB = list(filter(lambda obj: obj.rotulo == verticeFinal, self.vertices))
 
-            counter = 0
-            for k, vertice1 in enumerate(array_de_vertices):
-                for j, vertice2 in enumerate(array_de_vertices):
-                    if k == j or array_de_arestas[k][j] == '0':
-                        continue
-                    rotulo = "A"+str(counter)
-                    self.adicionar_aresta(
-                        rotulo, 0, self.vertices[k], self.vertices[j])
-                    counter += 1
+           
+                        if verticeA and verticeB:
+                            verticeA = verticeA[0]  # Pega o primeiro (único) vértice
+                            verticeB = verticeB[0]  # Pega o primeiro (único) vértice
+                        
+                            self.adicionar_aresta(
+                            "A" + str(aresta_counter), 0, verticeA, verticeB)
 
-            a = 0
-            while a < len(self.arestas):
-                aresta1 = self.arestas[a]
-                b = a + 1
-                while b < len(self.arestas):
-                    aresta2 = self.arestas[b]
-                    if aresta1.vertices[0] == aresta2.vertices[1] and aresta1.vertices[1] == aresta2.vertices[0]:
-                        del self.arestas[b]
-                    else:
-                        b += 1
-                a += 1
-        
+                            aresta_counter += 1
 
-            print("Grafo carregado com sucesso!!!")
-        except Exception as e:
-            print(f"Ocorreu um erro na exportação do grafo: {e}")
-
+            print("Arquivo lido com sucesso!")
 
 
 def encontrar_pontes_naive(self):

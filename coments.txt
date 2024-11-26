@@ -1,66 +1,99 @@
 criar um grafo 
 
-um grafo é um objeto que contém um array de vértices e arestas, e um booleano de direcionado, quando é criado, um objeto é instanciado, o vertice é um objeto com dois atributos de peso e de rótulo, e um array de arestas, onde acessamos as arestas adjacentes a ele, já uma aresta, possui rótulo, peso e um array contendo dois vértices, sendo eles inicial e final, para adicionar um vértice instanciamos um objeto desta classe, e o inserimos no array de vértices do grafo, para adicionar arestas é a mesma coisa, o objeto é instanciado e inserido no vetor de arestas do obj grafo, nesse caso, também no vetor de arestas dos dois vértices adjacentes.
+um grafo é um objeto que contém um array de vértices e arestas, e um booleano de direcionado, quando é criado, um objeto é instanciado,
+ o vertice é um objeto com dois atributos de peso e de rótulo, 
+e um array de arestas, onde acessamos as arestas adjacentes a ele, já uma aresta, possui rótulo, peso e um array 
+contendo dois vértices, sendo eles inicial e final, para adicionar um vértice instanciamos um objeto desta classe, 
+e o inserimos no array de vértices do grafo, para adicionar arestas é a mesma coisa, o objeto é instanciado e 
+inserido no vetor de arestas do obj grafo, nesse caso, também no vetor de arestas dos dois vértices adjacentes.
 
 
 remover vértice
 
- para removermos um vértice, o método recebe o vértice desejado como argumento, verifica se ele está inserido no vetor de vértices do grafo, é primeiro, um for é executado durante todo array de arestas desse vértice, e estas arestas são removidas do grafo, e depois o vertice é excluído (cada aresta do vértice é passada como argumento pró método remover aresta() do grafo.
+ para removermos um vértice, o método recebe o vértice desejado como argumento, verifica se ele está inserido no vetor de vértices do grafo, é primeiro, 
+ um for é executado durante todo array de arestas desse vértice, e estas arestas são removidas do grafo, 
+ e depois o vertice é excluído (cada aresta do vértice é passada como argumento pró método remover aresta() do grafo.
 
 
 remover aresta
 
-o método verifica se a aresta existe no vetor de arestas do grafo, e se sim, é passada como argumento pró método removerAresta(), e após isso, a aresta em questão é removida do array de arestas dos dois vértices pertencentes a mesma
+o método verifica se a aresta existe no vetor de arestas do grafo, e se sim, é passada como argumento pró método removerAresta(), e 
+após isso, a aresta em questão é removida do array de arestas dos dois vértices pertencentes a mesma
 
 
 checar adjacencia de vertices
 
-o método checar adjacencia vertices() recebe dois vértices como argumento, e verifica a partir de uma iteração em seu vetor de arestas, se alguma possui estes dois vértices relacionados
+o método checar adjacencia vertices() recebe dois vértices como argumento, 
+e verifica a partir de uma iteração em seu vetor de arestas, se alguma possui estes dois vértices relacionados
 
 
 checar adjacência de arestas
 
-o método checar adjacência arestas() possui 2 argumentos arestas que desejam ser verificadas, este método cria dois conjuntos utilizando o set(), contendo os vértices da aresta a  e da aresta b, a interseção entre estes conjuntos é verificada, e assim respondendo a pergunta inicial
+o método checar adjacência arestas() possui 2 argumentos arestas que desejam ser verificadas, 
+este método cria dois conjuntos utilizando o set(), contendo os vértices da aresta a  e da aresta b, 
+a interseção entre estes conjuntos é verificada, e assim respondendo a pergunta inicial
 
 
 alterar vértice e arestas
 
-este método realiza a alteração de dados do vértice, recebendo como argumento o rótulo e o peso do mesmo como argumento, estes dados são inseridos diretamente nos atributos do objeto, já a alteração de arestas ocorre da mesma forma (nota que se deseja alterar os vértices de uma aresta, a mesma deve ser excluída e criada novamente)
+este método realiza a alteração de dados do vértice, recebendo como argumento o rótulo e o peso do mesmo como argumento,
+ estes dados são inseridos diretamente nos atributos do objeto, já a alteração de arestas ocorre da
+  mesma forma (nota que se deseja alterar os vértices de uma aresta, a mesma deve ser excluída e criada novamente)
 
 
 
 
 checar arestas 
 
-este método primeiro verifica o tamanho do array de arestas do grafo, se ele for 0, uma resposta de arestas vazia é enviada, se não, o objeto retorna o conjunto de arestas do grafo
+este método primeiro verifica o tamanho do array de arestas do grafo, se ele for 0,
+ uma resposta de arestas vazia é enviada, se não, o objeto retorna o conjunto de arestas do grafo
 
 
 verificar arestas
 
-Esse método utiliza o atributo len dos arrays de vértices e arestas do grafo, concatenando o mesmo a uma string que informa o número total de vértices e arestas do mesmo.
+Esse método utiliza o atributo len dos arrays de vértices e arestas do grafo,
+ concatenando o mesmo a uma string que informa o número total de vértices e arestas do mesmo.
 
 checar grafo
 
-este método verifica se o grafo é vazio ou completo, primeiramente ele verifica o tamanho do vetor de vértices, se o mesmo for zero, uma confirmação de grafo vazio é enviada, se não, o método cria uma variável chamada conexões, e itera sobre as arestas do grafo, se o vértice atual for o primeiro da aresta, ele adciona o segundo, e vice versa, e no final, criando um vetor com todos os vértices adjacentes ao vértice atual, e ao final da iteração, o tamanho deste vetor é comparado com o tsamanho do vetor de vértices do grafo - 1, se for diferente, é retornado que o grafo não é completo.  (ou seja, o método, pra cada vértice do grafo, cria um vetor possuindo seus vizinhos, e compara com o tamanho do vetor de df , ,:-_*“&$#vértices do grafo original)
+este método verifica se o grafo é vazio ou completo, primeiramente ele verifica o 
+tamanho do vetor de vértices, se o mesmo for zero, uma confirmação de grafo vazio é enviada, se não,
+ o método cria uma variável chamada conexões, e itera sobre as arestas do grafo, se o vértice atual 
+for o primeiro da aresta, ele adciona o segundo, e vice versa, e no final, criando um vetor com todos 
+os vértices adjacentes ao vértice atual, e ao final da iteração, o tamanho deste vetor é comparado com o tsamanho do
+ vetor de vértices do grafo - 1, se for diferente, é retornado que o grafo não é completo.  (ou seja, o método, pra 
+ cada vértice do grafo, cria um vetor possuindo seus vizinhos, e compara com o tamanho do vetor de df , ,:-_*“&$#vértices do grafo original)
 
 checar articulação
 
-este método verifica os pontos de articulação, ou seja, vértices que se removidos, aumentam o número de componentes conexos, primeiro ele implementa uma busca em profundidade, que recebe o vértice atual e um array de vértices visitados, este método, utiliza o outro método chamado buscar_vizinhos(), do vértice atual, que retorna um array de vizinhos deste vértice, e o primeiro vértice iterado que não estiver no vetor de visitados, o mesmo é inserido em uma chamada recursiva do DFS
+este método verifica os pontos de articulação, ou seja, vértices que se removidos, aumentam o número de
+componentes conexos, primeiro ele implementa uma busca em profundidade, que recebe o vértice atual e um
+array de vértices visitados, este método, utiliza o outro método chamado buscar_vizinhos(), do vértice atual, que 
+retorna um array de vizinhos deste vértice, e o primeiro vértice iterado que não estiver no vetor de visitados, o mesmo é inserido em uma chamada recursiva do DFS
 
-para calcular os componentes, o método possui um método interno, que utiliza a busca DFS implementada anteriormente, inicialmente, o array de vértices do grafo é iterado, e pra cada vértice que não está presente no array de vizinhos, é executada uma DFS, e para cada DFS executada, um contador é incrementado em mais um, este contador representa os componentes do grafo. Este método descrito, retorna o número de componentes
+para calcular os componentes, o método possui um método interno, que utiliza a busca DFS implementada anteriormente, 
+inicialmente, o array de vértices do grafo é iterado, e pra cada vértice que não está presente no array de vizinhos, 
+é executada uma DFS, e para cada DFS executada, um contador é incrementado em mais um, este contador representa os componentes do grafo. Este método descrito, retorna o número de componentes
 
-Em seguida, o array de vértices é novamente iterado, e a cada iteração, o array atual e suas arestas incidentes são removidos, e em seguida, o método de buscar componentes é chamado ao grafo após a remoção, e depois o número de componentes encontrado é comparado com o número original de componentes, se for maior , o rótulo do vértice é inserido no vetor de articulações previamente inicializado. (a cada iteração de vértice, o vértice atual é removido, e calculado o número de componentes, se for maior que o número original, o vértice é uma articulação)
+Em seguida, o array de vértices é novamente iterado, e a cada iteração, o array atual e suas arestas incidentes
+são removidos, e em seguida, o método de buscar componentes é chamado ao grafo após a remoção, e depois o número de
+componentes encontrado é comparado com o número original de componentes, se for maior , o rótulo do vértice é inserido
+--no vetor de articulações previamente inicializado. (a cada iteração de vértice, o vértice atual é removido, e calculado o número de componentes, se for maior que o número original, o vértice é uma articulação)
 
 
 
 
 obter vizinhos
 
-este método recebe um vértice como argumento, e itera sobre o vetor de arestas, se uma aresta possuir o vértice indicado como vértice inicial OU final, o outro vértice é inserido no vetor de vizinhos, que é retornado.
+este método recebe um vértice como argumento, e itera sobre o vetor de arestas, se uma aresta possuir o vértice indicado 
+como vértice inicial OU final, o outro vértice é inserido no vetor de vizinhos, que é retornado.
 
 obter matriz de adjacência ND
 
-para obter uma matriz de adjacência, primeiro, o vetor de v é iterado, a cada vértice atual, o vetor de v é iterado novamente, se os dois vértices atuais das iterações foram iguais, é inserido 0 num vetor de vetores previamente definido, se não forem, é verificado as arestas do grafo atraves de um for no vetor de a, se o segundo vértice estiver presente em alguma aresta junto com o primeiro, é inserido 1, se não, é inserido 0 (este método retorna um vetor, onde cada vértice possui seu vetor de 1 ou 0s)
+para obter uma matriz de adjacência, primeiro, o vetor de v é iterado, a cada vértice atual, o vetor de v é iterado
+ novamente, se os dois vértices atuais das iterações foram iguais, é inserido 0 num vetor de vetores previamente definido,
+  se não forem, é verificado as arestas do grafo atraves de um for no vetor de a, se o segundo vértice estiver presente em alguma a
+  resta junto com o primeiro, é inserido 1, se não, é inserido 0 (este método retorna um vetor, onde cada vértice possui seu vetor de 1 ou 0s)
 
 obter matriz de adjacência D
 
@@ -68,51 +101,81 @@ A mesma coisa, só que na parte de verificação de arestas, só é inserido um,
 
 obter matriz incidência ND
 
-é criado inicialmente um vetor chamado matrizInc, em seguida, o vetor de vértices é iterado, e a cada iteração, o vetor de arestas também é iterado, se a aresta atual possuir o vértice atual, é inserido 1, se não, é inserido 0, e no final da iteração, a linha é adicionada ao vetor da matriz criado previamente
+é criado inicialmente um vetor chamado matrizInc, em seguida, o vetor de vértices é iterado, e a cada iteração, o vetor de arestas 
+também é iterado, se a aresta atual possuir o vértice atual, é inserido 1, se não, é inserido 0, e no final da iteração, a linha é adicionada ao vetor da matriz criado previamente
 
 obter matriz incidência ND
 
-mesma coisa que o anterior, so que se o vértice atual tiver na aresta atual, e estiver na posição 0 do vetor de vértices, é inserido -1, se estiver na posição 1, é inserido 1, e se ele não estiver constando na aresta, é inserido 0
+mesma coisa que o anterior, so que se o vértice atual tiver na aresta atual, e estiver na posição 0 do vetor de vértices,
+ é inserido -1, se estiver na posição 1, é inserido 1, e se ele não estiver constando na aresta, é inserido 0
 
 conectividade ND
 
-este método toma o vértice 0 do vetor de vértices do grafo como base, e apartir dele, verifica seus vértices alcançáveis, primeiramente, ele faz uma iteração no vetor de arestas, se esta aresta atual, possuir o vértice de referência, ele insere o outro vértice no vetor de alcançáveis
 
-após isso, outra iteração é feita, cada vértice do vetor de alcançaveis é verificado seus vizinhos, e se existir algum vizinho que não esta np vetor de alcançaveis, ele é adicionado ao mesmo, para evitar loops, um contador foi adicionado, e ele não pode ser maior que o tamanho do vetor de alcançaveis.
+este método toma o vértice 0 do vetor de vértices do grafo como base, e apartir dele, verifica seus vértices alcançáveis, 
+primeiramente, ele faz uma iteração no vetor de arestas, se esta aresta atual, possuir o vértice de referência, ele insere o outro vértice no vetor de alcançáveis
 
-após isso, o primeiro vértice de referencia é adicionado ao vetor de alcançaveis, e o mesmo é iterado, e a cada iteração do vetor de alcançaveis, é iterado o vetor de vértices original, e se existir algum vértice do grafo og que não esta nos alcançaveis, é retornado a afirmação de grafo desconexo.
+após isso, outra iteração é feita, cada vértice do vetor de alcançaveis é verificado seus vizinhos, e se existir algum vizinho 
+que não esta np vetor de alcançaveis, ele é adicionado ao mesmo, para evitar loops, um contador foi adicionado, e ele não pode ser maior que o tamanho do vetor de alcançaveis.
+
+após isso, o primeiro vértice de referencia é adicionado ao vetor de alcançaveis, e o mesmo é iterado, e a cada iteração 
+ vetor de alcançaveis, é iterado o vetor de vértices original, e se existir algum vértice do grafo og que não esta nos alcançaveis, é retornado a afirmação de grafo desconexo.
 
 conectividade naive
 
-neste método, o usuário irá remover uma aresta escolhida, e então, será verificado se o grafo ainda continua conexo, primeiramente, o usuário escolhe a aresta, a mesma é removida do grafo, depois o mesmo tem sua conectividade testada pelos métodos utilizados. em seguida o usuário tem a opção de restaurar a aresta escolhida. este método serve para encontrar pontes, onde uma aresta que é removida e acaba com a conectividade do grafo, é uma aresta ponte)
+neste método, o usuário irá remover uma aresta escolhida, e então, será verificado se o grafo ainda continua conexo
+, primeiramente, o usuário escolhe a aresta, a mesma é removida do grafo, depois o mesmo tem sua conectividade testada pelos 
+métodos utilizados. em seguida o usuário tem a opção de restaurar a aresta escolhida. este método serve para encontrar pontes, onde uma aresta que é removida e acaba com a conectividade do grafo, é uma aresta ponte)
 
 fortemente conexo
 
-este método verifica se um grafo D é fortemente conexo, primeiro, o array de vértices é iterado, e a cada iteração, uma dfs é executada, esta dfs utiliza uma pilha, que contem os vértices do grafo, e para cada vértice, é checado seus vizinhos, e se ele não tiver no array de visitados, ele é adicionado (depois da checagem ele é removido da pila), se o vizinho nçao estiver inserido nos visitados, ele é inserido na pilha para poder ser iterado. Apos isso, o tamanho do array de vértices visitados é comparado com o tamanho do array de v original, se forem iguais, o grafo é fortemente conexo.
+este método verifica se um grafo D é fortemente conexo, primeiro, o array de vértices é iterado, e a cada iteração, uma dfs 
+é executada, esta dfs utiliza uma pilha, que contem os vértices do grafo, e para cada vértice, é checado seus vizinhos, e s
+e ele não tiver no array de visitados, ele é adicionado (depois da checagem ele é removido da pila), se o vizinho nçao estiver inserido nos visitados,
+ ele é inserido na pilha para poder ser iterado. Apos isso, o tamanho do array de vértices visitados é comparado com o tamanho do array de v original, se forem iguais, o grafo é fortemente conexo.
 
 semi fortemente conexo
 
-primeiro, o grafo original D é convertido a um grafo ND, com um método especifico, onde este método cria um grafo nd novo, e adiciona os vértices e arestas do grafo original ao seus vetores, e apos essa transformação, a dfs é executada no mesmo, sendo assim, se ele for conexo, a resposta retornada é positiva.
+primeiro, o grafo original D é convertido a um grafo ND, com um método especifico, onde este método cria um grafo nd novo,
+ e adiciona os vértices e arestas do grafo original ao seus vetores, e apos essa transformação, a dfs é executada no mesmo, 
+ sendo assim, se ele for conexo, a resposta retornada é positiva.
 
 gerar csv 
 
-essa função serve para gerar um grafo atual em csv, principalmente para ser consumido pelo programa GEPHI, que aceita matrizes de adjacência nestes arquivos, este método recebe o nome do arquivo a ser criado, e um boolean indicando se o mesmo é direcionado ou não, primeiro, o porgrama verifica se o grafo é direcionado, se não for, ele cria o arquivo indicado, utilizando o método “w” que indica que dados serão escritos no mesmo, e primeiramente, será iterado o vetor de vértices do grafo, tendo cada rotulo sendo escrito na primeira linha, e separados por “;”.
+essa função serve para gerar um grafo atual em csv, principalmente para ser consumido pelo programa GEPHI, que aceita
+ matrizes de adjacência nestes arquivos, este método recebe o nome do arquivo a ser criado, e um boolean indicando se o 
+ mesmo é direcionado ou não, primeiro, o porgrama verifica se o grafo é direcionado, se não for, ele cria o arquivo indicado, 
+ utilizando o método “w” que indica que dados serão escritos no mesmo, e primeiramente, será iterado o vetor de vértices do grafo,
+  tendo cada rotulo sendo escrito na primeira linha, e separados por “;”.
  
-Em seguida, o método de criar matriz de adjacencia em g nd, é chamado (se o grafo for D, a matriz de adjacencia em D é chamada no lugar), sendo assim, possuindo a matriz de adj ao grafo indicado
+Em seguida, o método de criar matriz de adjacencia em g nd, é chamado (se o grafo for D, a matriz de adjacencia em D é chamada no lugar), se
+ndo assim, possuindo a matriz de adj ao grafo indicado
 
-Em seguida, o vetor de vértices é iterado novamente (cada iteração é uma linha), e a cada iteração, a matriz de adj é iterada (os indices das duas iterações estão sendo armazenados)
+Em seguida, o vetor de vértices é iterado novamente (cada iteração é uma linha), e a cada iteração, a matriz de 
+adj é iterada (os indices das duas iterações estão sendo armazenados)
 
-primeiramente, o rotulo do vértice atual + “;” é escrito no arquivo, em seguida, os valores da linha na matriz de adjacência são escritas, separados por “;”
+primeiramente, o rotulo do vértice atual + “;” é escrito no arquivo, em seguida, os valores da linha na matriz
+ de adjacência são escritas, separados por “;”
 
 ao final da iteração, e adicionado um “;” para indicar a quebra de linha.
 
 ler grafo de csv
 
-este método é responsavel or ler um grafo a partir de um arquivo csv, utikizando a matriz de adjacencia, primeiramente, o código abre o arquivo indicado pelo nome passado como paramentro em “r”, indicando leitura, em seguida, a primeira linha é salva, ela contém os vértices do grafo, esta linha é tratada, onde as “;” são removidas, e asism é transformada num vetor de rotulos de vértices, em seguidas este array é iterado, e cada vértice é adicionado ao grafo com peso 0 (padrão). A mesma coisa é feita com as linhas seguintes, onde os valores são lidos, tratados, e transformados em um array de asrrays de valores das arestas,
- 
-em seguida, uma iteração dupla é realizada no vetor de vértices lidos, os indexes de cada iteração são armazenados, e em seguida a aresta correspondente a eles é verificada, se o valor dela for 0, a iteração vai pra proxima, mas se for 1, uma aresta utilziando os dois vértices atuais é criada
 
-Este método, em grafos direcionados pode dar problema, pois como a matriz de adj indica apenas como 1, o vértice sucessor, o grafo resultante dessa exportação, é um multigrafo, com arestas de ida e volta, para evitar, é realizado duas iterações no vetor de arestas, e ao encontrar arestas de ida e volta (vértice inicial na aresta1 é o vértice final na aresta 2 E vice versa), a aresta b é deletada, acabando com o bug do multigrafo gerado a partir de csv de grafo direcionado.
+este método é responsavel or ler um grafo a partir de um arquivo csv, utikizando a matriz de adjacencia, primeiramente, o 
+código abre o arquivo indicado pelo nome passado como paramentro em “r”, indicando leitura, em seguida, a primeira linha é 
+salva, ela contém os vértices do grafo, esta linha é tratada, onde as “;” são removidas, e asism é transformada num vetor de 
+rotulos de vértices, em seguidas este array é iterado, e cada vértice é adicionado ao grafo com peso 0 (padrão). A mesma coisa é
+ feita com as linhas seguintes, onde os valores são lidos, tratados, e transformados em um array de asrrays de valores das arestas,
+ 
+em seguida, uma iteração dupla é realizada no vetor de vértices lidos, os indexes de cada iteração são armazenados, e em seguida a
+ aresta correspondente a eles é verificada, se o valor dela for 0, a iteração vai pra proxima, mas se for 1, uma aresta utilziando
+  os dois vértices atuais é criada
+
+Este método, em grafos direcionados pode dar problema, pois como a matriz de adj indica apenas como 1, o vértice sucessor, o
+grafo resultante dessa exportação, é um multigrafo, com arestas de ida e volta, para evitar, é realizado duas iterações no vetor de arestas, e
+ao encontrar arestas de ida e volta (vértice inicial na aresta1 é o vértice final na aresta 2 E vice versa), a aresta b
+é deletada, acabando com o bug do multigrafo gerado a partir de csv de grafo direcionado.
 
 
 

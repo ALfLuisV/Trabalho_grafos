@@ -322,41 +322,7 @@ def salvar_grafo_json(grafo, nome_arquivo):
     }
     with open(nome_arquivo, 'w') as f:
         json.dump(grafo_dict, f, indent=4)
-
-def verificar_componentes_fortemente_conexos(grafo: Grafo):
-    componentes = kosaraju(grafo)
-    print("Componentes fortemente conectados:")
-    for i, componente in enumerate(componentes):
-        print(f"Componente {i + 1}: {[vertice.rotulo for vertice in componente]}")
         
-def carregar_grafo_json(nome_arquivo: str) -> Grafo:
-    try:
-        with open(nome_arquivo, 'r') as f:
-            dados = json.load(f)
-        
-        grafo = Grafo(direcionado=dados["direcionado"])
-        
-        vertices = {}
-        for vertice_data in dados["vertices"]:
-            vertice = grafo.adicionar_vertice(vertice_data["rotulo"], vertice_data["peso"])
-            vertices[vertice_data["rotulo"]] = vertice
-        
-        for aresta_data in dados["arestas"]:
-            origem = vertices[aresta_data["origem"]]
-            destino = vertices[aresta_data["destino"]]
-            grafo.adicionar_aresta(aresta_data["rotulo"], aresta_data["peso"], origem, destino)
-        
-        print("Grafo carregado com sucesso a partir do arquivo JSON.")
-        return grafo
-    
-    except FileNotFoundError:
-        print(f"Erro: Arquivo '{nome_arquivo}' não encontrado.")
-    except KeyError as e:
-        print(f"Erro: Chave {e} ausente no arquivo JSON.")
-    except json.JSONDecodeError:
-        print("Erro: O arquivo JSON está malformado.")
-
-    return None
 
 def executar_fleury(grafo: Grafo):
     """
@@ -450,48 +416,6 @@ def executar_fleury_tarjan(grafo: Grafo):
         arquivo.write(conteudo)
 
     print(f"Resultado salvo em '{arquivo_saida}'")
-
-    """
-    Executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo.
-    Parâmetros:
-        grafo: Instância de Grafo.
-    """
-    if not grafo:
-        print("Erro: Nenhum grafo carregado ou criado. Crie ou carregue um grafo primeiro.")
-        return
-
-    # Criar diretório para salvar o arquivo de saída
-    pasta_resultados = "resultados"
-    if not os.path.exists(pasta_resultados):
-        os.makedirs(pasta_resultados)
-
-    # Medir tempo de execução
-    inicio_tempo = time.time()
-    auxGrafo = grafo
-    resultado = fleury_com_tarjan(auxGrafo)
-    tempo_execucao = time.time() - inicio_tempo
-
-    # Criar o conteúdo do arquivo
-    if isinstance(resultado, list):
-        conteudo = "Caminho Euleriano encontrado (usando Tarjan):\n" + " -> ".join(resultado) + "\n"
-    else:
-        conteudo = f"Erro durante a execução: {resultado}\n"
-
-    conteudo += f"\nTempo de execução: {tempo_execucao:.4f} segundos\n"
-
-    # Verificar se o arquivo já existe e criar um novo nome incremental
-    arquivo_saida = os.path.join(pasta_resultados, "resultado_fleury_tarjan.txt")
-    contador = 1
-    while os.path.exists(arquivo_saida):
-        arquivo_saida = os.path.join(pasta_resultados, f"resultado_fleury_tarjan_{contador}.txt")
-        contador += 1
-
-    # Escrever o resultado em um arquivo
-    with open(arquivo_saida, "w") as arquivo:
-        arquivo.write(conteudo)
-
-    print(f"Resultado salvo em '{arquivo_saida}'")
-
     
 def ajustar_grafo_grau_2(grafo):
     """
@@ -528,7 +452,9 @@ def exportar_csv(grafo: Grafo):
     grafo.gerar_csv(nome, grafo.direcionado)
 
 def ler_from_csv(grafo: Grafo):
+    
     grafo.ler_grafo_from_csv()
+
 
 def main():
     grafo = None  # Inicializar a variável do grafo
@@ -542,11 +468,15 @@ def main():
             case '1': 
                 direcionado = input("O grafo é direcionado? (s/n): ").strip().lower() == 's'
                 grafo = Grafo(direcionado)
-                file_name = input('Insira o nome do arquivo(não informe a extensão ".csv"):')
-                file_name = file_name + ".csv"
-                grafo.ler_grafo_from_csv(file_name)
+                file_name = input('Insira o nome do arquivo(não informe a extensão):')
+                entrada = input("O arquivo desejado está em CSV ou GML?(CSV = 0, GML = 1):")
+                if(entrada == '0'):
+                    file_name = file_name + ".csv"
+                else:
+                    file_name = file_name + ".gml"
+                grafo.ler_grafo_from_csv(file_name, entrada)
                 
-            case '2': 
+            case '2':
                 grafo = Grafo(direcionado=False)
                 
                 grafo = grafo.criarGrafo()

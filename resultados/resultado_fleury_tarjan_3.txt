@@ -1,0 +1,3 @@
+Erro durante a execução: O grafo não é conexo! Não é possível encontrar um caminho Euleriano.
+
+Tempo de execução: 0.0000 segundos

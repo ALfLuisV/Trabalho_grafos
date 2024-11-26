@@ -1,0 +1,4 @@
+Caminho Euleriano encontrado (usando Tarjan):
+A1 -> A5 -> A2 -> A3 -> A6 -> A7 -> A9 -> A8 -> A10 -> A4
+
+Tempo de execução: 0.0000 segundos
