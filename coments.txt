@@ -94,28 +94,97 @@ semi fortemente conexo
 
 primeiro, o grafo original D é convertido a um grafo ND, com um método especifico, onde este método cria um grafo nd novo, e adiciona os vértices e arestas do grafo original ao seus vetores, e apos essa transformação, a dfs é executada no mesmo, sendo assim, se ele for conexo, a resposta retornada é positiva.
 
-gerar csv 
+# Comentários sobre funções do sistema
 
-essa função serve para gerar um grafo atual em csv, principalmente para ser consumido pelo programa GEPHI, que aceita matrizes de adjacência nestes arquivos, este método recebe o nome do arquivo a ser criado, e um boolean indicando se o mesmo é direcionado ou não, primeiro, o porgrama verifica se o grafo é direcionado, se não for, ele cria o arquivo indicado, utilizando o método “w” que indica que dados serão escritos no mesmo, e primeiramente, será iterado o vetor de vértices do grafo, tendo cada rotulo sendo escrito na primeira linha, e separados por “;”.
- 
-Em seguida, o método de criar matriz de adjacencia em g nd, é chamado (se o grafo for D, a matriz de adjacencia em D é chamada no lugar), sendo assim, possuindo a matriz de adj ao grafo indicado
+## Funções de Grafo
 
-Em seguida, o vetor de vértices é iterado novamente (cada iteração é uma linha), e a cada iteração, a matriz de adj é iterada (os indices das duas iterações estão sendo armazenados)
+### gerar_csv
+Essa função serve para gerar um grafo atual em CSV, principalmente para ser consumido pelo programa GEPHI, que aceita matrizes de adjacência nestes arquivos. Este método recebe o nome do arquivo a ser criado e um booleano indicando se o mesmo é direcionado ou não. Primeiro, o programa verifica se o grafo é direcionado. Se não for, ele cria o arquivo indicado, utilizando o método “w” que indica que dados serão escritos no mesmo. Primeiramente, será iterado o vetor de vértices do grafo, tendo cada rótulo sendo escrito na primeira linha e separados por “;”.
 
-primeiramente, o rotulo do vértice atual + “;” é escrito no arquivo, em seguida, os valores da linha na matriz de adjacência são escritas, separados por “;”
+Em seguida, o método de criar matriz de adjacência em grafo não direcionado é chamado (se o grafo for direcionado, a matriz de adjacência direcionada é chamada no lugar), sendo assim, possuindo a matriz de adjacência ao grafo indicado. Em seguida, o vetor de vértices é iterado novamente (cada iteração é uma linha), e a cada iteração, a matriz de adjacência é iterada (os índices das duas iterações estão sendo armazenados). Primeiramente, o rótulo do vértice atual + “;” é escrito no arquivo, em seguida, os valores da linha na matriz de adjacência são escritos, separados por “;”. Ao final da iteração, é adicionado um “;” para indicar a quebra de linha.
 
-ao final da iteração, e adicionado um “;” para indicar a quebra de linha.
+### ler_grafo_from_csv
+Este método é responsável por ler um grafo a partir de um arquivo CSV, utilizando a matriz de adjacência. Primeiramente, o código abre o arquivo indicado pelo nome passado como parâmetro em “r”, indicando leitura. Em seguida, a primeira linha é salva, ela contém os vértices do grafo. Esta linha é tratada, onde os “;” são removidos, e assim é transformada num vetor de rótulos de vértices. Em seguida, este array é iterado, e cada vértice é adicionado ao grafo com peso 0 (padrão). A mesma coisa é feita com as linhas seguintes, onde os valores são lidos, tratados, e transformados em um array de arrays de valores das arestas. Em seguida, uma iteração dupla é realizada no vetor de vértices lidos, os índices de cada iteração são armazenados, e em seguida a aresta correspondente a eles é verificada. Se o valor dela for 0, a iteração vai para a próxima, mas se for 1, uma aresta utilizando os dois vértices atuais é criada.
 
-ler grafo de csv
+Este método, em grafos direcionados, pode dar problema, pois como a matriz de adjacência indica apenas como 1 o vértice sucessor, o grafo resultante dessa exportação é um multigrafo, com arestas de ida e volta. Para evitar, são realizadas duas iterações no vetor de arestas, e ao encontrar arestas de ida e volta (vértice inicial na aresta 1 é o vértice final na aresta 2 e vice-versa), a aresta b é deletada, acabando com o bug do multigrafo gerado a partir de CSV de grafo direcionado.
 
-este método é responsavel or ler um grafo a partir de um arquivo csv, utikizando a matriz de adjacencia, primeiramente, o código abre o arquivo indicado pelo nome passado como paramentro em “r”, indicando leitura, em seguida, a primeira linha é salva, ela contém os vértices do grafo, esta linha é tratada, onde as “;” são removidas, e asism é transformada num vetor de rotulos de vértices, em seguidas este array é iterado, e cada vértice é adicionado ao grafo com peso 0 (padrão). A mesma coisa é feita com as linhas seguintes, onde os valores são lidos, tratados, e transformados em um array de asrrays de valores das arestas,
- 
-em seguida, uma iteração dupla é realizada no vetor de vértices lidos, os indexes de cada iteração são armazenados, e em seguida a aresta correspondente a eles é verificada, se o valor dela for 0, a iteração vai pra proxima, mas se for 1, uma aresta utilziando os dois vértices atuais é criada
+### criarGrafo
+Esta função cria um grafo aleatório baseado no número de vértices. Ela utiliza a biblioteca `random` para selecionar vértices e criar arestas entre eles, garantindo que não haja loops ou arestas duplicadas. O tempo de execução para gerar o grafo é medido e exibido no console.
 
-Este método, em grafos direcionados pode dar problema, pois como a matriz de adj indica apenas como 1, o vértice sucessor, o grafo resultante dessa exportação, é um multigrafo, com arestas de ida e volta, para evitar, é realizado duas iterações no vetor de arestas, e ao encontrar arestas de ida e volta (vértice inicial na aresta1 é o vértice final na aresta 2 E vice versa), a aresta b é deletada, acabando com o bug do multigrafo gerado a partir de csv de grafo direcionado.
+### salvar_grafo_json
+Esta função salva o grafo atual em um arquivo JSON. Ela cria um dicionário com os vértices e arestas do grafo, incluindo seus rótulos e pesos, e escreve esse dicionário em um arquivo JSON com o nome especificado.
 
+### carregar_grafo_json
+Esta função carrega um grafo a partir de um arquivo JSON. Ela lê o arquivo JSON, cria uma instância de `Grafo` e adiciona os vértices e arestas conforme especificado no arquivo. Em caso de erro, mensagens apropriadas são exibidas no console.
 
+### ajustar_grafo_grau_2
+Esta função ajusta um grafo para que todos os vértices tenham grau 2, conectando vértices sequencialmente (1 com 2, 2 com 3, ...). Se o grafo tiver mais de dois vértices, o último vértice é conectado ao primeiro para formar um ciclo.
 
+### executar_fleury
+Esta função executa o algoritmo de Fleury em um grafo e salva o resultado em um arquivo com nome incremental. Ela verifica se o grafo é não direcionado e se está carregado antes de executar o algoritmo. O tempo de execução é medido e o resultado é salvo em um arquivo de texto.
 
+### executar_fleury_tarjan
+Esta função executa o algoritmo de Fleury usando Tarjan para detectar pontes e salva o resultado em um arquivo. Ela verifica se o grafo está carregado antes de executar o algoritmo. O tempo de execução é medido e o resultado é salvo em um arquivo de texto.
 
+### checar_adjacencia_vertices
+Esta função verifica se dois vértices são adjacentes em um grafo. Ela lista os vértices do grafo e solicita ao usuário que insira os índices dos vértices a serem verificados. O resultado é exibido no console.
 
+### checar_adjacencia_arestas
+Esta função verifica se duas arestas são adjacentes em um grafo. Ela lista as arestas do grafo e solicita ao usuário que insira os índices das arestas a serem verificadas. O resultado é exibido no console.
+
+### deletar_vertice_do_grafo
+Esta função deleta um vértice do grafo. Ela lista os vértices do grafo e solicita ao usuário que insira o índice do vértice a ser deletado. O vértice e suas arestas são removidos do grafo.
+
+### deletar_aresta_do_grafo
+Esta função deleta uma aresta do grafo. Ela lista as arestas do grafo e solicita ao usuário que insira o índice da aresta a ser deletada. A aresta é removida do grafo.
+
+### alterar_vertice_do_grafo
+Esta função altera um vértice do grafo. Ela lista os vértices do grafo e solicita ao usuário que insira o índice do vértice a ser alterado, o novo rótulo e o novo peso. O vértice é atualizado com os novos valores.
+
+### alterar_aresta_do_grafo
+Esta função altera uma aresta do grafo. Ela lista as arestas do grafo e solicita ao usuário que insira o índice da aresta a ser alterada, o novo rótulo e o novo peso. A aresta é atualizada com os novos valores.
+
+### adicionar_vertice_ao_grafo
+Esta função adiciona um vértice ao grafo. Ela solicita ao usuário que insira o rótulo e o peso do vértice. O vértice é adicionado ao grafo.
+
+### adicionar_aresta_ao_grafo
+Esta função adiciona uma aresta ao grafo. Ela solicita ao usuário que insira os índices dos vértices a serem conectados pela aresta e o rótulo e peso da aresta. A aresta é adicionada ao grafo.
+
+### verificar_conectividade
+Esta função verifica a conectividade do grafo. Ela exibe se o grafo é conectado ou não.
+
+### verificar_conectividade_naive
+Esta função verifica a conectividade do grafo usando um método ingênuo. Ela exibe se o grafo é conectado ou não.
+
+### exibir_lista_adjacencia
+Esta função exibe a lista de adjacência do grafo, considerando se ele é direcionado ou não.
+
+### verificar_componentes_fortemente_conexos
+Esta função verifica os componentes fortemente conexos do grafo usando o algoritmo de Kosaraju. Ela exibe os componentes fortemente conexos no console.
+
+### exibir_matriz_adj
+Esta função exibe o grafo em forma de matriz de adjacência. Ela considera se o grafo é direcionado ou não.
+
+### exibir_matriz_inci
+Esta função exibe a matriz de incidência do grafo.
+
+### checar_articulacoes
+Esta função verifica a existência de articulações no grafo. Ela exibe as articulações encontradas no console.
+
+### grafo_vazio_completo
+Esta função exibe se o grafo está vazio ou completo. Ela exibe o rótulo de cada vértice para uma visualização mais clara.
+
+### checar_existencia_arestas
+Esta função verifica a existência de arestas no grafo. Ela exibe as arestas encontradas no console.
+
+### checar_vertices_arestas
+Esta função verifica a existência de vértices e arestas no grafo. Ela exibe os vértices e arestas encontrados no console.
+
+### mostrar_menu
+Esta função exibe o menu de opções para o usuário. Ela solicita ao usuário que escolha uma opção e retorna a opção escolhida.
+
+### criar_vertices_iniciais
+Esta função cria os vértices iniciais do grafo. Ela solicita ao usuário que insira os rótulos e pesos dos vértices.
+
+### main
+Esta é a função principal do programa. Ela exibe o menu de opções e executa as funções correspondentes com base na escolha do usuário.
