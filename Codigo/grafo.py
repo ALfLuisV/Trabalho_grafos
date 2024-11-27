@@ -533,9 +533,6 @@ class Grafo:
         for vertice in vertices:
             grafo.adicionar_vertice(vertice.rotulo, vertice.peso)
 
-        print(grafo.arestas)
-        print()
-
         return grafo
 
 

@@ -482,7 +482,7 @@ def main():
                 grafo = Grafo(direcionado=False)
                 
                 grafo = grafo.criarGrafo()
-                num_arestas = int(input("Digite o número de arestas a serem adicionadas: "))
+                num_arestas = int(input("Digite o número de arestas a serem adicionadas(0 para que nenhuma seja adicionada): "))
                 adicionar_arestas_aleatorias(grafo, num_arestas)
                 salvar = input("Deseja salvar o grafo em um arquivo JSON? (s/n): ").strip().lower() == 's'
 
