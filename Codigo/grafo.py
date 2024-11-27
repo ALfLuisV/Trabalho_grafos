@@ -538,44 +538,6 @@ class Grafo:
 
         return grafo
 
-def adicionar_arestas_aleatorias(grafo, num_arestas):
-    """
-    Adiciona um número especificado de arestas aleatórias ao grafo.
-    Evita duplicatas, loops e arestas antibase.
-    
-    Parâmetros:
-        grafo: Instância de Grafo.
-        num_arestas: Número de arestas a serem adicionadas.
-    """
-    if len(grafo.vertices) < 2:
-        print("Erro: É necessário pelo menos dois vértices no grafo.")
-        return
-
-    arestas_existentes = set()  # Rastrear arestas já adicionadas
-
-    for _ in range(num_arestas):
-        while True:
-            # Selecionar dois vértices aleatórios
-            vertice1, vertice2 = random.sample(grafo.vertices, 2)
-
-            # Criar identificador da aresta para evitar duplicatas
-            if grafo.direcionado:
-                aresta_id = (vertice1.rotulo, vertice2.rotulo)
-            else:
-                aresta_id = tuple(sorted([vertice1.rotulo, vertice2.rotulo]))
-
-            # Verificar se a aresta já existe
-            if aresta_id not in arestas_existentes:
-                arestas_existentes.add(aresta_id)
-                break  # Sair do loop se a aresta for válida
-
-        # Criar a nova aresta
-        rotulo = f"A{len(grafo.arestas)}"
-        peso = random.randint(1, 10)  # Ajuste o intervalo de pesos conforme necessário
-        grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
-
-    print(f"{num_arestas} arestas adicionadas com sucesso ao grafo.")
-
 
 # O método `gerar_csv` cria um arquivo CSV representando a matriz de incidência ou de adjacência de um grafo, 
 # dependendo se ele é direcionado ou não. Ele recebe `self` (objeto do grafo), `nome_arquivo` (nome base do arquivo)
@@ -819,3 +781,41 @@ def encontrar_pontes_naive(self):
     if not pontes:
         return "O grafo não possui arestas que são pontes."
     return f"As pontes no grafo são: {', '.join(pontes)}"
+
+def adicionar_arestas_aleatorias(grafo, num_arestas):
+    """
+    Adiciona um número especificado de arestas aleatórias ao grafo.
+    Evita duplicatas, loops e arestas antibase.
+    
+    Parâmetros:
+        grafo: Instância de Grafo.
+        num_arestas: Número de arestas a serem adicionadas.
+    """
+    if len(grafo.vertices) < 2:
+        print("Erro: É necessário pelo menos dois vértices no grafo.")
+        return
+
+    arestas_existentes = set()  # Rastrear arestas já adicionadas
+
+    for _ in range(num_arestas):
+        while True:
+            # Selecionar dois vértices aleatórios
+            vertice1, vertice2 = random.sample(grafo.vertices, 2)
+
+            # Criar identificador da aresta para evitar duplicatas
+            if grafo.direcionado:
+                aresta_id = (vertice1.rotulo, vertice2.rotulo)
+            else:
+                aresta_id = tuple(sorted([vertice1.rotulo, vertice2.rotulo]))
+
+            # Verificar se a aresta já existe
+            if aresta_id not in arestas_existentes:
+                arestas_existentes.add(aresta_id)
+                break  # Sair do loop se a aresta for válida
+
+        # Criar a nova aresta
+        rotulo = f"A{len(grafo.arestas)}"
+        peso = random.randint(1, 10)  # Ajuste o intervalo de pesos conforme necessário
+        grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
+
+    print(f"{num_arestas} arestas adicionadas com sucesso ao grafo.")
