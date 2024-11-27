@@ -16,6 +16,14 @@
         "documentation": {}
     },
     {
+        "label": "adicionar_arestas_aleatorias",
+        "importPath": "grafo",
+        "description": "grafo",
+        "isExtraImport": true,
+        "detail": "grafo",
+        "documentation": {}
+    },
+    {
         "label": "encontrar_pontes_naive",
         "importPath": "grafo",
         "description": "grafo",
@@ -225,6 +233,15 @@
         "importPath": "Codigo.grafo",
         "description": "Codigo.grafo",
         "peekOfCode": "class Grafo:\n    def __init__(self, direcionado: bool):\n        self.vertices = []        # Lista de vértices no grafo\n        self.arestas = []         # Lista de arestas no grafo\n        self.direcionado = direcionado  # Determina se o grafo é direcionado\n    def adicionar_vertice(self, rotulo: str, peso: int = 0):\n        \"\"\"Adiciona um vértice ao grafo.\"\"\"\n        vertice = Vertice(rotulo, peso)\n        self.vertices.append(vertice)\n        return vertice",
+        "detail": "Codigo.grafo",
+        "documentation": {}
+    },
+    {
+        "label": "adicionar_arestas_aleatorias",
+        "kind": 2,
+        "importPath": "Codigo.grafo",
+        "description": "Codigo.grafo",
+        "peekOfCode": "def adicionar_arestas_aleatorias(grafo, num_arestas):\n    \"\"\"\n    Adiciona um número especificado de arestas aleatórias ao grafo.\n    Evita duplicatas, loops e arestas antibase.\n    Parâmetros:\n        grafo: Instância de Grafo.\n        num_arestas: Número de arestas a serem adicionadas.\n    \"\"\"\n    if len(grafo.vertices) < 2:\n        print(\"Erro: É necessário pelo menos dois vértices no grafo.\")",
         "detail": "Codigo.grafo",
         "documentation": {}
     },

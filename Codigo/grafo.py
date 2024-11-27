@@ -522,17 +522,8 @@ class Grafo:
             "O grafo será direcionado? (s/n): ").strip().lower() == 's'
         num_vertices = int(input("Digite o número de vértices: "))
         pesos_aleatorios = input(
-            "Os pesos das arestas e vértices serão aleatórios? (s/n) n = todos os pesos = 0: ").strip().lower() == 's'
+            "Os pesos das arestas e vértices serão aleatórios? (s/n) n = todos os pesos = 0: ").strip().lower() == 's'    
         
-        arestas_aleatorias = input(
-            "O número de arestas será aleatório? (s/n): ").strip().lower() == 's'
-        
-        if arestas_aleatorias:
-            num_arestas = random.randint(num_vertices - 1, num_vertices * (num_vertices - 1) // 2)
-        else:
-            num_arestas = int(input("Digite o número de arestas: "))
-        
-        start_time = time.perf_counter()
         
         grafo = Grafo(direcionado=direcionado)
 
@@ -542,41 +533,48 @@ class Grafo:
         for vertice in vertices:
             grafo.adicionar_vertice(vertice.rotulo, vertice.peso)
 
-        # Adicionar arestas aleatórias
-        arestas_existentes = set()
-        for i in range(num_arestas):
-            while True:
-                vertice1, vertice2 = random.sample(vertices, 2)
-
-                # Verificar se a aresta é um loop
-                if vertice1 == vertice2:
-                    continue
-
-                if direcionado:
-                    aresta_id = (vertice1.rotulo, vertice2.rotulo)
-                    aresta_id_reversa = (vertice2.rotulo, vertice1.rotulo)
-                else:
-                    aresta_id = tuple(sorted([vertice1.rotulo, vertice2.rotulo]))
-                    aresta_id_reversa = aresta_id
-
-                # Verificar se a aresta já existe ou se é antiparalela
-                if aresta_id not in arestas_existentes and aresta_id_reversa not in arestas_existentes:
-                    arestas_existentes.add(aresta_id)
-                    break
-
-            rotulo = f'A{i}'
-            peso = random.randint(1, 10) if pesos_aleatorios else 0
-            grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
-            
-            end_time = time.perf_counter()
-            
-            tempo_execucao = (end_time - start_time)
-
         print(grafo.arestas)
         print()
-        print(f"Tempo de execução para gerar o grafo: {tempo_execucao:.4f} segundos")
+
         return grafo
 
+def adicionar_arestas_aleatorias(grafo, num_arestas):
+    """
+    Adiciona um número especificado de arestas aleatórias ao grafo.
+    Evita duplicatas, loops e arestas antibase.
+    
+    Parâmetros:
+        grafo: Instância de Grafo.
+        num_arestas: Número de arestas a serem adicionadas.
+    """
+    if len(grafo.vertices) < 2:
+        print("Erro: É necessário pelo menos dois vértices no grafo.")
+        return
+
+    arestas_existentes = set()  # Rastrear arestas já adicionadas
+
+    for _ in range(num_arestas):
+        while True:
+            # Selecionar dois vértices aleatórios
+            vertice1, vertice2 = random.sample(grafo.vertices, 2)
+
+            # Criar identificador da aresta para evitar duplicatas
+            if grafo.direcionado:
+                aresta_id = (vertice1.rotulo, vertice2.rotulo)
+            else:
+                aresta_id = tuple(sorted([vertice1.rotulo, vertice2.rotulo]))
+
+            # Verificar se a aresta já existe
+            if aresta_id not in arestas_existentes:
+                arestas_existentes.add(aresta_id)
+                break  # Sair do loop se a aresta for válida
+
+        # Criar a nova aresta
+        rotulo = f"A{len(grafo.arestas)}"
+        peso = random.randint(1, 10)  # Ajuste o intervalo de pesos conforme necessário
+        grafo.adicionar_aresta(rotulo, peso, vertice1, vertice2)
+
+    print(f"{num_arestas} arestas adicionadas com sucesso ao grafo.")
 
 
 # O método `gerar_csv` cria um arquivo CSV representando a matriz de incidência ou de adjacência de um grafo, 

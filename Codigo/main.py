@@ -1,5 +1,6 @@
 import json
 from grafo import Grafo
+from grafo import adicionar_arestas_aleatorias
 from vertice import listar_vertices
 from aresta import listar_arestas
 from algoritmo import kosaraju
@@ -481,7 +482,10 @@ def main():
                 grafo = Grafo(direcionado=False)
                 
                 grafo = grafo.criarGrafo()
+                num_arestas = int(input("Digite o número de arestas a serem adicionadas: "))
+                adicionar_arestas_aleatorias(grafo, num_arestas)
                 salvar = input("Deseja salvar o grafo em um arquivo JSON? (s/n): ").strip().lower() == 's'
+
                 if salvar:
                     nome_arquivo = input("Digite o nome do arquivo JSON para salvar o grafo (ex: novo_grafo.json): ")
                     salvar_grafo_json(grafo, nome_arquivo)
