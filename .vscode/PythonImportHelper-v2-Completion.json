@@ -237,20 +237,20 @@
         "documentation": {}
     },
     {
-        "label": "encontrar_pontes_naive",
-        "kind": 2,
-        "importPath": "Codigo.grafo",
-        "description": "Codigo.grafo",
-        "peekOfCode": "def encontrar_pontes_naive(self):\n    \"\"\"\n    Identifica e retorna as arestas que são pontes no grafo.\n    \"\"\"\n    def contar_componentes():\n        \"\"\"\n        Conta o número de componentes conectados no grafo.\n        \"\"\"\n        visited = set()\n        componentes = 0",
-        "detail": "Codigo.grafo",
-        "documentation": {}
-    },
-    {
         "label": "adicionar_arestas_aleatorias",
         "kind": 2,
         "importPath": "Codigo.grafo",
         "description": "Codigo.grafo",
         "peekOfCode": "def adicionar_arestas_aleatorias(grafo, num_arestas):\n    \"\"\"\n    Adiciona um número especificado de arestas aleatórias ao grafo.\n    Evita duplicatas, loops e arestas antibase.\n    Parâmetros:\n        grafo: Instância de Grafo.\n        num_arestas: Número de arestas a serem adicionadas.\n    \"\"\"\n    if len(grafo.vertices) < 2:\n        print(\"Erro: É necessário pelo menos dois vértices no grafo.\")",
+        "detail": "Codigo.grafo",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_pontes_naive",
+        "kind": 2,
+        "importPath": "Codigo.grafo",
+        "description": "Codigo.grafo",
+        "peekOfCode": "def encontrar_pontes_naive(self):\n    \"\"\"\n    Identifica e retorna as arestas que são pontes no grafo.\n    \"\"\"\n    def contar_componentes():\n        \"\"\"\n        Conta o número de componentes conectados no grafo.\n        \"\"\"\n        visited = set()\n        componentes = 0",
         "detail": "Codigo.grafo",
         "documentation": {}
     },
